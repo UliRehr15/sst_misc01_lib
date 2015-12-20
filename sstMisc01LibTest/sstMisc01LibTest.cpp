@@ -35,6 +35,8 @@ int main (int argc, char *argv [])
 
   int iStat = 0;
 
+  printf("Test Misc01Lib Start. \n");
+
   iStat = oAscFil.fopenWr(0,(char*)"Test.asc");
   assert (iStat >= 0);
 
@@ -47,5 +49,8 @@ int main (int argc, char *argv [])
 
   iStat = oAscFil.fcloseFil(0);
   assert (iStat >= 0);
+
+  printf("Test Misc01Lib Success. \n");
 }
+//=============================================================================
 

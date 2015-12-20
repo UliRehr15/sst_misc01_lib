@@ -410,9 +410,10 @@ int sstMisc01AscFilIntCls::Rd_StrDS1 ( int           iKey,
 
   // int iStat;
 //.............................................................................
-  if (iKey != 0) return -1;
+  // if (iKey != 0) return -1;
+  if (iKey < 0 || iKey > 3) return -1;
 
-  ii = this->rd_line(0,&CLine);
+  ii = this->rd_line ( iKey, &CLine);
 
   *StrDS = CLine.Txt;
 
