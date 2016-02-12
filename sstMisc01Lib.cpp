@@ -21,6 +21,8 @@
 
 #include <string>
 
+#include <sstRec04Lib.h>
+
 #include "sstMisc01Lib.h"
 #include "sstMisc01LibInt.h"
 
@@ -28,7 +30,7 @@
 sstMisc01AscRowCls::sstMisc01AscRowCls()
 //-----------------------------------------------------------------------------
      {
-       this->poAscRowInt = new (sstMisc01AscRowIntCls);
+  this->poAscRowInt = new (sstMisc01AscRowIntCls);
      }
 //==============================================================================
 sstMisc01AscRowCls::~sstMisc01AscRowCls()
@@ -198,4 +200,36 @@ long sstMisc01AscFilCls::GetFileSize()
   return this->poAscFilInt->GetFileSize();
 }
 //==============================================================================
-
+sstCfgFilCls::sstCfgFilCls(std::string oCfgFilNam)
+{
+  this->poTestIntern = new sstCfgFilIntCls(oCfgFilNam);
+}
+//==============================================================================
+sstCfgFilCls::~sstCfgFilCls()
+{
+  delete (this->poTestIntern);
+}
+//==============================================================================
+int sstCfgFilCls::DeleteWriteNewClose(int iKey)
+{
+  return this->poTestIntern->DeleteWriteNewClose(iKey);
+}
+//==============================================================================
+int sstCfgFilCls::AddConfigSet(int         iKey,
+                               std::string oSection,
+                               std::string oParameter,
+                               std::string oValue)
+{
+  return this->poTestIntern->AddConfigSet(iKey,oSection,oParameter,oValue);
+}
+//==============================================================================
+sstCfgSetCls::sstCfgSetCls()
+{
+  this->poTestIntern = new (sstCfgSetIntCls);
+}
+//==============================================================================
+sstCfgSetCls::~sstCfgSetCls()
+{
+  delete (this->poTestIntern);
+}
+//==============================================================================

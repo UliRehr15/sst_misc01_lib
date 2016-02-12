@@ -401,6 +401,295 @@ class sstMisc01AscFilIntCls
      long  Siz;            /**< Dateigröße Bytes    */
 };
 //==============================================================================
+//==============================================================================
+enum _sstCfgFilRowTyp_enum
+{ eCfgRowSetEmpty,     /**< Empty Row         */
+  eCfgRowSetComment,   /**< Comment Row       */
+  eCfgRowSetSection,   /**< Section Row       */
+  eCfgRowSetSetting,   /**< Parameter Row     */
+  eCfgRowSetUnknown,   /**< Unknown Row       */
+  eCfgRowSetError,     /**< Error   Row       */
+     };
+typedef enum _sstCfgFilRowTyp_enum sstCfgFilRowTyp_enum;
+
+#define dSST_CFG_SECTION_TXTLEN   10  /**< Fix Lenght of config section @ingroup casc_lib2 */
+#define dSST_CFG_PARAMETER_TXTLEN   10  /**< Fix Lenght of config parameter @ingroup casc_lib2 */
+#define dSST_CFG_VALUE_TXTLEN   10  /**< Fix Lenght of config value @ingroup casc_lib2 */
+
+//==============================================================================
+/**
+* @brief sst Lib Config Set Class
+*
+* More Comment
+*
+* Changed: 10.12.14  Re.
+*
+* @ingroup casc2_lib
+*
+* @author Re.
+*
+* @date 10.12.14
+*/
+// ----------------------------------------------------------------------------
+class sstCfgSetIntCls
+{
+  public:   // Public functions
+     sstCfgSetIntCls();   // Constructor
+
+     /**
+     * @brief Find row type from Ton Ini Row
+     *
+     * @param iKey       [in]  For the moment 0
+     * @param sFilRow    [in]  set file row to class
+     * @param eTONSetTyp [out] Setting Type of fil row
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+    int GetTonIniRowType(int iKey, std::string *sFilRow, sstCfgFilRowTyp_enum *eTONSetTyp);
+     //==============================================================================
+     /**
+     * @brief Find settings values in ini file row and set into cfg object
+     *
+     * iStat = oTonIniRow.FindSetSettings ( iKey, std::string  *sFilRow);
+     *
+     * Settings row is for example "Name=NIS" <BR>
+     * Set Settings value 1 > Parameter (Name) <BR>
+     * Set Settings Value 2 > value (NIS) <BR>
+     *
+     * @param iKey       [in]   For the moment 0
+     * @param sFilRow    [in]   set file row to class
+     * @param sErrTxt    [out]  return error text
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int FindSetSettings (int           iKey,
+                          std::string  *sFilRow,
+                          std::string  *sErrTxt);
+
+    // ~X();   // Destructor
+     //==============================================================================
+     /**
+     * @brief // SetSection <BR>
+     * oTonIniRow.SetSelection(oSection);
+     *
+     * @param oSection [in] Section
+     */
+     // ----------------------------------------------------------------------------
+     void SetSection(std::string oSection);
+     //==============================================================================
+     /**
+     * @brief // Set Parameter <BR>
+     * oTonIniRow.SetParameter(oSection);
+     *
+     * @param oParameter [in] Parameter
+     */
+     // ----------------------------------------------------------------------------
+     void SetParameter(std::string oParameter);
+     //==============================================================================
+     /**
+     * @brief // Set Value <BR>
+     * oTonIniRow.SetValue(oValue);
+     *
+     * @param oValue [in] Value
+     */
+     // ----------------------------------------------------------------------------
+     void SetValue(std::string oValue);
+     //==============================================================================
+     /**
+     * @brief // Set Sort Char <BR>
+     * oTonIniRow.CfgSort(oSection, oParameter);
+     *
+     * @param oSection   [in] Value
+     * @param oParameter [in] Value
+     */
+     // ----------------------------------------------------------------------------
+     void SetCfgSort(std::string oSection, std::string oParameter);
+     //==============================================================================
+     /**
+     * @brief // Get Section <BR>
+     * oSection = oTonIniRow.GetSection()
+     *
+     * @return Section string
+     */
+     // ----------------------------------------------------------------------------
+     char* GetSection();
+     //==============================================================================
+     /**
+     * @brief // Get Parameter <BR>
+     * oParameter = oTonIniRow.GetParameter();
+     *
+     * @return Parameter string
+     */
+     // ----------------------------------------------------------------------------
+     char* GetParameter();
+     //==============================================================================
+     /**
+     * @brief // Get Value <BR>
+     * oValue = oTonIniRow.GetValue()
+     *
+     * @return Value string
+     */
+     // ----------------------------------------------------------------------------
+     char* GetValue();
+     //==============================================================================
+     /**
+     * @brief // Get Sort Char Adress <BR>
+     * oValue = oTonIniRow.GetCfgSortAdr()
+     *
+     * @return Value string
+     */
+     // ----------------------------------------------------------------------------
+     char* GetCfgSortAdr();
+     //==============================================================================
+     /**
+     * @brief // Get Sort Char size <BR>
+     * oValue = oTonIniRow.GetCfgSortSize()
+     *
+     * @return Sort Char Size
+     */
+     // ----------------------------------------------------------------------------
+     unsigned int GetCfgSortSize();
+     //==============================================================================
+     /**
+     * @brief // Write Section Row into file <BR>
+     * iStat = oTonIniRow.WritFileSection(&oExpFil);
+     *
+     * @param iKey    [in] For the moment 0
+     * @param oExpFil [in] For the moment 0
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int WritFileSection(int iKey,sstMisc01AscFilCls *oExpFil);
+     //==============================================================================
+     /**
+     * @brief // Write Parameter/Value Row in File <BR>
+     * iStat = oTonIniRow.WriFileParameterValue()
+     *
+     * @param iKey    [in] For the moment 0
+     * @param oExpFil [in] For the moment 0
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int WritFileParameterValue(int iKey,sstMisc01AscFilCls *oExpFil);
+     //==============================================================================
+
+
+protected:
+private:  // Private functions
+  char cSection[dSST_CFG_SECTION_TXTLEN];       /**< actual section */
+  char cParameter[dSST_CFG_PARAMETER_TXTLEN];   /**< actual parameter */
+  char cValue[dSST_CFG_VALUE_TXTLEN];           /**< actual parameter value */
+  char cCfgSort[dSST_CFG_SECTION_TXTLEN+dSST_CFG_PARAMETER_TXTLEN];  /**< Sort String */
+};
+//==============================================================================
+/**
+* @brief sst Lib Config File Class
+*
+* More Comment
+*
+* Changed: 10.12.14  Re.
+*
+* @ingroup casc2_lib
+*
+* @author Re.
+*
+* @date 10.12.14
+*/
+// ----------------------------------------------------------------------------
+class sstCfgFilIntCls : public sstMisc01AscFilCls
+{
+  public:   // Public functions
+  //==============================================================================
+  /**
+  * @brief // Constructor <BR>
+  * @param oCfgFilNam [in] Config File Name
+  */
+  // ----------------------------------------------------------------------------
+    sstCfgFilIntCls(std::string oCfgFilNam);   // Constructor
+    ~sstCfgFilIntCls();   // Constructor
+     // Delete existing config file, write and close new one
+     //==============================================================================
+     /**
+     * @brief // DeleteWriteNewClose <BR>
+     * iStat = oTonIniFile.DeleteWriteNewClose(iKey);
+     *
+     * @param iKey [in] For the moment 0
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int DeleteWriteNewClose(int iKey);
+
+     //==============================================================================
+     /**
+     * @brief // OpenWriteClose <BR>
+     * iStat = oTonIniFile.OpenWriteClose(iKey);
+     *
+     * @param iKey [in] For the moment 0
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int OpenWriteClose(int iKey);
+     //==============================================================================
+     /**
+     * @brief // AddConfigSet <BR>
+     * iStat = oTonIniFile.AddConfigSet(iKey,oSection);
+     *
+     * @param iKey       [in] For the moment 0
+     * @param oSection   [in] Section
+     * @param oParameter [in] Parameter
+     * @param oValue     [in] Value
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int AddConfigSet(int         iKey,
+                      std::string oSection,
+                      std::string oParameter,
+                      std::string oValue);
+     //==============================================================================
+
+
+    // ~X();   // Destructor
+     //==============================================================================
+
+
+private:  // Private functions
+  std::string oCfgFilNam;
+     std::string sFilRow;     /**< actual file row */
+  // sstCfgSetIntCls oCfgSet;    /**< config set */
+  sstRec04Cls *poCfgSetMem;  /**< rec mem for config sets */
+  sstRec04TreeKeyCls oTre;
+  char cActSection[dSST_CFG_SECTION_TXTLEN];       /**< actual section */
+
+};
+//-----------------------------------------------------------------------------
 
 
 #endif

@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMisc01LibInt.cpp    16.12.15  Re.    16.12.15  Re.
+// sstMisc01AscFil.cpp    16.12.15  Re.    16.12.15  Re.
 //
 
 #include <stdio.h>
@@ -20,6 +20,8 @@
 #include <assert.h>
 
 #include <string>
+
+#include <sstRec04Lib.h>
 
 #include "sstMisc01Lib.h"
 #include "sstMisc01LibInt.h"
