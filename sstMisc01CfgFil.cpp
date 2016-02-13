@@ -32,9 +32,9 @@
 #include "sstMisc01LibInt.h"
 
 //=============================================================================
-sstCfgFilIntCls::sstCfgFilIntCls(std::string oTmpCfgFilNam)
+sstMisc01CfgFilIntCls::sstMisc01CfgFilIntCls(std::string oTmpCfgFilNam)
 {
-  sstCfgSetIntCls oCfgSet;
+  sstMisc01CfgSetIntCls oCfgSet;
   memset(&this->cActSection,0,dSST_CFG_SECTION_TXTLEN);
   this->oCfgFilNam = oTmpCfgFilNam + ".cfg";
   // Str1_Init(0, &sFilRow);
@@ -45,12 +45,12 @@ sstCfgFilIntCls::sstCfgFilIntCls(std::string oTmpCfgFilNam)
   assert(iStat >= 0);
 }
 //=============================================================================
-sstCfgFilIntCls::~sstCfgFilIntCls()
+sstMisc01CfgFilIntCls::~sstMisc01CfgFilIntCls()
 {
   delete(this->poCfgSetMem);
 }
 //=============================================================================
-int sstCfgFilIntCls::DeleteWriteNewClose(int iKey)
+int sstMisc01CfgFilIntCls::DeleteWriteNewClose(int iKey)
 {
   int iStat = 0;
   if ( iKey != 0) return -1;
@@ -64,7 +64,7 @@ int sstCfgFilIntCls::DeleteWriteNewClose(int iKey)
   // open file
   iStat = oExpFil.fopenWr( 0, this->oCfgFilNam.c_str());
 
-  sstCfgSetIntCls oCfgSet;    /**< config set */
+  sstMisc01CfgSetIntCls oCfgSet;    /**< config set */
 
 //  for(dREC04RECNUMTYP ii = 1; ii <= this->poCfgSetMem->count(); ii++)
 //  {
@@ -95,18 +95,18 @@ int sstCfgFilIntCls::DeleteWriteNewClose(int iKey)
   return iStat;
 }
 //=============================================================================
-int sstCfgFilIntCls::OpenWriteClose(int iKey)
+int sstMisc01CfgFilIntCls::OpenWriteClose(int iKey)
 {
     if ( iKey != 0) return -1;
     return 0;
 }
 //=============================================================================
-int sstCfgFilIntCls::AddConfigSet(int iKey,
+int sstMisc01CfgFilIntCls::AddConfigSet(int iKey,
                                 std::string oTmpSection,
                                 std::string oTmpParameter,
                                 std::string oTmpValue)
 {
-  sstCfgSetIntCls oCfgSet;    /**< config set */
+  sstMisc01CfgSetIntCls oCfgSet;    /**< config set */
 
   if ( iKey != 0) return -1;
 

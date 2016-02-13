@@ -28,7 +28,7 @@
 #include "sstMisc01LibInt.h"
 
 //=============================================================================
-sstCfgSetIntCls::sstCfgSetIntCls()
+sstMisc01CfgSetIntCls::sstMisc01CfgSetIntCls()
 {
   memset(&this->cSection,0,dSST_CFG_SECTION_TXTLEN);
   memset(&this->cParameter,0,dSST_CFG_PARAMETER_TXTLEN);
@@ -36,7 +36,7 @@ sstCfgSetIntCls::sstCfgSetIntCls()
   memset(&this->cCfgSort,0,dSST_CFG_SECTION_TXTLEN + dSST_CFG_PARAMETER_TXTLEN);
 }
 //=============================================================================
-int sstCfgSetIntCls::FindSetSettings (int           iKey,
+int sstMisc01CfgSetIntCls::FindSetSettings (int           iKey,
                                    std::string  *sTmpFilRow,
                                    std::string  *sErrTxt)
 //-----------------------------------------------------------------------------
@@ -74,30 +74,30 @@ int sstCfgSetIntCls::FindSetSettings (int           iKey,
   return iRet;
 }
 //=============================================================================
-int sstCfgSetIntCls::GetTonIniRowType(int                    iKey,
+int sstMisc01CfgSetIntCls::GetCfgIniRowType(int                    iKey,
                                    std::string           *sTmpFilRow,
-                                   sstCfgFilRowTyp_enum *eTONSetTyp)
+                                   sstCfgFilRowTyp_enum *eCfgSetTyp)
 {
   std::string           sTmpSection;
   sstStr01Cls oRowStr;
   int iRet  = 0;
   int iStat = 0;
 //-----------------------------------------------------------------------------
-  *eTONSetTyp = eCfgRowSetError;
+  *eCfgSetTyp = eCfgRowSetError;
 
   if ( iKey != 0) return -1;
 
   // iStat = Str1Cpy( 0, &this->sFilRow, sTmpFilRow->Txt);
   if (sTmpFilRow->length() <= 0)
   {
-    *eTONSetTyp = eCfgRowSetEmpty;
+    *eCfgSetTyp = eCfgRowSetEmpty;
     return 0;
   }
 
   // Find comment >;
   if (sTmpFilRow->at(0) == 59)  // 59 = ";"
   {
-    *eTONSetTyp = eCfgRowSetComment;
+    *eCfgSetTyp = eCfgRowSetComment;
     return 0;
   }
 
@@ -111,12 +111,12 @@ int sstCfgSetIntCls::GetTonIniRowType(int                    iKey,
     oRowStr.GetNextBrakeInfo(0,sTmpFilRow,&sTmpSection);
     strncpy( this->cSection, sTmpSection.c_str(), dSST_CFG_SECTION_TXTLEN);
 
-    *eTONSetTyp = eCfgRowSetSection;
+    *eCfgSetTyp = eCfgRowSetSection;
     return 0;
   }
 
-  // All other are TON Settings rows
-  *eTONSetTyp = eCfgRowSetSetting;
+  // All other are Config Settings rows
+  *eCfgSetTyp = eCfgRowSetSetting;
 
   // Fatal Errors goes to an assert
   if (iRet < 0)
@@ -131,53 +131,53 @@ int sstCfgSetIntCls::GetTonIniRowType(int                    iKey,
   return iRet;
 }
 //=============================================================================
-void sstCfgSetIntCls::SetSection(std::string oTmpSection)
+void sstMisc01CfgSetIntCls::SetSection(std::string oTmpSection)
 {
   strncpy( this->cSection, oTmpSection.c_str(), dSST_CFG_SECTION_TXTLEN);
 }
 //=============================================================================
-void sstCfgSetIntCls::SetParameter(std::string oTmpParameter)
+void sstMisc01CfgSetIntCls::SetParameter(std::string oTmpParameter)
 {
   strncpy( this->cParameter, oTmpParameter.c_str(), dSST_CFG_PARAMETER_TXTLEN);
 }
 //=============================================================================
-void sstCfgSetIntCls::SetValue(std::string oTmpValue)
+void sstMisc01CfgSetIntCls::SetValue(std::string oTmpValue)
 {
   strncpy( this->cValue, oTmpValue.c_str(), dSST_CFG_VALUE_TXTLEN);
 }
 //=============================================================================
-void sstCfgSetIntCls::SetCfgSort(std::string oTmpSection, std::string oTmpParameter)
+void sstMisc01CfgSetIntCls::SetCfgSort(std::string oTmpSection, std::string oTmpParameter)
 {
   strncpy( this->cCfgSort, oTmpSection.c_str(), dSST_CFG_SECTION_TXTLEN);
   strncat( this->cCfgSort, oTmpParameter.c_str(), dSST_CFG_PARAMETER_TXTLEN);
 }
 //=============================================================================
-char* sstCfgSetIntCls::GetSection()
+char* sstMisc01CfgSetIntCls::GetSection()
 {
   return this->cSection;
 }
 //=============================================================================
-char* sstCfgSetIntCls::GetParameter()
+char* sstMisc01CfgSetIntCls::GetParameter()
 {
   return this->cParameter;
 }
 //=============================================================================
-char* sstCfgSetIntCls::GetValue()
+char* sstMisc01CfgSetIntCls::GetValue()
 {
   return this->cValue;
 }
 //=============================================================================
-char* sstCfgSetIntCls::GetCfgSortAdr()
+char* sstMisc01CfgSetIntCls::GetCfgSortAdr()
 {
   return this->cCfgSort;
 }
 //=============================================================================
-unsigned int sstCfgSetIntCls::GetCfgSortSize()
+unsigned int sstMisc01CfgSetIntCls::GetCfgSortSize()
 {
   return sizeof(this->cCfgSort);
 }
 //=============================================================================
-int sstCfgSetIntCls::WritFileSection(int iKey,sstMisc01AscFilCls *oExpFil)
+int sstMisc01CfgSetIntCls::WritFileSection(int iKey,sstMisc01AscFilCls *oExpFil)
 {
   sstMisc01AscRowCls oExpRow;
   std::string sFilRow;
@@ -209,7 +209,7 @@ int sstCfgSetIntCls::WritFileSection(int iKey,sstMisc01AscFilCls *oExpFil)
   return iStat;
 }
 //=============================================================================
-int sstCfgSetIntCls::WritFileParameterValue(int iKey,sstMisc01AscFilCls *oExpFil)
+int sstMisc01CfgSetIntCls::WritFileParameterValue(int iKey,sstMisc01AscFilCls *oExpFil)
 {
   sstMisc01AscRowCls oExpRow;
   std::string sFilRow;

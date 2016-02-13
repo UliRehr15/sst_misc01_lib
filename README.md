@@ -14,4 +14,6 @@ December 2015, Hanover, Germany, Uli Rehr
 Versions <BR>
 20151218: 1.0 First check in. Asc File IO functions. <BR>
 20151220: 1.1 Small corrections. <BR>
+20160212: 1.2 Small Log/Protocol System, <BR>
+              small Config File System. <BR>
 

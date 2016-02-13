@@ -200,22 +200,22 @@ long sstMisc01AscFilCls::GetFileSize()
   return this->poAscFilInt->GetFileSize();
 }
 //==============================================================================
-sstCfgFilCls::sstCfgFilCls(std::string oCfgFilNam)
+sstMisc01CfgFilCls::sstMisc01CfgFilCls(std::string oCfgFilNam)
 {
-  this->poTestIntern = new sstCfgFilIntCls(oCfgFilNam);
+  this->poTestIntern = new sstMisc01CfgFilIntCls(oCfgFilNam);
 }
 //==============================================================================
-sstCfgFilCls::~sstCfgFilCls()
+sstMisc01CfgFilCls::~sstMisc01CfgFilCls()
 {
   delete (this->poTestIntern);
 }
 //==============================================================================
-int sstCfgFilCls::DeleteWriteNewClose(int iKey)
+int sstMisc01CfgFilCls::DeleteWriteNewClose(int iKey)
 {
   return this->poTestIntern->DeleteWriteNewClose(iKey);
 }
 //==============================================================================
-int sstCfgFilCls::AddConfigSet(int         iKey,
+int sstMisc01CfgFilCls::AddConfigSet(int         iKey,
                                std::string oSection,
                                std::string oParameter,
                                std::string oValue)
@@ -223,12 +223,12 @@ int sstCfgFilCls::AddConfigSet(int         iKey,
   return this->poTestIntern->AddConfigSet(iKey,oSection,oParameter,oValue);
 }
 //==============================================================================
-sstCfgSetCls::sstCfgSetCls()
+sstMisc01CfgSetCls::sstMisc01CfgSetCls()
 {
-  this->poTestIntern = new (sstCfgSetIntCls);
+  this->poTestIntern = new (sstMisc01CfgSetIntCls);
 }
 //==============================================================================
-sstCfgSetCls::~sstCfgSetCls()
+sstMisc01CfgSetCls::~sstMisc01CfgSetCls()
 {
   delete (this->poTestIntern);
 }

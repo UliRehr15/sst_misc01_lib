@@ -110,7 +110,7 @@ int Test_ConfigSystem (int iKey)
 //-----------------------------------------------------------------------------
 {
 
-  sstCfgFilCls oCfgFil("CfgFileTest");
+  sstMisc01CfgFilCls oCfgFil("CfgFileTest");
 
   sstMisc01AscFilCls oAscFil;
   std::string oAscRow;

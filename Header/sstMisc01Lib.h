@@ -22,7 +22,10 @@
 /**
  * @defgroup sstMisc01Lib sstMisc01Lib: cpp sst miscellanious library (Version 1)
  *
- * cpp sst base functions <BR>
+ * sst Miscellaneous functions Lib <BR>
+ *   functions for reading/writing Asc Files  <BR>
+ *   functions for logging / protocol file <BR>
+ *   functions for config file reading / writing <BR>
  *
  */
 
@@ -30,8 +33,8 @@
 
 // Defines ---------------------------------------------------------------------
 
-#define dCASC2_TEXTLEN    200  /**< Fix Lenght of file row cpp fnc  @ingroup sstMisc01Lib */
-#define MAX_PFAD          260  /**< maximale path+filename length   @ingroup sstMisc01Lib */
+#define dCASC2_TEXTLEN    200  /**< Fix Lenght of Misc01 Asc file row    @ingroup sstMisc01Lib */
+#define MAX_PFAD          260  /**< Misc01 maximal path+filename length  @ingroup sstMisc01Lib */
 
 
 // Structures and Classes ------------------------------------------------------
@@ -39,8 +42,8 @@
 // forward declarations --------------------------------------------------------
 class sstMisc01AscRowIntCls;
 class sstMisc01AscFilIntCls;
-class sstCfgSetIntCls;
-class sstCfgFilIntCls;
+class sstMisc01CfgSetIntCls;
+class sstMisc01CfgFilIntCls;
 
 //==============================================================================
 /**
@@ -419,38 +422,24 @@ class sstMisc01AscFilCls
 *
 * Changed: 10.12.14  Re.
 *
-* @ingroup casc2_lib
+* @ingroup sstMisc01Lib
 *
 * @author Re.
 *
 * @date 10.12.14
 */
 // ----------------------------------------------------------------------------
-class sstCfgSetCls
+class sstMisc01CfgSetCls
 {
   public:   // Public functions
-  sstCfgSetCls();   // Constructor
-  ~sstCfgSetCls();   // Constructor
+  sstMisc01CfgSetCls();    // Constructor
+  ~sstMisc01CfgSetCls();   // Destructor
 
-     /**
-     * @brief Find row type from Ton Ini Row
-     *
-     * @param iKey       [in]  For the moment 0
-     * @param sFilRow    [in]  set file row to class
-     * @param eTONSetTyp [out] Setting Type of fil row
-     *
-     * @return Errorstate
-     *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
-     */
-     // ----------------------------------------------------------------------------
-    // int GetTonIniRowType(int iKey, std::string *sFilRow, sstCfgFilRowTyp_enum *eTONSetTyp);
      //==============================================================================
      /**
      * @brief Find settings values in ini file row and set into cfg object
      *
-     * iStat = oTonIniRow.FindSetSettings ( iKey, std::string  *sFilRow);
+     * iStat = oCfgSet.FindSetSettings ( iKey, std::string  *sFilRow);
      *
      * Settings row is for example "Name=NIS" <BR>
      * Set Settings value 1 > Parameter (Name) <BR>
@@ -474,7 +463,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // SetSection <BR>
-     * oTonIniRow.SetSelection(oSection);
+     * oCfgSet.SetSelection(oSection);
      *
      * @param oSection [in] Section
      */
@@ -483,7 +472,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Set Parameter <BR>
-     * oTonIniRow.SetParameter(oSection);
+     * oCfgSet.SetParameter(oSection);
      *
      * @param oParameter [in] Parameter
      */
@@ -492,7 +481,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Set Value <BR>
-     * oTonIniRow.SetValue(oValue);
+     * oCfgSet.SetValue(oValue);
      *
      * @param oValue [in] Value
      */
@@ -501,7 +490,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Set Sort Char <BR>
-     * oTonIniRow.CfgSort(oSection, oParameter);
+     * oCfgSet.CfgSort(oSection, oParameter);
      *
      * @param oSection   [in] Value
      * @param oParameter [in] Value
@@ -511,7 +500,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Get Section <BR>
-     * oSection = oTonIniRow.GetSection()
+     * oSection = oCfgSet.GetSection()
      *
      * @return Section string
      */
@@ -520,7 +509,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Get Parameter <BR>
-     * oParameter = oTonIniRow.GetParameter();
+     * oParameter = oCfgSet.GetParameter();
      *
      * @return Parameter string
      */
@@ -529,7 +518,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Get Value <BR>
-     * oValue = oTonIniRow.GetValue()
+     * oValue = oCfgSet.GetValue()
      *
      * @return Value string
      */
@@ -538,7 +527,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Get Sort Char Adress <BR>
-     * oValue = oTonIniRow.GetCfgSortAdr()
+     * oValue = oCfgSet.GetCfgSortAdr()
      *
      * @return Value string
      */
@@ -547,7 +536,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Get Sort Char size <BR>
-     * oValue = oTonIniRow.GetCfgSortSize()
+     * oValue = oCfgSet.GetCfgSortSize()
      *
      * @return Sort Char Size
      */
@@ -556,7 +545,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Write Section Row into file <BR>
-     * iStat = oTonIniRow.WritFileSection(&oExpFil);
+     * iStat = oCfgSet.WritFileSection(&oExpFil);
      *
      * @param iKey    [in] For the moment 0
      * @param oExpFil [in] For the moment 0
@@ -571,7 +560,7 @@ class sstCfgSetCls
      //==============================================================================
      /**
      * @brief // Write Parameter/Value Row in File <BR>
-     * iStat = oTonIniRow.WriFileParameterValue()
+     * iStat = oCfgSet.WriFileParameterValue()
      *
      * @param iKey    [in] For the moment 0
      * @param oExpFil [in] For the moment 0
@@ -588,7 +577,7 @@ class sstCfgSetCls
 
 protected:
 private:  // Private functions
-     sstCfgSetIntCls *poTestIntern;   /**< Pointer to intern object */
+     sstMisc01CfgSetIntCls *poTestIntern;   /**< Pointer to intern object */
 };
 //==============================================================================
 /**
@@ -598,14 +587,14 @@ private:  // Private functions
 *
 * Changed: 10.12.14  Re.
 *
-* @ingroup casc2_lib
+* @ingroup sstMisc01Lib
 *
 * @author Re.
 *
 * @date 10.12.14
 */
 // ----------------------------------------------------------------------------
-class sstCfgFilCls : public sstMisc01AscFilCls
+class sstMisc01CfgFilCls : public sstMisc01AscFilCls
 {
   public:   // Public functions
   //==============================================================================
@@ -614,13 +603,13 @@ class sstCfgFilCls : public sstMisc01AscFilCls
   * @param oCfgFilNam [in] Config File Name
   */
   // ----------------------------------------------------------------------------
-    sstCfgFilCls(std::string oCfgFilNam);   // Constructor
-    ~sstCfgFilCls();   // Constructor
+    sstMisc01CfgFilCls(std::string oCfgFilNam);   // Constructor
+    ~sstMisc01CfgFilCls();   // Constructor
      // Delete existing config file, write and close new one
      //==============================================================================
      /**
      * @brief // DeleteWriteNewClose <BR>
-     * iStat = oTonIniFile.DeleteWriteNewClose(iKey);
+     * iStat = oCfgFile.DeleteWriteNewClose(iKey);
      *
      * @param iKey [in] For the moment 0
      *
@@ -634,7 +623,7 @@ class sstCfgFilCls : public sstMisc01AscFilCls
      //==============================================================================
      /**
      * @brief // OpenWriteClose <BR>
-     * iStat = oTonIniFile.OpenWriteClose(iKey);
+     * iStat = oCfgFile.OpenWriteClose(iKey);
      *
      * @param iKey [in] For the moment 0
      *
@@ -648,7 +637,7 @@ class sstCfgFilCls : public sstMisc01AscFilCls
      //==============================================================================
      /**
      * @brief // AddConfigSet <BR>
-     * iStat = oTonIniFile.AddConfigSet(iKey,oSection);
+     * iStat = oCfgFile.AddConfigSet(iKey,oSection);
      *
      * @param iKey       [in] For the moment 0
      * @param oSection   [in] Section
@@ -673,7 +662,7 @@ class sstCfgFilCls : public sstMisc01AscFilCls
 
 
 private:  // Private functions
-     sstCfgFilIntCls *poTestIntern;   /**< Pointer to intern object */
+     sstMisc01CfgFilIntCls *poTestIntern;   /**< Pointer to intern object */
 
 };
 //-----------------------------------------------------------------------------
