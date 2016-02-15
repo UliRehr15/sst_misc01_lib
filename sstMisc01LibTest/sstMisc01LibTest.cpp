@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMisc01Lib.cpp    16.12.15  Re.    16.12.15  Re.
+// sstMisc01LibTest.cpp    15.02.16  Re.    16.12.15  Re.
 //
 
 #include <stdio.h>
@@ -26,7 +26,9 @@
 #include "sstMisc01LibTest.h"
 
 int Test_AscFile (int iKey);
+int Test_LogSystem (int iKey);
 int Test_ConfigSystem (int iKey);
+int Test_ProgressBar (int iKey);
 
 //=============================================================================
 int main (int argc, char *argv [])
@@ -39,7 +41,13 @@ int main (int argc, char *argv [])
   iStat = Test_AscFile ( 0);
   assert (iStat >= 0);
 
+  iStat = Test_LogSystem ( 0);
+  assert (iStat >= 0);
+
   iStat = Test_ConfigSystem ( 0);
+  assert (iStat >= 0);
+
+  iStat = Test_ProgressBar ( 0);
   assert (iStat >= 0);
 
   printf("Test Misc01Lib Success. \n");
@@ -87,23 +95,21 @@ int Test_AscFile (int iKey) // v  -> For the moment 0
 int Test_LogSystem (int iKey) // v  -> For the moment 0
 //-----------------------------------------------------------------------------
 {
-  int iRet  = 0;
   int iStat = 0;
   //-----------------------------------------------------------------------------
   if ( iKey != 0) return -1;
 
-  // Fatal Errors goes to an assert
+  sstMisc01PrtFilCls oSstPrt;
 
-  // Pipe |
-  // Smaller <
-  // Greater >
+  // Open Protocol
+  iStat = oSstPrt.SST_PrtAuf ( 0, (char*) "TestPrt");
+  assert(iStat == 0);
 
-  assert(iRet >= 0);
+  // Close Protocol
+  iStat = oSstPrt.SST_PrtZu ( 0);
+  assert(iStat == 0);
 
-  // Small Errors will given back
-  iRet = iStat;
-
-  return iRet;
+  return iStat;
 }
 //=============================================================================
 int Test_ConfigSystem (int iKey)
@@ -157,6 +163,32 @@ Param3=333
   assert (iStat = -1);  // End of file
 
   iStat = oAscFil.fcloseFil(0);
+
+  return iStat;
+}
+//=============================================================================
+int Test_ProgressBar (int iKey) // v  -> For the moment 0
+//-----------------------------------------------------------------------------
+{
+  sstMisc01ConPrgBarCls oPrgBar;
+
+  int iStat = 0;
+  //-----------------------------------------------------------------------------
+  if ( iKey != 0) return -1;
+
+  // open progress bar on console with 10 calls per point
+  iStat = oPrgBar.Open ( 0, (char*) "Reading Start", 10);
+  assert(iStat == 0);
+
+  for (int ii=0; ii<100; ii++)
+  {
+    // write tick/call on progress bar
+    oPrgBar.Tick ();
+  }
+
+  // close progress bar on console
+  iStat = oPrgBar.Close ( 0, (char*) "Reading Stop");
+  assert(iStat == 0);
 
   return iStat;
 }

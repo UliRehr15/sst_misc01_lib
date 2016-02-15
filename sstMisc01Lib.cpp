@@ -60,13 +60,6 @@ int sstMisc01AscRowCls::Line_toStr1 (int             iKey,
   return this->poAscRowInt->Line_toStr1(iKey,Str1);
 }
 //==============================================================================
-int sstMisc01AscRowCls::Line_toStr2 (int             iKey,
-                               std::string    *Str2)
-//-----------------------------------------------------------------------------
-{
-  return this->poAscRowInt->Line_toStr2(iKey,Str2);
-}
-//==============================================================================
 int sstMisc01AscRowCls::Str1_toLine (int          iKey,
                                std::string *Str1)
 //-----------------------------------------------------------------------------
@@ -74,13 +67,6 @@ int sstMisc01AscRowCls::Str1_toLine (int          iKey,
   return this->poAscRowInt->Str1_toLine(iKey,Str1);
 }
 //==============================================================================
-int sstMisc01AscRowCls::Str2_toLine (int          iKey,
-                               std::string *Str2)
-//-----------------------------------------------------------------------------
-{
-  return this->poAscRowInt->Str2_toLine(iKey,Str2);
-}
-//=============================================================================
 sstMisc01AscRowIntCls* sstMisc01AscRowCls::GetIntAdr()
 {
   return this->poAscRowInt;
@@ -160,20 +146,6 @@ int sstMisc01AscFilCls::wr_txt ( int    iKey,
   return this->poAscFilInt->wr_txt(iKey,Txt);
 }
 //==============================================================================
-int sstMisc01AscFilCls::Rd_StrDS2 ( int           iKey,
-                              std::string  *StrDS)
-//-----------------------------------------------------------------------------
-{
-  return this->poAscFilInt->Rd_StrDS2(iKey,StrDS);
-}
-//==============================================================================
-int sstMisc01AscFilCls::Wr_StrDS2 ( int          iKey,
-                              std::string *StrDS)
-//-----------------------------------------------------------------------------
-{
-  return this->poAscFilInt->Wr_StrDS2 ( iKey, StrDS);
-}
-//==============================================================================
 int sstMisc01AscFilCls::Rd_StrDS1 ( int           iKey,
                               std::string  *StrDS)
 //-----------------------------------------------------------------------------
@@ -232,4 +204,96 @@ sstMisc01CfgSetCls::~sstMisc01CfgSetCls()
 {
   delete (this->poTestIntern);
 }
-//==============================================================================
+//=============================================================================
+sstMisc01PrtMsgCls::sstMisc01PrtMsgCls()
+{
+    poTestIntern = new(sstMisc01PrtMsgIntCls);
+}
+//=============================================================================
+sstMisc01PrtMsgCls::~sstMisc01PrtMsgCls()
+{
+    delete(poTestIntern);
+}
+//=============================================================================
+sstMisc01PrtMsgIntCls* sstMisc01PrtMsgCls::GetInternAdress ()
+{
+  return this->poTestIntern;
+}
+//=============================================================================
+sstMisc01PrtFilCls::sstMisc01PrtFilCls()
+{
+    poTestIntern = new(sstMisc01PrtFilIntCls);
+}
+//=============================================================================
+sstMisc01PrtFilCls::~sstMisc01PrtFilCls()
+{
+    delete(poTestIntern);
+}
+//=============================================================================
+int sstMisc01PrtFilCls::SST_PrtAuf ( int      iKey,
+                                     char    *cFilNam)
+//-----------------------------------------------------------------------------
+{
+  return this->poTestIntern->SST_PrtAuf(iKey,cFilNam);
+}
+//=============================================================================
+int sstMisc01PrtFilCls::SST_PrtWrt ( int           iKey,
+                                     char         *cMld)
+//-----------------------------------------------------------------------------
+{
+  return this->poTestIntern->SST_PrtWrt( iKey, cMld);
+}
+//=============================================================================
+int sstMisc01PrtFilCls::SST_PrtWrtMld ( int                 iKey,
+                                        sstMisc01PrtMsgCls *oMld)
+//-----------------------------------------------------------------------------
+{
+  return this->poTestIntern->SST_PrtWrtMld( iKey, oMld->GetInternAdress());
+}
+//=============================================================================
+int sstMisc01PrtFilCls::SST_PrtWrtZeil ( int             iKey,
+                                         unsigned long   ulZeil,
+                                         char           *cMld)
+//-----------------------------------------------------------------------------
+{
+  return this->poTestIntern->SST_PrtWrtZeil( iKey, ulZeil, cMld);
+}
+//=============================================================================
+int sstMisc01PrtFilCls::SST_PrtWrtDbl ( int           iKey,
+                                        double        dDblVal,
+                                        char         *cMld)
+//-----------------------------------------------------------------------------
+{
+  return this->poTestIntern->SST_PrtWrtDbl( iKey, dDblVal, cMld);
+}
+//=============================================================================
+int sstMisc01PrtFilCls::SST_PrtWrtInt4 ( int           iKey,
+                                         unsigned long          lVal,
+                                         char         *cMld)
+//-----------------------------------------------------------------------------
+{
+  return this->poTestIntern->SST_PrtWrtInt4( iKey, lVal, cMld);
+}
+//=============================================================================
+int sstMisc01PrtFilCls::SST_PrtWrtChar ( int           iKey,
+                                         char         *cVal,
+                                         char         *cMld)
+//-----------------------------------------------------------------------------
+{
+  return this->poTestIntern->SST_PrtWrtChar( iKey, cVal, cMld);
+}
+//=============================================================================
+int sstMisc01PrtFilCls::SST_PrtWrtConsole (int   iKey,
+                                           char *cOutText)
+//-----------------------------------------------------------------------------
+{
+  return this->poTestIntern->SST_PrtWrtConsole( iKey, cOutText);
+}
+//=============================================================================
+int sstMisc01PrtFilCls::SST_PrtZu ( int           iKey)
+//-----------------------------------------------------------------------------
+{
+  return this->poTestIntern->SST_PrtZu( iKey);
+}
+//=============================================================================
+

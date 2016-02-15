@@ -16,4 +16,6 @@ Versions <BR>
 20151220: 1.1 Small corrections. <BR>
 20160212: 1.2 Small Log/Protocol System, <BR>
               small Config File System. <BR>
+20160213: 1.3 Documentation corrected. <BR>
+20160215: 1.4 extend log lib, small progress bar object. <BR>
 

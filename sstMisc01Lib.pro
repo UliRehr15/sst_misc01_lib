@@ -20,8 +20,11 @@ SOURCES		+= sstMisc01Lib.cpp \
     sstMisc01AscFil.cpp \
     sstMisc01AscRow.cpp \
     sstMisc01CfgSet.cpp \
-    sstMisc01CfgFil.cpp
-SOURCES		+=
+    sstMisc01CfgFil.cpp \
+    sstMisc01PrgBar.cpp \
+    sstMisc01PrtFil.cpp \
+    sstMisc01PrtMsg.cpp
+
 
 OTHER_FILES += README.md
 

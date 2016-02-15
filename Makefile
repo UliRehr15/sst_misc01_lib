@@ -46,12 +46,18 @@ SOURCES       = sstMisc01Lib.cpp \
 		sstMisc01AscFil.cpp \
 		sstMisc01AscRow.cpp \
 		sstMisc01CfgSet.cpp \
-		sstMisc01CfgFil.cpp 
+		sstMisc01CfgFil.cpp \
+		sstMisc01PrgBar.cpp \
+		sstMisc01PrtFil.cpp \
+		sstMisc01PrtMsg.cpp 
 OBJECTS       = sstMisc01Lib.o \
 		sstMisc01AscFil.o \
 		sstMisc01AscRow.o \
 		sstMisc01CfgSet.o \
-		sstMisc01CfgFil.o
+		sstMisc01CfgFil.o \
+		sstMisc01PrgBar.o \
+		sstMisc01PrtFil.o \
+		sstMisc01PrtMsg.o
 DIST          = /usr/lib/i386-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/i386-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/i386-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -302,7 +308,8 @@ sstMisc01AscFil.o: sstMisc01AscFil.cpp ../sst_rec04_lib/Header/sstRec04Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01AscFil.o sstMisc01AscFil.cpp
 
-sstMisc01AscRow.o: sstMisc01AscRow.cpp ../sst_rec04_lib/Header/sstRec04Lib.h \
+sstMisc01AscRow.o: sstMisc01AscRow.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
+		../sst_rec04_lib/Header/sstRec04Lib.h \
 		Header/sstMisc01Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01AscRow.o sstMisc01AscRow.cpp
@@ -318,6 +325,23 @@ sstMisc01CfgFil.o: sstMisc01CfgFil.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
 		../sst_rec04_lib/Header/sstRec04Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01CfgFil.o sstMisc01CfgFil.cpp
+
+sstMisc01PrgBar.o: sstMisc01PrgBar.cpp ../sst_rec04_lib/Header/sstRec04Lib.h \
+		Header/sstMisc01Lib.h \
+		sstMisc01LibInt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01PrgBar.o sstMisc01PrgBar.cpp
+
+sstMisc01PrtFil.o: sstMisc01PrtFil.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
+		../sst_rec04_lib/Header/sstRec04Lib.h \
+		Header/sstMisc01Lib.h \
+		sstMisc01LibInt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01PrtFil.o sstMisc01PrtFil.cpp
+
+sstMisc01PrtMsg.o: sstMisc01PrtMsg.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
+		../sst_rec04_lib/Header/sstRec04Lib.h \
+		Header/sstMisc01Lib.h \
+		sstMisc01LibInt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01PrtMsg.o sstMisc01PrtMsg.cpp
 
 ####### Install
 

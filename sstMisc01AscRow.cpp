@@ -21,6 +21,7 @@
 
 #include <string>
 
+#include <sstStr01Lib.h>
 #include <sstRec04Lib.h>
 
 #include "sstMisc01Lib.h"
@@ -71,57 +72,41 @@ int sstMisc01AscRowIntCls::CatLine ( int            iKey,
   return iRet;
 }
 //=============================================================================
-///**
-//* @brief Append Long Int Value to Line-Structur
-//*
-//* More Comment
-//*
-//* Changed: 24.03.10  Re.
-//*
-//* @ingroup sstlib
-//*
-//* @param iKey:   [in]      For the moment 0
-//* @param sLine:  [in out]  Line-Struktur
-//* @param lValue: [in] Long Integer to append as string
-//*
-//* @return Errorstate
-//*
-//* @retval   = 0: OK
-//* @retval   < 0: Unspecified Error
-//*
-//* @author Re.
-//*
-//* @date 24.03.10
-//*/
-////-----------------------------------------------------------------------------
-//int sstMisc01AscRowIntCls::LineAppendLong (int   iKey,
-//                                   long  lValue)
-////-----------------------------------------------------------------------------
-//{
-//  sstMisc01AscRowIntCls sLineTmp;
-//  int iRet  = 0;
-//  int iStat = 0;
-////-----------------------------------------------------------------------------
-//  if ( iKey != 0) return -1;
+int sstMisc01AscRowIntCls::LineAppendLong (int   iKey,
+                                   unsigned long  lValue)
+//-----------------------------------------------------------------------------
+{
+  sstMisc01AscRowIntCls sLineTmp;
+  sstStr01Cls oCsvStr;
+  std::string oTmpStr;
 
-//  // Int4 in einen String konvertieren und in Zeilenbereich kopieren
-//  // iStat = casc_LineIni_c ( 0, &sLineTmp);
-//  iStat = Str_Int4Zeile ( 0, 1, 12, &lValue, sLineTmp.Txt, dCASC2_TEXTLEN);
+  int iRet  = 0;
+  int iStat = 0;
+//-----------------------------------------------------------------------------
+  if ( iKey != 0) return -1;
 
-//  iStat = CatLine ( 0,  &sLineTmp);
+  // Int4 in einen String konvertieren und in Zeilenbereich kopieren
+  // iStat = casc_LineIni_c ( 0, &sLineTmp);
+  // iStat = Str_Int4Zeile ( 0, 1, 12, &lValue, sLineTmp.Txt, dCASC2_TEXTLEN);
+  iStat = oCsvStr.Csv_UInt4_2String(0,lValue,&oTmpStr);
 
-//  // Heavy Errors goes to an assert
-//  if (iRet < 0)
-//  {
-//    // Expression (iRet >= 0) has to be fullfilled
-//    assert(0);
-//  }
+  sLineTmp.Line_toStr1(0,&oTmpStr);
 
-//  // Small Errors will given back
-//  iRet = iStat;
+  // Append second row to object
+  iStat = this->CatLine ( 0,  &sLineTmp);
 
-//  return iRet;
-//}
+  // Heavy Errors goes to an assert
+  if (iRet < 0)
+  {
+    // Expression (iRet >= 0) has to be fullfilled
+    assert(0);
+  }
+
+  // Small Errors will given back
+  iRet = iStat;
+
+  return iRet;
+}
 //=============================================================================
 int sstMisc01AscRowIntCls::Line_toStr1 (int             iKey,
                                 std::string    *Str1)
@@ -161,44 +146,6 @@ int sstMisc01AscRowIntCls::Line_toStr1 (int             iKey,
   return iRet;
 }
 //=============================================================================
-int sstMisc01AscRowIntCls::Line_toStr2 (int             iKey,
-                                std::string    *Str2)
-//-----------------------------------------------------------------------------
-{
-  int iRet  = 0;
-  int iStat = 0;
-//-----------------------------------------------------------------------------
-  if ( iKey != 0) return -1;
-
-  // if (strlen(this->Txt) <= 0)
-  if (strlen(this->Txt) <= 0)
-  {
-    return -2;
-  }
-//  if (strlen(this->Txt) >= dSTR1_TEXTLEN)
-//  {
-//    return -3;
-//  }
-
-  // iStat = StrDS2_Ini( 0, Str2);
-  Str2->clear();;
-
-  // iStat = Str2Cpy(0, Str2, this->Txt);
-  *Str2 = this->Txt;
-
-  // Fatal Errors goes to an assert
-  if (iRet < 0)
-  {
-    // Expression (iRet >= 0) has to be fullfilled
-    assert(0);
-  }
-
-  // Small Errors will given back
-  iRet = iStat;
-
-  return iRet;
-}
-//=============================================================================
 int sstMisc01AscRowIntCls::Str1_toLine (int          iKey,
                                 std::string *Str1)
 //-----------------------------------------------------------------------------
@@ -210,30 +157,6 @@ int sstMisc01AscRowIntCls::Str1_toLine (int          iKey,
 
   strncpy( this->Txt, Str1->c_str(), dCASC2_TEXTLEN);
   this->Len = strlen(this->Txt);
-
-  // Fatal Errors goes to an assert
-  if (iRet < 0)
-  {
-    // Expression (iRet >= 0) has to be fullfilled
-    assert(0);
-  }
-
-  // Small Errors will given back
-  iRet = iStat;
-
-  return iRet;
-}
-//=============================================================================
-int sstMisc01AscRowIntCls::Str2_toLine (int          iKey,
-                                std::string *Str2)
-//-----------------------------------------------------------------------------
-{
-  int iRet  = 0;
-  int iStat = 0;
-//-----------------------------------------------------------------------------
-  if ( iKey != 0) return -1;
-
-  strncpy( this->Txt, Str2->c_str(), dCASC2_TEXTLEN);
 
   // Fatal Errors goes to an assert
   if (iRet < 0)

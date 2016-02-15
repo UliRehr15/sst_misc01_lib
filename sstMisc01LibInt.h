@@ -31,6 +31,9 @@
 
 #define dFINFO_NAM_LEN   12    /**< Extended Explanation for this Define @ingroup sstTemplateIntLib */
 
+#define dCASC_MELDLEN 80
+
+
 /**
  * @brief Extended explanation for define
  * @ingroup sstTemplateIntLib
@@ -41,7 +44,7 @@
 
 //==============================================================================
 /**
-* @brief Casc2 File Row Class
+* @brief sst Asc File Row Class
 *
 * More Comment
 *
@@ -78,7 +81,7 @@ class sstMisc01AscRowIntCls
      * @brief append long value as string to row
      *
      * @param iKey   [in] For the moment 0
-     * @param lValue [in] Long value
+     * @param ulValue [in] Long value
      *
      * @return Errorstate
      *
@@ -87,7 +90,7 @@ class sstMisc01AscRowIntCls
      */
      // ----------------------------------------------------------------------------
      int LineAppendLong (int   iKey,
-                         long  lValue);
+                         unsigned long  ulValue);
      //==============================================================================
      /**
      * @brief Write object to str1 structure
@@ -105,21 +108,6 @@ class sstMisc01AscRowIntCls
                       std::string    *Str1);
      //==============================================================================
      /**
-     * @brief write object to str2 structure
-     *
-     * @param iKey [in]  For the moment 0
-     * @param Str2 [out] Str2 structure
-     *
-     * @return Errorstate
-     *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
-     */
-     // ----------------------------------------------------------------------------
-     int Line_toStr2 (int             iKey,
-                      std::string    *Str2);
-     //==============================================================================
-     /**
      * @brief Import Str1 structure
      *
      * @param iKey [in] For the moment 0
@@ -134,21 +122,6 @@ class sstMisc01AscRowIntCls
      int Str1_toLine (int          iKey,
                       std::string *Str1);
      //==============================================================================
-     /**
-     * @brief Import Str2 structure
-     *
-     * @param iKey [in] For the moment 0
-     * @param Str2 [in] Str2 structure
-     *
-     * @return Errorstate
-     *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
-     */
-     // ----------------------------------------------------------------------------
-     int Str2_toLine (int          iKey,
-                      std::string *Str2);
-     //==============================================================================
 
 
      char Txt[dCASC2_TEXTLEN];  /**< One Row in File    */
@@ -156,9 +129,8 @@ class sstMisc01AscRowIntCls
   private:  // Private Funktionen
 };
 //==============================================================================
-//==============================================================================
 /**
-* @brief Casc2 File object Class
+* @brief sst Asc File object Class
 *
 * More Comment
 *
@@ -177,7 +149,7 @@ class sstMisc01AscFilIntCls
      sstMisc01AscFilIntCls();  // Konstruktor
      //==============================================================================
      /**
-     * @brief Shortstory
+     * @brief Open Asc File for only reading
      *
      * @param iKey   [in] For the moment 0
      * @param FilNam [in] Name of new file
@@ -192,7 +164,7 @@ class sstMisc01AscFilIntCls
                    const char     *FilNam);
      //==============================================================================
      /**
-     * @brief Open Asc File for Writing
+     * @brief Open Asc File for only Writing
      *
      * @param iKey   [in] For the moment 0
      * @param FilNam [in] Name of new file
@@ -308,40 +280,6 @@ class sstMisc01AscFilIntCls
 
      //==============================================================================
      /**
-     * @brief Read Str2 structure from file
-     *
-     * iStat = oFile.Rd_StrDS2 ( iKey, *StrDS);
-     *
-     * @param iKey  [in]  For the moment 0
-     * @param StrDS [out] Str2 structure
-     *
-     * @return Errorstate
-     *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
-     */
-     // ----------------------------------------------------------------------------
-     int Rd_StrDS2 ( int           iKey,
-                     std::string  *StrDS);
-     //==============================================================================
-     /**
-     * @brief Write Str2 structure to file
-     *
-     * iStat = oFile.Wr_StrDS2 ( iKey, *StrDS);
-     *
-     * @param iKey  [in] For the moment 0
-     * @param StrDS [in] Str2 structure
-     *
-     * @return Errorstate
-     *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
-     */
-     // ----------------------------------------------------------------------------
-     int Wr_StrDS2 ( int          iKey,
-                     std::string *StrDS);
-     //==============================================================================
-     /**
      * @brief Read Str1 structure from file
      *
      * iStat = oFile.Rd_StrDS1 ( iKey, *StrDS);
@@ -395,6 +333,15 @@ class sstMisc01AscFilIntCls
      */
      // ----------------------------------------------------------------------------
      long GetFileSize();
+     // ----------------------------------------------------------------------------
+     //==============================================================================
+     /**
+     * @brief GetFileName
+     *
+     * @retval   = File Name
+     */
+     // ----------------------------------------------------------------------------
+     char* GetFileName();
      // ----------------------------------------------------------------------------
 
   private:  // Private Funktionen
@@ -691,6 +638,356 @@ private:  // Private functions
   char cActSection[dSST_CFG_SECTION_TXTLEN];       /**< actual section */
 
 };
+//==============================================================================
+/**
+* @brief warning message class in log file class
+*
+* Changed: 19.01.16  Re.
+*
+* @ingroup sstMisc01IntLib
+*
+* @author Re.
+*
+* @date 19.01.16
+*/
+// ----------------------------------------------------------------------------
+class sstMisc01PrtMsgIntCls
+{
+  public:   // Public functions
+     sstMisc01PrtMsgIntCls();  // Constructor
+    //~sstTestBaseCls();  // Destructor
+     //==============================================================================
+     /**
+     * @brief // SST_MldSet <BR>
+     * iStat = oMld.SST_MldSet(iKey,cText,iIk,iNr,Typ);
+     *
+     * @param iKey  [in] For the moment 0
+     * @param cText [in] For the moment 0
+     * @param iIk   [in] For the moment 0
+     * @param iNr   [in] For the moment 0
+     * @param iTyp  [in] For the moment 0
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int SST_MldSet (int           iKey,
+                     char         *cText,
+                     int           iIk,
+                     int           iNr,
+                     int           iTyp);
+     //==============================================================================
+     /**
+     * @brief // SST_MldAppendLong <BR>
+     * iStat = oMld.SST_MldAppendLong( iKey, lValue);
+     *
+     * @param iKey   [in] For the moment 0
+     * @param lValue [in] For the moment 0
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int SST_MldAppendLong (int           iKey,
+                            long          lValue);
+     //==============================================================================
+     /**
+     * @brief // GetMldLength <BR>
+     * uiMldLength = oMld.GetMldLength();
+     *
+     * @return String length of mld
+     */
+     // ----------------------------------------------------------------------------
+     unsigned int GetMldLength();
+     //==============================================================================
+     /**
+     * @brief // GetMldText <BR>
+     * cMldChar = oMld.GetMldText();
+     *
+     * @return Mld Char string
+     */
+     // ----------------------------------------------------------------------------
+     char* GetMldText();
+// ----------------------------------------------------------------------------
+  private:  // Private functions
+     int     Ik;                  /**< Fehlertyp 0= hochzählbar */
+     int     Nr;                  /**< Fehlernummer */
+     int     Typ;                 /**< Fehlerklasse 5=fatal => Abbruch */
+     char    Txt[dCASC_MELDLEN];  /**< Meldungstext ASCIZ */
+};
+
+//-----------------------------------------------------------------------------
+//$DA
+//$TOPIC SST_Prt_stru
+//
+// struct _SST_Prt_stru
+//        {
+//          Cint4         Hdl;       // Handle des Protokoll-Systems
+//          Cchar         Nam[14];   // Name des Protkoll-Systems
+//          SST_HPO_stru  Mld;
+//        };
+// typedef struct  _SST_Prt_stru SST_Prt_stru;
+//
+//  Erstellt: 22.03.02  UR
+//  Geändert: 01.11.02  UR
+//
+//$KAT SSTLIB
+//$KT  Einfaches Protokoll-System
+//
+//     Setzt auf das "offizielle" Protokollsystem aus der LageLib auf und
+//     bietet eine vereinfachte Funktionalität.
+//
+//     01.11.02: Ab Version 80 Protokoll-Handle jetzt Int*4.  UR
+//
+//$DE
+
+//==============================================================================
+/**
+* @brief Protocol class or log file class
+*
+* Changed: 09.07.15  Re.
+*
+* @ingroup sstMisc01IntLib
+*
+* @author Re.
+*
+* @date 09.07.15
+*/
+// ----------------------------------------------------------------------------
+class sstMisc01PrtFilIntCls
+{
+  public:   // Public functions
+     sstMisc01PrtFilIntCls();  // Constructor
+    //~sstTestBaseCls();  // Destructor
+     //=============================================================================
+     /**
+     * @brief // Open Protocol <BR>
+     * iStat = oSstPrt.SST_PrtAuf ( iKey, *cFilNam);
+     *
+     * Key = 0: Write only in file, Key = 1: Write to console too.
+     *
+     * Changed: 11.06.03  UR
+     *
+     * @param iKey    [in] 0 or 1
+     * @param cFilNam [in] Name of Protocolfile
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     *
+     * @author ur
+     *
+     * @date 11.06.03
+     */
+     //-----------------------------------------------------------------------------
+     int SST_PrtAuf ( int           iKey,
+                      char         *cFilNam);
+     //=============================================================================
+     /**
+     * @brief Write in Message in Protocolfile// Shortstory <BR>
+     * iStat = oSstPrt.SST_PrtWrt ( iKey, *cMld);
+     *
+     * More Comment
+     *
+     * Changed: 11.06.03  UR
+     *
+     * @param iKey  [in]      For the moment 0
+     * @param cMld  [in]      Message
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     *
+     * @author ur
+     *
+     * @date 11.06.03
+     */
+     //-----------------------------------------------------------------------------
+     int SST_PrtWrt ( int           iKey,
+                      char         *cMld);
+// ----------------------------------------------------------------------------
+     //=============================================================================
+     /**
+     * @brief // Write a Messageobject in Protocolfile <BR>
+     * iStat = oPtr.SST_PrtWrtMld ( iKey, *oMld);
+     *
+     * Changed: 11.02.10  Re.
+     *
+     * @param iKey: [in]      For the moment 0
+     * @param oMld: [in]      Message-Object
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     *
+     * @author Re.
+     *
+     * @date 11.02.10
+     */
+     //-----------------------------------------------------------------------------
+     int SST_PrtWrtMld ( int           iKey,
+                         sstMisc01PrtMsgIntCls *oMld);
+     //=============================================================================
+     /**
+     * @brief // Write Message in Protocolfile with Row-Information <BR>
+     * iStat = oSstPrt.SST_PrtWrtZeil ( iKey, lZeil, *cMld);
+     *
+     * Two Row-Information: First Row-Number, Second Text-Information
+     *
+     * Changed: 11.06.03  UR
+     *
+     * @param iKey   [in]      For the moment 0
+     * @param ulZeil [in]      Row-Number
+     * @param cMld   [in]      Output-Message
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     *
+     * @author ur
+     *
+     * @date 11.06.03
+     */
+     //-----------------------------------------------------------------------------
+     int SST_PrtWrtZeil ( int             iKey,
+                          unsigned long   ulZeil,
+                          char           *cMld);
+     //=============================================================================
+     /**
+     * @brief // Write Message to Protocolfile with Double-Value <BR>
+     * iStat = oSstPrt.SST_PrtWrtDbl ( iKey, dDblVal, *cMld);
+     *
+     * Key=1: Write to Console
+     *
+     * @param iKey      [in]      0 or 1
+     * @param dDblVal   [in]      Double Value
+     * @param cMld      [in]      Output-Message
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     *
+     * @author Re.
+     *
+     * @date 29.01.10
+     */
+     //-----------------------------------------------------------------------------
+     int SST_PrtWrtDbl ( int           iKey,
+                         double        dDblVal,
+                         char         *cMld);
+     //=============================================================================
+     /**
+     * @brief // Write Message to Protocolfile with Integer-Value <BR>
+     * iStat = oSstPrt.SST_PrtWrtInt4 ( iKey, lVal, *cMld);
+     *
+     * Key=1: Write to Console
+     *
+     * Changed: 12.11.07  UR
+     *
+     * @param iKey  [in]      0 or 1
+     * @param lVal  [in]      Long Integer-Value
+     * @param cMld  [in]      Output-Message
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     *
+     * @author ur
+     *
+     * @date 12.11.07
+     */
+     //-----------------------------------------------------------------------------
+     int SST_PrtWrtInt4 ( int           iKey,
+                          unsigned long          lVal,
+                          char         *cMld);
+     //=============================================================================
+     /**
+     * @brief // Write Message to Protocolfile with char-Value <BR>
+     * iStat = oSstPrt.SST_PrtWrtChar ( iKey, *cVal, *cMld);
+     *
+     * Key = 1: Write to Console too
+     *
+     * Changed: 12.11.07  UR
+     *
+     * @param iKey    [in]      0 or 1
+     * @param cVal    [in]      Char-Value
+     * @param cMld    [in]      Output-Message
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     *
+     * @author ur
+     *
+     * @date 12.11.07
+     */
+     //-----------------------------------------------------------------------------
+     int SST_PrtWrtChar ( int           iKey,
+                          char         *cVal,
+                          char         *cMld);
+     //=============================================================================
+     /**
+     * @brief // Write Message to Console <BR>
+     * iStat = oSstPrt.SST_PrtWrtConsole ( iKey, *cOutText);
+     *
+     * More Comment
+     *
+     * Changed: 12.11.07  UR
+     *
+     * @param iKey     [in] For the moment 0
+     * @param cOutText [in] String for Writing to Console
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     *
+     * @author ur
+     *
+     * @date 12.11.07
+     */
+     //-----------------------------------------------------------------------------
+     int SST_PrtWrtConsole (int   iKey,
+                            char *cOutText);
+     //=============================================================================
+     /**
+     * @brief // Close Protocol <BR>
+     * iStat = oSstPrt.SST_PrtZu ( iKey);
+     *
+     * iKey = 1: Write Close-Message to log file
+     *
+     * Changed: 11.06.03  UR
+     *
+     * @param iKey  [in]      0 or 1
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     *
+     * @author ur
+     *
+     * @date 11.06.03
+     */
+     //-----------------------------------------------------------------------------
+     int SST_PrtZu ( int           iKey);
+     //=============================================================================
+  private:  // Private functions
+  sstMisc01AscFilIntCls  Fil;   /**< Protocol-File */
+};
+//-----------------------------------------------------------------------------
+
 //-----------------------------------------------------------------------------
 
 

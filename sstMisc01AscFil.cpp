@@ -351,56 +351,6 @@ int sstMisc01AscFilIntCls::wr_txt ( int    iKey,
   return iRet;
 }
 //=============================================================================
-int sstMisc01AscFilIntCls::Rd_StrDS2 ( int           iKey,
-                               std::string  *StrDS)
-//.............................................................................
-{
-  sstMisc01AscRowIntCls CLine;
-  // Cchar tChar;
-  // int iChar;
-  unsigned int ii;
-
-  // int iStat = 0;
-//.............................................................................
-  if (iKey != 0) return -1;
-//  iStat = 0;
-//  iChar = 0;
-
-  ii = this->rd_line( 0, &CLine);
-
-  *StrDS = CLine.Txt;
-
-  return ii;
-}
-//=============================================================================
-int sstMisc01AscFilIntCls::Wr_StrDS2 ( int          iKey,
-                               std::string *StrDS)
-//.............................................................................
-{
-  sstMisc01AscRowIntCls oAscRow;
-
-  int iRet = 0;
-  int iStat = 0;
-//.............................................................................
-  if (iKey != 0) return -1;
-
-  iStat = oAscRow.Str2_toLine(0,StrDS);
-
-  iStat = wr_line(0,&oAscRow);
-
-  // Fatal Errors goes to an assert
-  if (iRet < 0)
-  {
-    // Expression (iRet >= 0) has to be fullfilled
-    assert(0);
-  }
-
-  // Small Errors will given back
-  iRet = iStat;
-
-  return iRet;
-}
-//=============================================================================
 int sstMisc01AscFilIntCls::Rd_StrDS1 ( int           iKey,
                                std::string  *StrDS)
 //.............................................................................
@@ -503,5 +453,10 @@ int sstMisc01AscFilIntCls::line_back (int iKey)
 long sstMisc01AscFilIntCls::GetFileSize()
 {
   return this->Siz;
+}
+//=============================================================================
+char* sstMisc01AscFilIntCls::GetFileName()
+{
+  return this->Nam;
 }
 //=============================================================================
