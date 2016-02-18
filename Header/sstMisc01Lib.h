@@ -161,7 +161,7 @@ class sstMisc01AscFilCls
   ~sstMisc01AscFilCls();
      //==============================================================================
      /**
-     * @brief Shortstory
+     * @brief Open Asc File for reading
      *
      * @param iKey   [in] For the moment 0
      * @param FilNam [in] Name of new file
@@ -352,7 +352,6 @@ class sstMisc01AscFilCls
 
 };
 //==============================================================================
-//==============================================================================
 /**
 * @brief sst Lib Config Set Class
 *
@@ -515,7 +514,7 @@ class sstMisc01CfgSetCls
 
 protected:
 private:  // Private functions
-     sstMisc01CfgSetIntCls *poTestIntern;   /**< Pointer to intern object */
+     sstMisc01CfgSetIntCls *poInternObject;   /**< Pointer to intern object */
 };
 //==============================================================================
 /**
@@ -594,16 +593,9 @@ class sstMisc01CfgFilCls : public sstMisc01AscFilCls
                       std::string oValue);
      //==============================================================================
 
-
-    // ~X();   // Destructor
-     //==============================================================================
-
-
 private:  // Private functions
-     sstMisc01CfgFilIntCls *poTestIntern;   /**< Pointer to intern object */
-
+     sstMisc01CfgFilIntCls *poInternObject;   /**< Pointer to intern object */
 };
-//-----------------------------------------------------------------------------
 //==============================================================================
 /**
 * @brief Definition Class sstMisc01PrtMsgCls
@@ -635,9 +627,8 @@ class sstMisc01PrtMsgCls
      sstMisc01PrtMsgIntCls* GetInternAdress ();
 // ----------------------------------------------------------------------------
   private:  // Private functions
-     sstMisc01PrtMsgIntCls *poTestIntern;   /**< Pointer to intern object */
+     sstMisc01PrtMsgIntCls *poInternObject;   /**< Pointer to intern object */
 };
-//-----------------------------------------------------------------------------
 //==============================================================================
 /**
 * @brief Definition Class sstMisc01PrtFilCls
@@ -881,7 +872,7 @@ class sstMisc01PrtFilCls
 
 
 private:  // Private functions
-  sstMisc01PrtFilIntCls *poTestIntern;   /**< Pointer to intern object */
+  sstMisc01PrtFilIntCls *poInternObject;   /**< Pointer to intern object */
 };
 //==============================================================================
 /**
@@ -946,9 +937,9 @@ class sstMisc01ConPrgBarCls
      void Tick ();
      // ----------------------------------------------------------------------------
   private:  // Private functions
-  unsigned long ulPointsSet;  /**< Dummy */
-  unsigned long ulLimit;      /**< Dummy */
-  unsigned long ulLimitMult;  /**< Dummy */
+  unsigned long ulPointsSet;  /**< ulPointsSet */
+  unsigned long ulLimit;      /**< ulLimit */
+  unsigned long ulLimitMult;  /**< ulLimitMult */
   unsigned long ulNumCalls;   /**< Number of Calls */
 
 };

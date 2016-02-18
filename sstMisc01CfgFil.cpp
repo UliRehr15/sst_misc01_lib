@@ -20,14 +20,10 @@
 #include <assert.h>
 
 #include <string>
+#include <list>
 
-// #include <kern.h>
-// #include <mathem.h>
-// #include <str_lib.h>
 #include <sstStr01Lib.h>
 #include <sstMisc01Lib.h>
-#include <sstRec04Lib.h>
-// #include <sstlib2.h>
 
 #include "sstMisc01LibInt.h"
 
@@ -37,26 +33,16 @@ sstMisc01CfgFilIntCls::sstMisc01CfgFilIntCls(std::string oTmpCfgFilNam)
   sstMisc01CfgSetIntCls oCfgSet;
   memset(&this->cActSection,0,dSST_CFG_SECTION_TXTLEN);
   this->oCfgFilNam = oTmpCfgFilNam + ".cfg";
-  // Str1_Init(0, &sFilRow);
-  this->sFilRow.clear();
-  this->poCfgSetMem = new sstRec04Cls(sizeof(oCfgSet));
-  // Init new Tree sorting object for RecMem object
-  int iStat = this->poCfgSetMem->TreIni( 0, &oCfgSet, oCfgSet.GetCfgSortAdr(), oCfgSet.GetCfgSortSize(), sstRecTyp_CC, &this->oTre);
-  assert(iStat >= 0);
-}
-//=============================================================================
-sstMisc01CfgFilIntCls::~sstMisc01CfgFilIntCls()
-{
-  delete(this->poCfgSetMem);
 }
 //=============================================================================
 int sstMisc01CfgFilIntCls::DeleteWriteNewClose(int iKey)
 {
   int iStat = 0;
+  // int iStat1 = 0;
   if ( iKey != 0) return -1;
 
   // Rebuild Tree system
-  iStat = this->poCfgSetMem->TreBld ( 0, &this->oTre);
+  this->oCfgSetList.sort(compare_CfgSetInt);
 
   // CascObjekt open to write
   sstMisc01AscFilCls oExpFil;
@@ -66,27 +52,17 @@ int sstMisc01CfgFilIntCls::DeleteWriteNewClose(int iKey)
 
   sstMisc01CfgSetIntCls oCfgSet;    /**< config set */
 
-//  for(dREC04RECNUMTYP ii = 1; ii <= this->poCfgSetMem->count(); ii++)
-//  {
-//    this->poCfgSetMem->Read(0,ii,&oCfgSet);
-
-//    iStat = oCfgSet.WritFileSection(0,&oExpFil);
-//    iStat = oCfgSet.WritFileParameterValue(0,&oExpFil);
-//  }
-
-  dREC04RECNUMTYP dRecNo1 = 0;
-  int iStat1 = 0;
-  iStat1 = this->poCfgSetMem->TreReadNxtGE ( 0, &this->oTre, &oCfgSet, &dRecNo1);
-  while (iStat1 >= 0)
+  for (oIterCfgSet=oCfgSetList.begin(); oIterCfgSet!=oCfgSetList.end(); ++oIterCfgSet)
   {
-    iStat = strncmp(this->cActSection,oCfgSet.GetSection(),dSST_CFG_SECTION_TXTLEN);
-    if (iStat != 0)
-    {
-      strncpy(this->cActSection,oCfgSet.GetSection(),dSST_CFG_SECTION_TXTLEN);
-      iStat = oCfgSet.WritFileSection(0,&oExpFil);
-    }
-    iStat = oCfgSet.WritFileParameterValue(0,&oExpFil);
-    iStat1 = this->poCfgSetMem->TreReadNxtGE ( 0, &this->oTre, &oCfgSet, &dRecNo1);
+      // std::cout << ' ' << *it;
+
+        iStat = strncmp(this->cActSection,oIterCfgSet->GetSection(),dSST_CFG_SECTION_TXTLEN);
+        if (iStat != 0)
+        {
+          strncpy(this->cActSection,oIterCfgSet->GetSection(),dSST_CFG_SECTION_TXTLEN);
+          iStat = oIterCfgSet->WritFileSection(0,&oExpFil);
+        }
+        iStat = oIterCfgSet->WritFileParameterValue(0,&oExpFil);
   }
 
   // CascObjekt beenden und zugehörige Datei schließen.
@@ -110,12 +86,12 @@ int sstMisc01CfgFilIntCls::AddConfigSet(int iKey,
 
   if ( iKey != 0) return -1;
 
-    dREC04RECNUMTYP dRecNo = 0;
     oCfgSet.SetSection(oTmpSection);
     oCfgSet.SetParameter(oTmpParameter);
     oCfgSet.SetValue(oTmpValue);
     oCfgSet.SetCfgSort(oTmpSection,oTmpParameter);
-    this->poCfgSetMem->WritNew( 0,&oCfgSet,&dRecNo);
+    // this->poCfgSetMem->WritNew( 0,&oCfgSet,&dRecNo);
+    this->oCfgSetList.push_back(oCfgSet);
 
     return 0;
 }

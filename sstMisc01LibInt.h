@@ -29,16 +29,7 @@
 
 // Defines ---------------------------------------------------------------------
 
-#define dFINFO_NAM_LEN   12    /**< Extended Explanation for this Define @ingroup sstTemplateIntLib */
-
-#define dCASC_MELDLEN 80
-
-
-/**
- * @brief Extended explanation for define
- * @ingroup sstTemplateIntLib
- */
-#define dKODE_MIN
+#define dMISC01_PRTMELDLEN 80
 
 // Structures and Classes ------------------------------------------------------
 
@@ -350,7 +341,6 @@ class sstMisc01AscFilIntCls
      long  Siz;            /**< Dateigröße Bytes    */
 };
 //==============================================================================
-//==============================================================================
 enum _sstCfgFilRowTyp_enum
 { eCfgRowSetEmpty,     /**< Empty Row         */
   eCfgRowSetComment,   /**< Comment Row       */
@@ -361,9 +351,9 @@ enum _sstCfgFilRowTyp_enum
      };
 typedef enum _sstCfgFilRowTyp_enum sstCfgFilRowTyp_enum;
 
-#define dSST_CFG_SECTION_TXTLEN   10  /**< Fix Lenght of config section @ingroup casc_lib2 */
-#define dSST_CFG_PARAMETER_TXTLEN   10  /**< Fix Lenght of config parameter @ingroup casc_lib2 */
-#define dSST_CFG_VALUE_TXTLEN   10  /**< Fix Lenght of config value @ingroup casc_lib2 */
+#define dSST_CFG_SECTION_TXTLEN   10  /**< Fix Lenght of config section @ingroup sstMisc01IntLib */
+#define dSST_CFG_PARAMETER_TXTLEN   10  /**< Fix Lenght of config parameter @ingroup sstMisc01IntLib */
+#define dSST_CFG_VALUE_TXTLEN   10  /**< Fix Lenght of config value @ingroup sstMisc01IntLib */
 
 //==============================================================================
 /**
@@ -548,6 +538,32 @@ private:  // Private functions
 };
 //==============================================================================
 /**
+* @brief // Compare the combination of section and parameter <BR>
+*
+* bStat = compare_CfgSetInt ( first, second);
+*
+* More Comment
+*
+* Changed: 18.02.16  Re.
+*
+* @ingroup sstMisc01IntLib
+*
+* @param first  [in] first CfgSetInt
+* @param second [in] second CfgSetInt
+*
+* @return Errorstate
+*
+* @retval   = 0: False
+* @retval   = 1: True
+*
+* @author Re.
+*
+* @date 18.02.16
+*/
+//------------------------------------------------------------------------------
+bool compare_CfgSetInt (sstMisc01CfgSetIntCls& first, sstMisc01CfgSetIntCls& second);
+//==============================================================================
+/**
 * @brief sst Lib Config File Class
 *
 * More Comment
@@ -571,7 +587,6 @@ class sstMisc01CfgFilIntCls : public sstMisc01AscFilCls
   */
   // ----------------------------------------------------------------------------
     sstMisc01CfgFilIntCls(std::string oCfgFilNam);   // Constructor
-    ~sstMisc01CfgFilIntCls();   // Constructor
      // Delete existing config file, write and close new one
      //==============================================================================
      /**
@@ -624,17 +639,10 @@ class sstMisc01CfgFilIntCls : public sstMisc01AscFilCls
                       std::string oValue);
      //==============================================================================
 
-
-    // ~X();   // Destructor
-     //==============================================================================
-
-
 private:  // Private functions
   std::string oCfgFilNam;
-     std::string sFilRow;     /**< actual file row */
-  // sstMisc01CfgSetIntCls oCfgSet;    /**< config set */
-  sstRec04Cls *poCfgSetMem;  /**< rec mem for config sets */
-  sstRec04TreeKeyCls oTre;
+  std::list<sstMisc01CfgSetIntCls> oCfgSetList;
+  std::list<sstMisc01CfgSetIntCls>::iterator oIterCfgSet;
   char cActSection[dSST_CFG_SECTION_TXTLEN];       /**< actual section */
 
 };
@@ -717,34 +725,8 @@ class sstMisc01PrtMsgIntCls
      int     Ik;                  /**< Fehlertyp 0= hochzählbar */
      int     Nr;                  /**< Fehlernummer */
      int     Typ;                 /**< Fehlerklasse 5=fatal => Abbruch */
-     char    Txt[dCASC_MELDLEN];  /**< Meldungstext ASCIZ */
+     char    Txt[dMISC01_PRTMELDLEN];  /**< Meldungstext ASCIZ */
 };
-
-//-----------------------------------------------------------------------------
-//$DA
-//$TOPIC SST_Prt_stru
-//
-// struct _SST_Prt_stru
-//        {
-//          Cint4         Hdl;       // Handle des Protokoll-Systems
-//          Cchar         Nam[14];   // Name des Protkoll-Systems
-//          SST_HPO_stru  Mld;
-//        };
-// typedef struct  _SST_Prt_stru SST_Prt_stru;
-//
-//  Erstellt: 22.03.02  UR
-//  Geändert: 01.11.02  UR
-//
-//$KAT SSTLIB
-//$KT  Einfaches Protokoll-System
-//
-//     Setzt auf das "offizielle" Protokollsystem aus der LageLib auf und
-//     bietet eine vereinfachte Funktionalität.
-//
-//     01.11.02: Ab Version 80 Protokoll-Handle jetzt Int*4.  UR
-//
-//$DE
-
 //==============================================================================
 /**
 * @brief Protocol class or log file class
@@ -811,7 +793,6 @@ class sstMisc01PrtFilIntCls
      //-----------------------------------------------------------------------------
      int SST_PrtWrt ( int           iKey,
                       char         *cMld);
-// ----------------------------------------------------------------------------
      //=============================================================================
      /**
      * @brief // Write a Messageobject in Protocolfile <BR>
@@ -987,9 +968,6 @@ class sstMisc01PrtFilIntCls
   sstMisc01AscFilIntCls  Fil;   /**< Protocol-File */
 };
 //-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-
 
 #endif
 

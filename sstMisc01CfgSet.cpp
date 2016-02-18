@@ -19,10 +19,10 @@
 #include <string.h>
 #include <assert.h>
 
+#include <list>
 #include <string>
 
 #include <sstStr01Lib.h>
-#include <sstRec04Lib.h>
 
 #include <sstMisc01Lib.h>
 #include "sstMisc01LibInt.h"
@@ -105,8 +105,6 @@ int sstMisc01CfgSetIntCls::GetCfgIniRowType(int                    iKey,
   if (sTmpFilRow->at(0) == 91)  // 91 = "["
   {
     // Return from next informationstring contents inside of brakes.
-    // long lStrPos=0;
-    // iStat = Str1_GetNextBrakeInfo ( 1, sTmpFilRow, &lStrPos, (char*)"[",(char*) "]", &sTmpSection);
     oRowStr.SetBracket(0,(char*)"[]");
     oRowStr.GetNextBrakeInfo(0,sTmpFilRow,&sTmpSection);
     strncpy( this->cSection, sTmpSection.c_str(), dSST_CFG_SECTION_TXTLEN);
@@ -190,14 +188,7 @@ int sstMisc01CfgSetIntCls::WritFileSection(int iKey,sstMisc01AscFilCls *oExpFil)
   iStat = oExpFil->wr_line( 1, &oExpRow);
 
   // write section to row
-//  iStat = Str1Cpy(0,&sFilRow, (char*) "[");
-//  iStat = Str1Cat(0,&sFilRow, this->sSection.Txt);
-//  iStat = Str1Cat(0,&sFilRow, (char*)"]");
-  // Str1_Init(0,&sFilRow);
   sFilRow.clear();
-//  strncpy(sFilRow.Txt, (char*) "[", dSTR1_TEXTLEN);
-//  strncat(sFilRow.Txt, this->cSection, dSTR1_TEXTLEN);
-//  strncat(sFilRow.Txt, (char*)"]", dSTR1_TEXTLEN);
   sFilRow =  "[";
   sFilRow = sFilRow +  this->cSection;
   sFilRow = sFilRow + "]";
@@ -221,15 +212,9 @@ int sstMisc01CfgSetIntCls::WritFileParameterValue(int iKey,sstMisc01AscFilCls *o
   // Str1_Init(0,&sFilRow);
   sFilRow.clear();
   // write parameter to row
-  // iStat = Str1Cpy(0,&sFilRow, this->sParameter.Txt);
-  // strncpy(sFilRow.Txt, this->cParameter, dSTR1_TEXTLEN);
   sFilRow = this->cParameter;
 
   // write value to row
-//  iStat = Str1Cat(0,&sFilRow, (char*) "=");
-//  iStat = Str1Cat(0,&sFilRow, this->sValue.Txt);
-//  strncat(sFilRow.Txt, (char*) "=", dSTR1_TEXTLEN);
-//  strncat(sFilRow.Txt, this->cValue, dSTR1_TEXTLEN);
   sFilRow = sFilRow + "=";
   sFilRow = sFilRow + this->cValue;
 
@@ -237,5 +222,15 @@ int sstMisc01CfgSetIntCls::WritFileParameterValue(int iKey,sstMisc01AscFilCls *o
   iStat = oExpFil->wr_line( 0, &oExpRow);
 
   return iStat;
+}
+//=============================================================================
+// comparison of two sstMisc01CfgSetIntCls objects
+bool compare_CfgSetInt (sstMisc01CfgSetIntCls& first, sstMisc01CfgSetIntCls& second)
+{ std::string oTmpFirst;
+  std::string oTmpSecond;
+  oTmpFirst = first.GetCfgSortAdr();
+  oTmpSecond = second.GetCfgSortAdr();
+  if (oTmpFirst < oTmpSecond) return true;
+  return false;
 }
 //=============================================================================

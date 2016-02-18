@@ -18,4 +18,5 @@ Versions <BR>
               small Config File System. <BR>
 20160213: 1.3 Documentation corrected. <BR>
 20160215: 1.4 extend log lib, small progress bar object. <BR>
+20160218: 1.5 sst_misc01 no more base on sst_rec04 <BR>
 

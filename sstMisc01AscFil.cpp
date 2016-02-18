@@ -19,9 +19,8 @@
 #include <string.h>
 #include <assert.h>
 
+#include <list>
 #include <string>
-
-#include <sstRec04Lib.h>
 
 #include "sstMisc01Lib.h"
 #include "sstMisc01LibInt.h"
@@ -48,9 +47,6 @@ int sstMisc01AscFilIntCls::fopenRd ( int             iKey,
 
   iStat = strlen( FilNam);
   if (iStat < 1 || iStat >= MAX_PFAD) return -1;
-
-  // Allgemeines ASC-Datei-System initialisieren
-  // iStat = casc_ini_c ( 0, CFile);
 
   // setting b is nessasary from difference between UNIX/Windows
   // (CR/LF or LF)
@@ -399,52 +395,20 @@ int sstMisc01AscFilIntCls::Wr_StrDS1 ( int          iKey,
   return iRet;
 }
 //=============================================================================
-//$DA
-//$TOPIC casc_line_back_c
 int sstMisc01AscFilIntCls::line_back (int iKey)
-                           //
-                           //   <- Rückgabe Funktion
-                           //      0 = OK
-                           //     <0 = allgemeiner Fehler
-//
-//  Erstellt: 11.06.02   UR
-//  Geändert: 11.06.02   UR
-//
-//$KAT ASCI-Dateizeilen-Verwaltung
-//$KT  Datei-Lese-Position eine Zeile zurücksetzen
-//
-//$DE
 //.............................................................................
 {
   char tchar = 0;
-  // int ichar;
-  // int ReadSiz;
-  // long iPos;
-  // int ii;
 
   int iRet;
   int iStat = 0;
-  // Cint4 iStat4;
 //.............................................................................
   if (iKey != 0) return -1;
   iRet = 0;
   // iStat = 0;
 
-  // iPos = -1;
-  // iStat4 = C_lseek_c ( CFile->Hdl, iPos, 1);
-  // iStat = C_read_c (  CFile->Hdl, &tchar, 1);
-
-  // Vorletztes Zeichen noch einmal lesen
-  // Bei DOS-Asc-Dateien wird noch einmal -ichar = 10- gelesen,
-  // bei Unix-Asc-Dateien wird bereits der letzte Buchstabe gelesen.
-  // iPos = -2;
-  // iStat4 = C_lseek_c ( CFile->Hdl, iPos, 1);
-  // iStat = C_read_c (  CFile->Hdl, &tchar, 1);
-
   do
   {
-    // iStat4 = C_lseek_c ( CFile->Hdl, iPos, 1);
-    // iStat = C_read_c (  CFile->Hdl, &tchar, 1);
   } while (tchar != 10 || iStat != 1);
 
   return iRet;

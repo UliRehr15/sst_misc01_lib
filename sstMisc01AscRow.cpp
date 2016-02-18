@@ -19,10 +19,10 @@
 #include <string.h>
 #include <assert.h>
 
+#include <list>
 #include <string>
 
 #include <sstStr01Lib.h>
-#include <sstRec04Lib.h>
 
 #include "sstMisc01Lib.h"
 #include "sstMisc01LibInt.h"
@@ -86,8 +86,6 @@ int sstMisc01AscRowIntCls::LineAppendLong (int   iKey,
   if ( iKey != 0) return -1;
 
   // Int4 in einen String konvertieren und in Zeilenbereich kopieren
-  // iStat = casc_LineIni_c ( 0, &sLineTmp);
-  // iStat = Str_Int4Zeile ( 0, 1, 12, &lValue, sLineTmp.Txt, dCASC2_TEXTLEN);
   iStat = oCsvStr.Csv_UInt4_2String(0,lValue,&oTmpStr);
 
   sLineTmp.Line_toStr1(0,&oTmpStr);
@@ -122,15 +120,9 @@ int sstMisc01AscRowIntCls::Line_toStr1 (int             iKey,
   {
     return -2;
   }
-//  if (strlen(this->Txt) >= dSTR1_TEXTLEN)
-//  {
-//    return -3;
-//  }
 
-  // iStat = Str1_Init( 0, Str1);
   Str1->clear();
 
-  // iStat = Str1Cpy(0, Str1, this->Txt);
   *Str1 = this->Txt;
 
   // Fatal Errors goes to an assert

@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_DECLARATIVE_DEBUG
 CFLAGS        = -pipe -g -fPIC -Wall -W $(DEFINES)
 CXXFLAGS      = -pipe -g -fPIC -Wall -W $(DEFINES)
-INCPATH       = -I/usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++ -I. -IHeader -I../sst_str01_lib/Header -I../sst_rec04_lib/Header
+INCPATH       = -I/usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++ -I. -IHeader -I../sst_str01_lib/Header
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/i386-linux-gnu/qt5/bin/qmake
@@ -298,47 +298,40 @@ compiler_clean:
 
 ####### Compile
 
-sstMisc01Lib.o: sstMisc01Lib.cpp ../sst_rec04_lib/Header/sstRec04Lib.h \
-		Header/sstMisc01Lib.h \
+sstMisc01Lib.o: sstMisc01Lib.cpp Header/sstMisc01Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01Lib.o sstMisc01Lib.cpp
 
-sstMisc01AscFil.o: sstMisc01AscFil.cpp ../sst_rec04_lib/Header/sstRec04Lib.h \
-		Header/sstMisc01Lib.h \
+sstMisc01AscFil.o: sstMisc01AscFil.cpp Header/sstMisc01Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01AscFil.o sstMisc01AscFil.cpp
 
 sstMisc01AscRow.o: sstMisc01AscRow.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
-		../sst_rec04_lib/Header/sstRec04Lib.h \
 		Header/sstMisc01Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01AscRow.o sstMisc01AscRow.cpp
 
 sstMisc01CfgSet.o: sstMisc01CfgSet.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
-		../sst_rec04_lib/Header/sstRec04Lib.h \
 		Header/sstMisc01Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01CfgSet.o sstMisc01CfgSet.cpp
 
 sstMisc01CfgFil.o: sstMisc01CfgFil.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
 		Header/sstMisc01Lib.h \
-		../sst_rec04_lib/Header/sstRec04Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01CfgFil.o sstMisc01CfgFil.cpp
 
-sstMisc01PrgBar.o: sstMisc01PrgBar.cpp ../sst_rec04_lib/Header/sstRec04Lib.h \
+sstMisc01PrgBar.o: sstMisc01PrgBar.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
 		Header/sstMisc01Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01PrgBar.o sstMisc01PrgBar.cpp
 
 sstMisc01PrtFil.o: sstMisc01PrtFil.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
-		../sst_rec04_lib/Header/sstRec04Lib.h \
 		Header/sstMisc01Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01PrtFil.o sstMisc01PrtFil.cpp
 
 sstMisc01PrtMsg.o: sstMisc01PrtMsg.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
-		../sst_rec04_lib/Header/sstRec04Lib.h \
 		Header/sstMisc01Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01PrtMsg.o sstMisc01PrtMsg.cpp

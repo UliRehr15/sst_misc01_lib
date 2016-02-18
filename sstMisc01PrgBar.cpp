@@ -20,14 +20,12 @@
 #include <time.h>
 #include <assert.h>
 
+#include <list>
 #include <string>
 
-// #include <kern.h>
-// #include <mathem.h>
-// #include <str_lib.h>
-#include <sstRec04Lib.h>
+#include <sstStr01Lib.h>
 #include <sstMisc01Lib.h>
-// #include <sstlib2.h>
+
 #include "sstMisc01LibInt.h"
 
 //=============================================================================

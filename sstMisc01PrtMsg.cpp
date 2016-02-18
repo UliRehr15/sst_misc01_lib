@@ -20,15 +20,12 @@
 #include <string.h>
 #include <assert.h>
 
+#include <list>
 #include <string>
 
-// #include <kern.h>
-// #include <mathem.h>
-// #include <str_lib.h>
 #include <sstStr01Lib.h>
-#include <sstRec04Lib.h>
 #include <sstMisc01Lib.h>
-// #include <sstlib2.h>
+
 #include "sstMisc01LibInt.h"
 
 //=============================================================================
@@ -37,40 +34,9 @@ sstMisc01PrtMsgIntCls::sstMisc01PrtMsgIntCls()
   this->Ik = 0;                       /**< Fehlertyp 0= hochzählbar */
   this->Nr = 0;                       /**< Fehlernummer */
   this->Typ = 0;                      /**< Fehlerklasse 5=fatal => Abbruch */
-  memset(this->Txt,0,dCASC_MELDLEN);  /**< Meldungstext ASCIZ */
+  memset(this->Txt,0,dMISC01_PRTMELDLEN);  /**< Meldungstext ASCIZ */
 
 }
-//=============================================================================
-/**
-* @brief Meldung initialisieren
-*/
-//-----------------------------------------------------------------------------
-//int SST_MldIni (int iKey,
-//                SST_Mld_stru *sMld)
-////-----------------------------------------------------------------------------
-//{
-//  int iRet  = 0;
-//  int iStat = 0;
-////-----------------------------------------------------------------------------
-//  if ( iKey != 0) return -1;
-
-//  memset( sMld->Txt, 0, 80);
-//  sMld->Ik = 0;
-//  sMld->Nr = 0;
-//  sMld->Typ = 0;
-
-//  // Heavy Errors goes to an assert
-//  if (iRet < 0)
-//  {
-//    // Expression (iRet >= 0) has to be fullfilled
-//    assert(0);
-//  }
-
-//  // Small Errors will given back
-//  iRet = iStat;
-
-//  return iRet;
-//}
 //=============================================================================
 /**
 * @brief Meldung setzen
@@ -90,7 +56,7 @@ int sstMisc01PrtMsgIntCls::SST_MldSet (int           iKey,
   if ( iKey != 0) return -1;
   if (strlen(cText) <=0 ) return -2;
 
-  strncpy( this->Txt, cText,dCASC_MELDLEN);
+  strncpy( this->Txt, cText, dMISC01_PRTMELDLEN);
   this->Ik =  iIk;  // Fehlertyp
   this->Nr =  iNr;  // Fehlernummer
   this->Typ = Typ;  // Fehlerklasse
@@ -127,20 +93,15 @@ int sstMisc01PrtMsgIntCls::SST_MldAppendLong (int           iKey,
   if ( iKey != 0) return -1;
 
   // Int4 in einen String konvertieren und in Zeilenbereich kopieren
-  // iStat = casc_LineIni_c ( 0, &sLineTmp);
-  // iStat = Str_Int4Zeile ( 0, 1, 12, &lValue, sLineTmp.Txt, dCASC2_TEXTLEN);
-  // sLineTmp.Len = strlen ( sLineTmp.Txt);
   oTmpStr.Csv_Int4_2String( 0, lValue, &oString);
 
-  strncpy ( sLine.Txt, this->Txt, dCASC_MELDLEN);
+  strncpy ( sLine.Txt, this->Txt, dMISC01_PRTMELDLEN);
   sLine.Len = strlen ( sLine.Txt);
-  // iStat = casc_CatLine_c ( 0, &sLine, &sLineTmp);
-  // iStat = sLine.CatLine( 0, &sLineTmp);
   iStat = sLine.Str1_toLine(0,&oString);
 
-  if (sLine.Len < dCASC_MELDLEN )
+  if (sLine.Len < dMISC01_PRTMELDLEN )
   {
-   strncpy( this->Txt, sLine.Txt, dCASC_MELDLEN);
+   strncpy( this->Txt, sLine.Txt, dMISC01_PRTMELDLEN);
   }
 
   // Heavy Errors goes to an assert
