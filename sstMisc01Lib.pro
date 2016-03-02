@@ -23,7 +23,8 @@ SOURCES		+= sstMisc01Lib.cpp \
     sstMisc01CfgFil.cpp \
     sstMisc01PrgBar.cpp \
     sstMisc01PrtFil.cpp \
-    sstMisc01PrtMsg.cpp
+    sstMisc01PrtMsg.cpp \
+    sstMisc01FilNam.cpp
 
 
 OTHER_FILES += README.md

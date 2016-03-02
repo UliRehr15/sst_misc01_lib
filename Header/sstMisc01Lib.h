@@ -46,6 +46,7 @@ class sstMisc01CfgSetIntCls;
 class sstMisc01CfgFilIntCls;
 class sstMisc01PrtMsgIntCls;
 class sstMisc01PrtFilIntCls;
+class sstMisc01FilNamIntCls;
 
 //==============================================================================
 /**
@@ -944,6 +945,111 @@ class sstMisc01ConPrgBarCls
 
 };
 //==============================================================================
+/**
+* @brief sst File Name Class
+*
+* Should work also with lower/upper case file extension
+*
+* Changed: 01.03.16  Re.
+*
+* @ingroup sstMisc01Lib
+*
+* @author Re.
+*
+* @date 01.03.16
+*/
+// ----------------------------------------------------------------------------
+class sstMisc01FilNamCls
+{
+  public:   // Public functions
+     sstMisc01FilNamCls();  // Constructor
+    ~sstMisc01FilNamCls();  // Destructor
+     //==============================================================================
+     /**
+     * @brief // remove given ending from filename <BR>
+     * iStat = oSstFilNam.RemoveExtension(iKey, FilNamEnding, FilNamWith, FilNamWithout);
+     *
+     * @param iKey          [in] For the moment 0
+     * @param oFilNamEnding  [in]
+     * @param oFilNamWith    [in]
+     * @param oFilNamWithout [out]
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int RemoveExtension ( int   iKey,
+                           std::string *oFilNamEnding,
+                           std::string *oFilNamWith,
+                           std::string *oFilNamWithout);
+     //==============================================================================
+     /**
+     * @brief // Find point char position in filename (1-n) <BR>
+     * iStat = oSstFilNam.GetPntPos ( iKey, &oFilNam, &uiPntPos);
+     *
+     * Search from file end <BR>
+     *
+     * @param iKey     [in] For the moment 0
+     * @param oFilNam  [in]  Filename
+     * @param uiPntPos [out] Point Position in String (1-n)
+     *
+     * @return Errorstate
+     *
+     * @retval   = 1: Yes, point char found
+     * @retval   = 0: Nothing found
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int GetPntPos ( int   iKey,
+                     std::string *oFilNam,
+                     unsigned int  *uiPntPos);
+     //==============================================================================
+     /**
+     * @brief // exchange ending in filename with new ending <BR>
+     * iStat = oSstFilNam.ReplaceExtension ( iKey, FilNamOld, FilNamEnd, FilNamNew);
+     *
+     * @param iKey      [in]  For the moment 0
+     * @param oFilNamOld [in]  given filename with ending
+     * @param oFilNamEnd [in]  new ending
+     * @param oFilNamNew [out] new filename with new ending
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int ReplaceExtension ( int          iKey,
+                            std::string *oFilNamOld,
+                            std::string *oFilNamEnd,
+                            std::string *oFilNamNew);
+     //==============================================================================
+     /**
+     * @brief // Split filenamestring to name and ending <BR>
+     * iStat = oSstFilNam.SplitExtension(iKey, oFilNamEnd, oFilEnd, oFilNam);
+     *
+     * @param iKey       [in]  For the moment 0
+     * @param oFilNamEnd [in]   for example "test.csv"
+     * @param oFilEnd    [out] result for example "csv"
+     * @param oFilNam    [out] result for example "Test"
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int SplitExtension (int   iKey,
+                         std::string *oFilNamEnd,
+                         std::string *oFilEnd,
+                         std::string *oFilNam);
+// ----------------------------------------------------------------------------
+  private:  // Private functions
+    sstMisc01FilNamIntCls *poInternObject;   /**< Pointer to intern object */
+};
+//-----------------------------------------------------------------------------
 
 
 #endif

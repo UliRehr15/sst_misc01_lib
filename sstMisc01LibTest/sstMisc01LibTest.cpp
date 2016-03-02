@@ -25,10 +25,6 @@
 
 #include "sstMisc01LibTest.h"
 
-int Test_AscFile (int iKey);
-int Test_LogSystem (int iKey);
-int Test_ConfigSystem (int iKey);
-int Test_ProgressBar (int iKey);
 
 //=============================================================================
 int main (int argc, char *argv [])
@@ -37,6 +33,9 @@ int main (int argc, char *argv [])
   int iStat = 0;
 
   printf("Test Misc01Lib Start. \n");
+
+  iStat = Test_FileNameCls ( 0);
+  assert (iStat >= 0);
 
   iStat = Test_AscFile ( 0);
   assert (iStat >= 0);
@@ -189,6 +188,76 @@ int Test_ProgressBar (int iKey) // v  -> For the moment 0
   // close progress bar on console
   iStat = oPrgBar.Close ( 0, (char*) "Reading Stop");
   assert(iStat == 0);
+
+  return iStat;
+}
+//=============================================================================
+int Test_FileNameCls (int iKey)
+//-----------------------------------------------------------------------------
+{
+  sstMisc01FilNamCls oSstFilNam;
+
+  int iStat = 0;
+  //-----------------------------------------------------------------------------
+  if ( iKey != 0) return -1;
+
+  {
+    std::string FilNamEnding=".dxf";
+    std::string FilNamWith="test.dXf";
+    std::string FilNamWithout;
+    // remove given ending from filename
+    iStat = oSstFilNam.RemoveExtension( 0, &FilNamEnding, &FilNamWith, &FilNamWithout);
+    assert (iStat >= 0);
+    assert (FilNamWithout.compare("test") == 0);
+  }
+
+  {
+    std::string FilNam="testtttt";
+    unsigned int PntPos=0;
+  // Find point char in filename
+  iStat = oSstFilNam.GetPntPos( iKey, &FilNam, &PntPos);
+  assert (iStat == 0);
+  assert (PntPos == 0);
+}
+  {
+    std::string FilNam="test.ttt";
+    unsigned int PntPos=0;
+  // Find point char in filename
+  iStat = oSstFilNam.GetPntPos( iKey, &FilNam, &PntPos);
+  assert (iStat == 1);
+  assert (PntPos == 5);
+}
+
+  {
+    std::string FilNamEnd="dxXf";
+    std::string FilNamOld="test.csv";
+    std::string FilNamNew;
+  // exchange ending in filename with new ending
+  iStat = oSstFilNam.ReplaceExtension( 0, &FilNamOld, &FilNamEnd, &FilNamNew);
+  assert (iStat >= 0);
+  assert (FilNamNew.compare("test.dxXf") == 0);
+}
+
+  {
+    std::string FilNamEnd="dxfdxf";
+    std::string FilNamOld="testtesttesttest.csv";
+    std::string FilNamNew;
+  // exchange ending in filename with new ending
+  iStat = oSstFilNam.ReplaceExtension( 0, &FilNamOld, &FilNamEnd, &FilNamNew);
+  assert (iStat >= 0);
+  assert (FilNamNew.compare("testtesttesttest.dxfdxf") == 0);
+}
+
+  {
+    std::string FilNamEnd="test.dxf";
+    std::string FilEnd;
+    std::string FilNam;
+  // Split filenamestring to name and ending
+  iStat = oSstFilNam.SplitExtension( iKey, &FilNamEnd, &FilEnd, &FilNam);
+  assert (iStat >= 0);
+  assert (FilEnd.compare("dxf") == 0);
+  assert (FilNam.compare("test") == 0);
+}
 
   return iStat;
 }

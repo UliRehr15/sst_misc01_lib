@@ -286,4 +286,49 @@ int sstMisc01PrtFilCls::SST_PrtZu ( int           iKey)
   return this->poInternObject->SST_PrtZu( iKey);
 }
 //=============================================================================
+sstMisc01FilNamCls::sstMisc01FilNamCls()
+{
+    poInternObject = new(sstMisc01FilNamIntCls);
+}
+//=============================================================================
+sstMisc01FilNamCls::~sstMisc01FilNamCls()
+{
+    delete(poInternObject);
+}
+//=============================================================================
+int sstMisc01FilNamCls::RemoveExtension ( int   iKey,
+                std::string *oFilNamEnding,
+                std::string *oFilNamWith,
+                std::string *oFilNameWithout)
+{
+  return this->poInternObject->RemoveExtension(iKey,oFilNamEnding,oFilNamWith,oFilNameWithout);
+}
+//==============================================================================
+int sstMisc01FilNamCls::GetPntPos ( int           iKey,
+                                    std::string  *oDatNam,
+                                    unsigned int *uiPntPos)
+{
+  return this->poInternObject->GetPntPos( iKey, oDatNam, uiPntPos);
+
+}
+//==============================================================================
+int sstMisc01FilNamCls::ReplaceExtension ( int          iKey,
+                                    std::string *oFilNamOld,
+                                    std::string *oFilNamEnd,
+                                    std::string *oFilNamNew)
+{
+  return this->poInternObject->ReplaceExtension(iKey,oFilNamOld,oFilNamEnd,oFilNamNew);
+
+}
+//==============================================================================
+int sstMisc01FilNamCls::SplitExtension (int           iKey,
+                                   std::string  *oFilNamEnd,
+                                   std::string  *oFilEnd,
+                                   std::string  *oFilNam)
+                                   // unsigned int  uiFilNamLen)
+{
+  return this->poInternObject->SplitExtension(iKey,oFilNamEnd,oFilEnd,oFilNam);
+
+}
+//==============================================================================
 

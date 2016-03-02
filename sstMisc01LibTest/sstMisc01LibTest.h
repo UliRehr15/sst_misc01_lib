@@ -13,12 +13,17 @@
  **********************************************************************/
 // sstMisc01LibTest.h   18.12.15  Re.   18.12.15  Re.
 //
-// Intern Datastructures and Prototypes for system "sstMisc01Lib"
+// Intern Datastructures and Prototypes for system "sstMisc01LibTest"
 //
 
 #ifndef   _SST_MISC01_LIB_TEST_HEADER
 #define   _SST_MISC01_LIB_TEST_HEADER
 
+int Test_AscFile (int iKey);
+int Test_LogSystem (int iKey);
+int Test_ConfigSystem (int iKey);
+int Test_ProgressBar (int iKey);
+int Test_FileNameCls (int iKey);
 
 
 #endif

@@ -967,6 +967,108 @@ class sstMisc01PrtFilIntCls
   private:  // Private functions
   sstMisc01AscFilIntCls  Fil;   /**< Protocol-File */
 };
+//==============================================================================
+/**
+* @brief Definition Class sstTestBaseInternCls
+*
+* template for sst base class <BR>
+*
+* Changed: 01.03.16  Re.
+*
+* @ingroup sstMisc01IntLib
+*
+* @author Re.
+*
+* @date 01.03.16
+*/
+// ----------------------------------------------------------------------------
+class sstMisc01FilNamIntCls
+{
+  public:   // Public functions
+     sstMisc01FilNamIntCls();  // Constructor
+    //~sstTestBaseCls();  // Destructor
+     //==============================================================================
+     /**
+     * @brief // remove given extension from filename <BR>
+     * iStat = oSstFilNamInt.RemoveExtension(iKey, FilNamEnding, FilNamWith, FilNamWithout);
+     *
+     * @param iKey          [in] For the moment 0
+     * @param oFilNamEnding  [in]
+     * @param oFilNamWith    [in]
+     * @param oFilNamWithout [out]
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int RemoveExtension ( int          iKey,
+                           std::string *oFilNamEnding,
+                           std::string *oFilNamWith,
+                           std::string *oFilNamWithout);
+     //==============================================================================
+     /**
+     * @brief // Find point char in filename <BR>
+     * iStat = oSstFilNamInt.GetPntPos(iKey, DatNam, PktPos);
+     *
+     * @param iKey   [in] For the moment 0
+     * @param oFilNam [in]  Filename
+     * @param uiPntPos [out] Point Position in String
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int GetPntPos ( int   iKey,
+                     std::string *oFilNam,
+                     unsigned int  *uiPntPos);
+     //==============================================================================
+     /**
+     * @brief // exchange ending in filename with new ending <BR>
+     * iStat = oSstFilNamInt.ReplaceExtension ( iKey, FilNamOld, FilNamEnd, FilNamNew);
+     *
+     * @param iKey      [in]  For the moment 0
+     * @param oFilNamOld [in]  given filename with ending
+     * @param oFilNamEnd [in]  new ending
+     * @param oFilNamNew [out] new filename with new ending
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int ReplaceExtension ( int          iKey,
+                            std::string *oFilNamOld,
+                            std::string *oFilNamEnd,
+                            std::string *oFilNamNew);
+     //==============================================================================
+     /**
+     * @brief // Split filenamestring to name and ending <BR>
+     * iStat = oSstFilNamInt.SplitExtension(iKey, oFilNamEnd, oFilEnd, oFilNam);
+     *
+     * @param iKey       [in]  For the moment 0
+     * @param oFilNamEnd [in]   for example "test.csv"
+     * @param oFilEnd    [out] result for example "csv"
+     * @param oFilNam    [out] result for example "Test"
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int SplitExtension (int          iKey,
+                         std::string *oFilNamEnd,
+                         std::string *oFilEnd,
+                         std::string *oFilNam);
+// ----------------------------------------------------------------------------
+private:  // Private functions
+int Dum;        /**< Dummy */
+};
 //-----------------------------------------------------------------------------
 
 #endif
