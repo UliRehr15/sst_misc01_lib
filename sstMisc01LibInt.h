@@ -990,9 +990,9 @@ class sstMisc01FilNamIntCls
      //==============================================================================
      /**
      * @brief // remove given extension from filename <BR>
-     * iStat = oSstFilNamInt.RemoveExtension(iKey, FilNamEnding, FilNamWith, FilNamWithout);
+     * iStat = oSstFilNamInt.RemoveExtension(iKey, FilNamEnding, FilNamWith, &FilNamWithout);
      *
-     * @param iKey          [in] For the moment 0
+     * @param iKey           [in] For the moment 0
      * @param oFilNamEnding  [in]
      * @param oFilNamWith    [in]
      * @param oFilNamWithout [out]
@@ -1004,8 +1004,8 @@ class sstMisc01FilNamIntCls
      */
      // ----------------------------------------------------------------------------
      int RemoveExtension ( int          iKey,
-                           std::string *oFilNamEnding,
-                           std::string *oFilNamWith,
+                           std::string  oFilNamEnding,
+                           std::string  oFilNamWith,
                            std::string *oFilNamWithout);
      //==============================================================================
      /**

@@ -52,17 +52,18 @@ int sstMisc01PrtFilIntCls::SST_PrtAuf ( int          Key,
   if(iStat >= 0)
   { // Protokolldatei geöffnet
 
-    strcpy(CLine.Txt,"Protokolldatei geöffnet: ");
+    // strcpy(CLine.Txt,"Protokolldatei geöffnet: ");  // german
+    strcpy(CLine.Txt,"Protocolfile opened: ");
     strcat(CLine.Txt, FilNam);
     CLine.Len = strlen(CLine.Txt);
 
     // Write in Message in Protocolfile
-    // iStat = SST_PrtWrt ( Key, Prt, CLine.Txt);
     iStat = SST_PrtWrt ( Key, CLine.Txt);
   }
   else
   { // Protokolldatei konnte nicht geöffnet werden
-    strcpy(CLine.Txt," Protokolldatei konnte nicht geöffnet werden");
+    // strcpy(CLine.Txt," Protokolldatei konnte nicht geöffnet werden"); // german
+    strcpy(CLine.Txt,"ERROR: Protocolfile could not be opened!");
     // Write in Message in Protocolfile
     iStat = SST_PrtWrt ( Key, CLine.Txt);
     iRet = -2;
@@ -321,10 +322,6 @@ int sstMisc01PrtFilIntCls::SST_PrtWrtConsole (int   iKey,
   return iRet;
 }
 //=============================================================================
-/**
-* @brief Close Protocol
-*/
-//-----------------------------------------------------------------------------
 int sstMisc01PrtFilIntCls::SST_PrtZu ( int           iKey)
 //.............................................................................
 {
@@ -336,10 +333,10 @@ int sstMisc01PrtFilIntCls::SST_PrtZu ( int           iKey)
   // iRet = 0;
 
   // Write Message to Protocolfile with char-Value
-  iStat = this->SST_PrtWrtChar ( iKey, this->Fil.GetFileName(), (char*)"Protokolldatei geschlossen: ");
+  // iStat = this->SST_PrtWrtChar ( iKey, this->Fil.GetFileName(), (char*)"Protokolldatei geschlossen: ");
+  iStat = this->SST_PrtWrtChar ( iKey, this->Fil.GetFileName(), (char*)"Protocolfile closed: ");
 
-  // Ascii-Datei schließen
-  // iStat = casc_fclose_c ( 0, &Prt->Fil);
+  // Close ACS File
   iStat = this->Fil.fcloseFil( 0);
 
   return iStat;

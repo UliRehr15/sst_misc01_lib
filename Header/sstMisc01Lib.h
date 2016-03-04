@@ -599,9 +599,7 @@ private:  // Private functions
 };
 //==============================================================================
 /**
-* @brief Definition Class sstMisc01PrtMsgCls
-*
-* template for sst base class <BR>
+* @brief sst Protocol message class
 *
 * Changed: 09.07.15  Re.
 *
@@ -632,9 +630,7 @@ class sstMisc01PrtMsgCls
 };
 //==============================================================================
 /**
-* @brief Definition Class sstMisc01PrtFilCls
-*
-* template for sst base class <BR>
+* @brief sst Protocol file class
 *
 * Changed: 09.07.15  Re.
 *
@@ -969,10 +965,10 @@ class sstMisc01FilNamCls
      * @brief // remove given ending from filename <BR>
      * iStat = oSstFilNam.RemoveExtension(iKey, FilNamEnding, FilNamWith, FilNamWithout);
      *
-     * @param iKey          [in] For the moment 0
-     * @param oFilNamEnding  [in]
-     * @param oFilNamWith    [in]
-     * @param oFilNamWithout [out]
+     * @param iKey            [in] For the moment 0
+     * @param oFilNamEnding   [in]
+     * @param oFilNamWith     [in]
+     * @param poFilNamWithout [out]
      *
      * @return Errorstate
      *
@@ -981,9 +977,9 @@ class sstMisc01FilNamCls
      */
      // ----------------------------------------------------------------------------
      int RemoveExtension ( int   iKey,
-                           std::string *oFilNamEnding,
-                           std::string *oFilNamWith,
-                           std::string *oFilNamWithout);
+                           std::string  oFilNamEnding,
+                           std::string  oFilNamWith,
+                           std::string *poFilNamWithout);
      //==============================================================================
      /**
      * @brief // Find point char position in filename (1-n) <BR>

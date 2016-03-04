@@ -297,11 +297,11 @@ sstMisc01FilNamCls::~sstMisc01FilNamCls()
 }
 //=============================================================================
 int sstMisc01FilNamCls::RemoveExtension ( int   iKey,
-                std::string *oFilNamEnding,
-                std::string *oFilNamWith,
-                std::string *oFilNameWithout)
+                std::string  oFilNamEnding,
+                std::string  oFilNamWith,
+                std::string *poFilNameWithout)
 {
-  return this->poInternObject->RemoveExtension(iKey,oFilNamEnding,oFilNamWith,oFilNameWithout);
+  return this->poInternObject->RemoveExtension(iKey,oFilNamEnding,oFilNamWith,poFilNameWithout);
 }
 //==============================================================================
 int sstMisc01FilNamCls::GetPntPos ( int           iKey,

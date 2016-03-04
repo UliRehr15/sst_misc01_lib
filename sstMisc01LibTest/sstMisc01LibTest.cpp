@@ -202,11 +202,11 @@ int Test_FileNameCls (int iKey)
   if ( iKey != 0) return -1;
 
   {
-    std::string FilNamEnding=".dxf";
+    std::string FilNamEnding="dxf";
     std::string FilNamWith="test.dXf";
     std::string FilNamWithout;
     // remove given ending from filename
-    iStat = oSstFilNam.RemoveExtension( 0, &FilNamEnding, &FilNamWith, &FilNamWithout);
+    iStat = oSstFilNam.RemoveExtension( 0, FilNamEnding, FilNamWith, &FilNamWithout);
     assert (iStat >= 0);
     assert (FilNamWithout.compare("test") == 0);
   }

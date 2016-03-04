@@ -36,25 +36,23 @@ sstMisc01FilNamIntCls::sstMisc01FilNamIntCls()
 
 }
 //=============================================================================
-int sstMisc01FilNamIntCls::RemoveExtension ( int          Key,
-                                       std::string *DatEnd,
-                                       std::string *DatNamMit,
-                                       std::string *DatNamOhn)
+int sstMisc01FilNamIntCls::RemoveExtension ( int          iKey,
+                                             std::string  DatEnd,
+                                             std::string  DatNamMit,
+                                             std::string *DatNamOhn)
 //-----------------------------------------------------------------------------
 {
-  // char *TZ;   // Zeiger auf Datei-Endung in gefundenem Dateinamen
-  // unsigned int TLen = 0;  // Textlänge der Datei-Endung für Löschen
   std::string oTmpDatEnd;
   std::string oTmpDatNamMit;
 
   int istat;
 //-----------------------------------------------------------------------------
-  if (Key != 0) return -1;
+  if (iKey != 0) return -1;
   istat = 0;
   DatNamOhn->clear();
 
-  oTmpDatEnd    = *DatEnd;
-  oTmpDatNamMit = *DatNamMit;
+  oTmpDatEnd    = DatEnd;
+  oTmpDatNamMit = DatNamMit;
 
 
 
@@ -74,7 +72,7 @@ int sstMisc01FilNamIntCls::RemoveExtension ( int          Key,
   if (uiPos > 0)
   {
     // memset(TZ,'\0',TLen);  // String -DatNamMit- nullen ab gefundener Adresse
-    *DatNamOhn = DatNamMit->substr(0,uiPos);
+    *DatNamOhn = DatNamMit.substr(0,uiPos-1);
   }
 
   // und in Ergebnis kopieren
