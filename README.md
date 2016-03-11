@@ -20,4 +20,6 @@ Versions <BR>
 20160215: 1.4 extend log lib, small progress bar object. <BR>
 20160218: 1.5 sst_misc01 no more base on sst_rec04 <BR>
 20160302: 1.6 new class: file name handling <BR>
+20160304: 1.7 changes in file name and protocol classhandling <BR>
+20160311: 1.8 Doxy Documentation extented. <BR>
 

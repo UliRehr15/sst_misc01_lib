@@ -162,7 +162,8 @@ class sstMisc01AscFilCls
   ~sstMisc01AscFilCls();
      //==============================================================================
      /**
-     * @brief Open Asc File for reading
+     * @brief // Open Asc File for reading <BR>
+     * iStat = oAscFil.fopenRd ( iKey, FilNam);
      *
      * @param iKey   [in] For the moment 0
      * @param FilNam [in] Name of new file
@@ -177,7 +178,8 @@ class sstMisc01AscFilCls
                    const char     *FilNam);
      //==============================================================================
      /**
-     * @brief Open Asc File for Writing
+     * @brief // Open Asc File for Writing <BR>
+     * iStat = oAscFil.fopenWr ( iKey, FilNam);
      *
      * @param iKey   [in] For the moment 0
      * @param FilNam [in] Name of new file
@@ -192,7 +194,8 @@ class sstMisc01AscFilCls
                    const char *FilNam);
      //==============================================================================
      /**
-     * @brief Open Asc File for Writing
+     * @brief // Open Asc File for Writing <BR>
+     * iStat = oAscFil.fopenWr2 ( iKey);
      *
      * @param iKey   [in] For the moment 0
      *
@@ -205,7 +208,8 @@ class sstMisc01AscFilCls
      int fopenWr2 ( int         iKey);
      //==============================================================================
      /**
-     * @brief Get Size of file
+     * @brief // Get Size of file <BR>
+     * iStat = oAscFil.fsize_get ( iKey, FSize);
      *
      * @param iKey  [in]  For the moment 0
      * @param FSize [out] Size of file
@@ -220,7 +224,8 @@ class sstMisc01AscFilCls
                      long  *FSize);
      //==============================================================================
      /**
-     * @brief Close file
+     * @brief // Close file <BR>
+     * iStat = oAscFil.fcloseFil ( iKey);
      *
      * @param iKey [in] For the moment 0
      *
@@ -233,7 +238,8 @@ class sstMisc01AscFilCls
      int fcloseFil ( int iKey);
      //==============================================================================
      /**
-     * @brief Close and delete file
+     * @brief // Close and delete file <BR>
+     * iStat = oAscFil.fdeleteFil ( iKey);
      *
      * @param iKey [in] For the moment 0
      *
@@ -246,7 +252,8 @@ class sstMisc01AscFilCls
      int fdeleteFil ( int iKey);
      //==============================================================================
      /**
-     * @brief Read Row from file
+     * @brief // Read Row from file <BR>
+     * iStat = oAscFil.rd_line ( iKey, CLine);
      *
      * @param iKey  [in]  For the moment 0
      * @param CLine [out] File Row
@@ -261,7 +268,8 @@ class sstMisc01AscFilCls
                    sstMisc01AscRowCls  *CLine);
      //==============================================================================
      /**
-     * @brief Write Row to file
+     * @brief // Write Row to file <BR>
+     * iStat = oAscFil.wr_line ( iKey, CLine);
      *
      * @param iKey  [in] For the moment 0
      * @param CLine [in] File Row
@@ -272,12 +280,12 @@ class sstMisc01AscFilCls
      * @retval   < 0: Unspecified Error
      */
      // ----------------------------------------------------------------------------
-     int wr_line ( int           iKey,
+     int wr_line ( int                 iKey,
                    sstMisc01AscRowCls *CLine);
-
      //==============================================================================
      /**
-     * @brief Write Txt String to file
+     * @brief // Write Txt String to file <BR>
+     * iStat = oAscFil.wr_txt ( iKey, Txt);
      *
      * @param iKey [in] For the moment 0
      * @param Txt  [in] Text string
@@ -290,15 +298,13 @@ class sstMisc01AscFilCls
      // ----------------------------------------------------------------------------
      int wr_txt ( int    iKey,
                   char   Txt[]);
-
      //==============================================================================
      /**
-     * @brief Read Str1 structure from file
+     * @brief // Read string object from file <BR>
+     * iStat = oAscFil.Rd_StrDS1 ( iKey, &oString);
      *
-     * iStat = oFile.Rd_StrDS1 ( iKey, *StrDS);
-     *
-     * @param iKey  [in]  For the moment 0
-     * @param StrDS [out] Str1 structure
+     * @param iKey    [in]  For the moment 0
+     * @param oString [out] Str1 structure
      *
      * @return Errorstate
      *
@@ -307,15 +313,14 @@ class sstMisc01AscFilCls
      */
      // ----------------------------------------------------------------------------
      int Rd_StrDS1 ( int           iKey,
-                     std::string  *StrDS);
+                     std::string  *oString);
      //==============================================================================
      /**
-     * @brief Write Str1 structure to file
+     * @brief // Write string object to file <BR>
+     * iStat = oAscFil.Wr_StrDS1 ( iKey, &oString);
      *
-     * iStat = oFile.Wr_StrDS1 ( iKey, *StrDS);
-     *
-     * @param iKey  [in] For the moment 0
-     * @param StrDS [in] String 1 structure
+     * @param iKey    [in] For the moment 0
+     * @param oString [in] String 1 structure
      *
      * @return Errorstate
      *
@@ -323,11 +328,12 @@ class sstMisc01AscFilCls
      * @retval   < 0: Unspecified Error
      */
      // ----------------------------------------------------------------------------
-     int Wr_StrDS1 ( int          iKey,
-                     std::string  *StrDS);
+     int Wr_StrDS1 ( int           iKey,
+                     std::string  *oString);
      //==============================================================================
      /**
-     * @brief Step one line back
+     * @brief // Step one line back <BR>
+     * iStat = oAscFil.line_back ( iKey);
      *
      * @param iKey [in] For the moment 0
      *
@@ -340,7 +346,8 @@ class sstMisc01AscFilCls
      int line_back (int iKey);
      //==============================================================================
      /**
-     * @brief GetFileSize
+     * @brief // GetFileSize <BR>
+     * iStat = oAscFil.GetFileSize ( iKey);
      *
      * @retval   = File Size
      */
