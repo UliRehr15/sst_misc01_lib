@@ -147,7 +147,7 @@ int sstMisc01AscRowIntCls::Str1_toLine (int          iKey,
 //-----------------------------------------------------------------------------
   if ( iKey != 0) return -1;
 
-  strncpy( this->Txt, Str1->c_str(), dCASC2_TEXTLEN);
+  strncpy( this->Txt, Str1->c_str(), dCASC2_TEXTLEN-1);
   this->Len = strlen(this->Txt);
 
   // Fatal Errors goes to an assert

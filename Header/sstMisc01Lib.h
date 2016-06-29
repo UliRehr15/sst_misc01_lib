@@ -33,7 +33,7 @@
 
 // Defines ---------------------------------------------------------------------
 
-#define dCASC2_TEXTLEN    200  /**< Fix Lenght of Misc01 Asc file row    @ingroup sstMisc01Lib */
+#define dCASC2_TEXTLEN    300  /**< Fix Lenght of Misc01 Asc file row    @ingroup sstMisc01Lib */
 #define MAX_PFAD          260  /**< Misc01 maximal path+filename length  @ingroup sstMisc01Lib */
 
 

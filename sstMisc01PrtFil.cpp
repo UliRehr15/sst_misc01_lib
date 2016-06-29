@@ -268,8 +268,8 @@ int sstMisc01PrtFilIntCls::SST_PrtWrtDbl ( int           Key,
 */
 //-----------------------------------------------------------------------------
 int sstMisc01PrtFilIntCls::SST_PrtWrtChar ( int           Key,
-                     char         *CharVal,
-                     char         *Mld)
+                                            char         *CharVal,
+                                            char         *Mld)
 //.............................................................................
 {
   sstMisc01AscRowIntCls cLineOut;

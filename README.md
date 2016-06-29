@@ -12,14 +12,15 @@ Structure of coding projects should be:
 December 2015, Hanover, Germany, Uli Rehr
 
 Versions <BR>
-20151218: 1.0 First check in. Asc File IO functions. <BR>
-20151220: 1.1 Small corrections. <BR>
-20160212: 1.2 Small Log/Protocol System, <BR>
-              small Config File System. <BR>
-20160213: 1.3 Documentation corrected. <BR>
-20160215: 1.4 extend log lib, small progress bar object. <BR>
-20160218: 1.5 sst_misc01 no more base on sst_rec04 <BR>
-20160302: 1.6 new class: file name handling <BR>
-20160304: 1.7 changes in file name and protocol classhandling <BR>
-20160311: 1.8 Doxy Documentation extented. <BR>
+20151218: Vers. 1.0 First check in. Asc File IO functions. <BR>
+20151220: Vers. 1.1 Small corrections. <BR>
+20160212: Vers. 1.2 Small Log/Protocol System, <BR>
+                    small Config File System. <BR>
+20160213: Vers. 1.3 Documentation corrected. <BR>
+20160215: Vers. 1.4 extend log lib, small progress bar object. <BR>
+20160218: Vers. 1.5 sst_misc01 no more base on sst_rec04 <BR>
+20160302: Vers. 1.6 new class: file name handling <BR>
+20160304: Vers. 1.7 changes in file name and protocol classhandling <BR>
+20160311: Vers. 1.8 Doxy Documentation extented. <BR>
+20160629: Vers. 1.9 Length of Read/Write File Row extended. <BR>
 
