@@ -77,11 +77,17 @@ int Test_AscFile (int iKey) // v  -> For the moment 0
   iStat = oAscFil.fcloseFil(0);
   assert (iStat >= 0);
 
-  // Fatal Errors goes to an assert
+  iStat = oAscFil.fopenRd(0, (char*)"Test.asc");
+  assert (iStat >= 0);
 
-  // Pipe |
-  // Smaller <
-  // Greater >
+  oStr.clear();
+  iStat = oAscFil.Rd_StrDS1( 0, &oStr);
+  assert(oStr == "Row1: Test");
+
+  iStat = oAscFil.fcloseFil(0);
+  assert (iStat >= 0);
+
+  // Fatal Errors goes to an assert
 
   assert(iRet >= 0);
 

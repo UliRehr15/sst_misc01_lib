@@ -23,4 +23,5 @@ Versions <BR>
 20160304: Vers. 1.7 changes in file name and protocol classhandling <BR>
 20160311: Vers. 1.8 Doxy Documentation extented. <BR>
 20160629: Vers. 1.9 Length of Read/Write File Row extended. <BR>
+20160807: Vers. 1.10: Patch reading from unix or windows. <BR>
 

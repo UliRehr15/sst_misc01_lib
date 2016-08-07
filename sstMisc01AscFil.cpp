@@ -34,8 +34,6 @@ sstMisc01AscFilIntCls::sstMisc01AscFilIntCls()
   this->Siz = 0;                 // Dateigröße
 }
 //=============================================================================
-// Complete function description is in headerfile
-//------------------------------------------------------------------------------
 int sstMisc01AscFilIntCls::fopenRd ( int             iKey,
                              const char     *FilNam)
 //------------------------------------------------------------------------------
@@ -46,21 +44,19 @@ int sstMisc01AscFilIntCls::fopenRd ( int             iKey,
   // iStat = 0;
 
   iStat = strlen( FilNam);
-  if (iStat < 1 || iStat >= MAX_PFAD) return -1;
+  if (iStat < 1 || iStat >= MAX_PFAD) return -2;
 
   // setting b is nessasary from difference between UNIX/Windows
   // (CR/LF or LF)
   if ((  this->Hdl = fopen( FilNam, "r+b")) == NULL)
   {
-    // puts("Datei konnte nicht geöffnet werden.");
-    iStat = -1;
+    iStat = -3;
   }
   else
   {
-    // Dateigröße feststellen
-    // CFile->Hdl = iStat;
+    // Get Filesize
     strcpy( this->Nam, FilNam);
-    fseek ( this->Hdl, 0, SEEK_END);  // Get File-Size-Information
+    fseek ( this->Hdl, 0, SEEK_END);
     this->Siz = ftell( this->Hdl);
     fseek ( this->Hdl, 0, SEEK_SET);
     iStat = 0;
@@ -244,7 +240,8 @@ int sstMisc01AscFilIntCls::rd_line ( int             iKey,
 
     // Test auf Zeilenende
 
-    if(ichar == 10 && iKey >= 2)  // 10 -> LF    (UNIX-Variante)
+    // if(ichar == 10 && iKey >= 2)  // 10 -> LF    (UNIX-Variante)
+    if(ichar == 10)  // 10 -> LF    (UNIX-Variante)
     {
       // Zeilen-Ende erreicht
       CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
@@ -309,7 +306,6 @@ int sstMisc01AscFilIntCls::rd_line ( int             iKey,
   else return ii-2;
 }
 //=============================================================================
-//-----------------------------------------------------------------------------
 int sstMisc01AscFilIntCls::wr_line ( int           iKey,
                              sstMisc01AscRowIntCls *CLine)
 {
@@ -328,7 +324,6 @@ int sstMisc01AscFilIntCls::wr_line ( int           iKey,
   return iRet;
 }
 //=============================================================================
-//-----------------------------------------------------------------------------
 int sstMisc01AscFilIntCls::wr_txt ( int    iKey,
                             char   Txt[])
 {
@@ -369,18 +364,20 @@ int sstMisc01AscFilIntCls::Rd_StrDS1 ( int           iKey,
 }
 //=============================================================================
 int sstMisc01AscFilIntCls::Wr_StrDS1 ( int          iKey,
-                               std::string *sStrDS)
+                                       std::string *sStrDS)
 //.............................................................................
 {
   sstMisc01AscRowIntCls oFilRow;
   int iRet = 0;
   int iStat = 0;
 //.............................................................................
-  if (iKey != 0) return -1;
+  if (iKey < 0 || iKey > 1) return -1;
 
+  // Copy string to row object
   iStat = oFilRow.Str1_toLine ( 0, sStrDS);
 
-  iStat = this->wr_line ( 0, &oFilRow);
+  // write row objekt to file, if iKey = 1, write also empty row
+  iStat = this->wr_line ( iKey, &oFilRow);
 
   // Fatal Errors goes to an assert
   if (iRet < 0)

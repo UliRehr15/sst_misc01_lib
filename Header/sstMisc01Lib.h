@@ -319,13 +319,17 @@ class sstMisc01AscFilCls
      * @brief // Write string object to file <BR>
      * iStat = oAscFil.Wr_StrDS1 ( iKey, &oString);
      *
-     * @param iKey    [in] For the moment 0
-     * @param oString [in] String 1 structure
+     * iKey = 0: Empty row will not be written. <BR>
+     * iKey = 1: Write empty row too. <BR>
+     *
+     * @param iKey    [in] 0 or 1
+     * @param oString [in] String object
      *
      * @return Errorstate
      *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
+     * @retval   =  0: OK
+     * @retval   = -1: Wrong Key
+     * @retval   <  0: Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int Wr_StrDS1 ( int           iKey,

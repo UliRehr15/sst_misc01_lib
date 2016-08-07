@@ -143,12 +143,15 @@ class sstMisc01AscFilIntCls
      * @brief Open Asc File for only reading
      *
      * @param iKey   [in] For the moment 0
-     * @param FilNam [in] Name of new file
+     * @param FilNam [in] Name of existing file
      *
      * @return Errorstate
      *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
+     * @retval   =  0: OK
+     * @retval   = -1: Wrong Key
+     * @retval   = -2: File name error
+     * @retval   = -3: File not found
+     * @retval   <  0: Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int fopenRd ( int             iKey,
@@ -288,17 +291,20 @@ class sstMisc01AscFilIntCls
                      std::string  *StrDS);
      //==============================================================================
      /**
-     * @brief Write Str1 structure to file
-     *
+     * @brief // Write std::string to file <BR>
      * iStat = oFile.Wr_StrDS1 ( iKey, *StrDS);
      *
-     * @param iKey  [in] For the moment 0
-     * @param StrDS [in] String 1 structure
+     * iKey = 0: Empty row will not be written.
+     * iKey = 1: Write empty row too.
+     *
+     * @param iKey  [in] 0 or 1
+     * @param StrDS [in] std::String
      *
      * @return Errorstate
      *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
+     * @retval   =  0: OK
+     * @retval   = -1: Wrong Key
+     * @retval   <  0: Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int Wr_StrDS1 ( int          iKey,
