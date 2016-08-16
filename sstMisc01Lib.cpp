@@ -162,6 +162,12 @@ long sstMisc01AscFilCls::GetFileSize()
   return this->poAscFilInt->GetFileSize();
 }
 //==============================================================================
+char* sstMisc01AscFilCls::GetFileName()
+//-----------------------------------------------------------------------------
+{
+  return this->poAscFilInt->GetFileName();
+}
+//==============================================================================
 sstMisc01CfgFilCls::sstMisc01CfgFilCls(std::string oCfgFilNam)
 {
   this->poInternObject = new sstMisc01CfgFilIntCls(oCfgFilNam);

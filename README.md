@@ -6,6 +6,7 @@ This library should be build with QT 5 and qt creator 3.0.
 Structure of coding projects should be:
 
 .. [libs] <BR>
+   [sst_str01_lib]<BR>
    [sst_misc01_lib]<BR>
    [Doxygen_ouput]<BR>
 
@@ -24,4 +25,5 @@ Versions <BR>
 20160311: Vers. 1.8 Doxy Documentation extented. <BR>
 20160629: Vers. 1.9 Length of Read/Write File Row extended. <BR>
 20160807: Vers. 1.10: Patch reading from unix or windows. <BR>
+20160816: Vers. 1.11: Get FileName function for Class sstAscFile. <BR>
 
