@@ -234,8 +234,10 @@ class sstMisc01AscFilIntCls
      *
      * @return Errorstate
      *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
+     * @retval   =  0: OK
+     * @retval   = -1: Wrong Key
+     * @retval   = -4: File not open
+     * @retval   <  0: Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int rd_line ( int             iKey,

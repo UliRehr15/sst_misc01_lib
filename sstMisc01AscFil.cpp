@@ -194,10 +194,8 @@ int sstMisc01AscFilIntCls::fdeleteFil ( int iKey)
   return iRet;
 }
 //=============================================================================
-// Complete function description is in headerfile
-//-----------------------------------------------------------------------------
-int sstMisc01AscFilIntCls::rd_line ( int             iKey,
-                             sstMisc01AscRowIntCls  *CLine)
+int sstMisc01AscFilIntCls::rd_line ( int                     iKey,
+                                     sstMisc01AscRowIntCls  *CLine)
 {
   int ichar;
 
@@ -206,6 +204,7 @@ int sstMisc01AscFilIntCls::rd_line ( int             iKey,
   int iStat;
 //.............................................................................
   if (iKey < 0 || iKey > 3) return -1;
+  if (this->Hdl == NULL) return -4;
   iStat = 0;
   ichar = 0;
 

@@ -26,4 +26,5 @@ Versions <BR>
 20160629: Vers. 1.9 Length of Read/Write File Row extended. <BR>
 20160807: Vers. 1.10: Patch reading from unix or windows. <BR>
 20160816: Vers. 1.11: Get FileName function for Class sstAscFile. <BR>
+20160905: Vers. 1.12: Extend return error in Class sstAscFile. <BR>
 
