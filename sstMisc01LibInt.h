@@ -173,7 +173,7 @@ class sstMisc01AscFilIntCls
                    const char *FilNam);
      //==============================================================================
      /**
-     * @brief Open Asc File for Writing
+     * @brief Open Asc File for Writing with intern file name
      *
      * @param iKey   [in] For the moment 0
      *
@@ -184,6 +184,22 @@ class sstMisc01AscFilIntCls
      */
      // ----------------------------------------------------------------------------
      int fopenWr2 ( int         iKey);
+     //==============================================================================
+     /**
+     * @brief // Open Asc File for appending data <BR>
+     * iStat = oAscFil.fopenAppend ( iKey, oFilNam);
+     *
+     * @param iKey   [in] For the moment 0
+     * @param oFilNam [in] Name of existing file
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int fopenAppend ( int               iKey,
+                       const std::string oFilNam);
      //==============================================================================
      /**
      * @brief Get Size of file
@@ -294,7 +310,7 @@ class sstMisc01AscFilIntCls
      //==============================================================================
      /**
      * @brief // Write std::string to file <BR>
-     * iStat = oFile.Wr_StrDS1 ( iKey, *StrDS);
+     * iStat = oFile.Wr_StrDS1 ( iKey, &StrDS);
      *
      * iKey = 0: Empty row will not be written.
      * iKey = 1: Write empty row too.
@@ -311,6 +327,26 @@ class sstMisc01AscFilIntCls
      // ----------------------------------------------------------------------------
      int Wr_StrDS1 ( int          iKey,
                      std::string  *StrDS);
+     //==============================================================================
+     /**
+     * @brief // Write std::string to file <BR>
+     * iStat = oFile.Wr_String ( iKey, oString);
+     *
+     * iKey = 0: Empty row will not be written.
+     * iKey = 1: Write empty row too.
+     *
+     * @param iKey    [in] 0 or 1
+     * @param oString [in] std::String
+     *
+     * @return Errorstate
+     *
+     * @retval   =  0: OK
+     * @retval   = -1: Wrong Key
+     * @retval   <  0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int Wr_String ( int          iKey,
+                     std::string  oString);
      //==============================================================================
      /**
      * @brief Step one line back

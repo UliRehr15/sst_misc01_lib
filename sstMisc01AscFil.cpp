@@ -30,7 +30,7 @@ sstMisc01AscFilIntCls::sstMisc01AscFilIntCls()
 //------------------------------------------------------------------------------
 {
   strcpy( this->Nam,"\0");
-  this->Hdl = (int) NULL;
+  this->Hdl = NULL;
   this->Siz = 0;                 // Dateigröße
 }
 //=============================================================================
@@ -64,32 +64,26 @@ int sstMisc01AscFilIntCls::fopenRd ( int             iKey,
   return iStat;
 }
 //=============================================================================
-int sstMisc01AscFilIntCls::fopenWr ( int         iKey,     // v  -> Vorerst immer 0
-                             const char *FilNam)   //    -> Name der ASC-Datei
+int sstMisc01AscFilIntCls::fopenWr ( int         iKey,
+                                     const char *FilNam)
 //------------------------------------------------------------------------------
 {
-  // int Hdl;
-  int iStat;
+  int iStat = 0;
 //.............................................................................
   if (iKey != 0) return -1;
-  iStat = 0;
-  Hdl   = 0;
 
-  // Name leer oder fehlerhaft, zurück
+  // file name empty, return with error
   if ( strlen( FilNam) <= 0) return -2;
-
-  // Allgemeines ASC-Datei-System initialisieren
-  // iStat = casc_ini_c ( 0, CFile);
 
   if (( this->Hdl = fopen( FilNam, "w")) == NULL)
   {
-    // puts("Datei konnte nicht geöffnet werden.");
     iStat = -1;
   }
   else
   {
+    // store file name
     strncpy( this->Nam, FilNam, MAX_PFAD);
-    this->Siz = 0;
+    this->Siz = 0;  // File is empty
   }
   return iStat;
 }
@@ -97,33 +91,48 @@ int sstMisc01AscFilIntCls::fopenWr ( int         iKey,     // v  -> Vorerst imme
 int sstMisc01AscFilIntCls::fopenWr2 ( int         iKey)
 //------------------------------------------------------------------------------
 {
-  // int Hdl;
-  int iStat;
+  int iStat = 0;
 //.............................................................................
   if (iKey != 0) return -1;
-  iStat = 0;
-  Hdl   = 0;
 
-  // Name leer oder fehlerhaft, zurück
+  // file name empty, return with error
   if ( strlen( this->Nam) <= 0) return -2;
-
-  // Allgemeines ASC-Datei-System initialisieren
-  // iStat = casc_ini_c ( 0, CFile);
 
   if (( this->Hdl = fopen( this->Nam, "w")) == NULL)
   {
-    // puts("Datei konnte nicht geöffnet werden.");
     iStat = -1;
   }
   else
   {
-    // strncpy( this->Nam, FilNam, MAX_PFAD);
     this->Siz = 0;
   }
   return iStat;
 }
 //=============================================================================
+int sstMisc01AscFilIntCls::fopenAppend ( int               iKey,
+                                         const std::string oFilNam)
 //------------------------------------------------------------------------------
+{
+  int iStat = 0;
+//.............................................................................
+  if (iKey != 0) return -1;
+
+  // file name empty, return with error
+  if ( oFilNam.length() <= 0) return -2;
+
+  if (( this->Hdl = fopen( oFilNam.c_str(), "a")) == NULL)
+  {
+    iStat = -1;
+  }
+  else
+  {
+    // store file name
+    strncpy( this->Nam, oFilNam.c_str(), MAX_PFAD);
+    this->Siz = 0;  // File is empty
+  }
+  return iStat;
+}
+//=============================================================================
 int sstMisc01AscFilIntCls::fsize_get ( int            iKey,    // v  -> Vorerst immer 0
                                long          *FSize)  //   <-  Dateigröße
 //------------------------------------------------------------------------------
@@ -139,21 +148,18 @@ int sstMisc01AscFilIntCls::fsize_get ( int            iKey,    // v  -> Vorerst 
   return iret;
 }
 //=============================================================================
-//------------------------------------------------------------------------------
-int sstMisc01AscFilIntCls::fcloseFil ( int Key)
+int sstMisc01AscFilIntCls::fcloseFil ( int iKey)
 //------------------------------------------------------------------------------
 {
-  int iStat;
-  int iRet;
+  int iStat = 0;
+  int iRet  = 0;
 //.............................................................................
-  if (Key != 0) return -1;
-  iRet = 0;
-
+  if (iKey != 0) return -1;
 
   if ( this->Hdl != 0)
   {
     iStat = fclose( this->Hdl);
-    this->Hdl = 0;
+    this->Hdl = NULL;
     iRet = iStat;
   }
   else
@@ -163,23 +169,18 @@ int sstMisc01AscFilIntCls::fcloseFil ( int Key)
   return iRet;
 }
 //=============================================================================
-//------------------------------------------------------------------------------
 int sstMisc01AscFilIntCls::fdeleteFil ( int iKey)
 //------------------------------------------------------------------------------
 {
-  int iStat;
-  int iRet;
+  int iStat = 0;
+  int iRet  = 0;
 //.............................................................................
   if (iKey != 0) return -1;
-  iRet = 0;
-
 
   if ( this->Hdl != 0)
   {
-    // iStat= -1;
-    // iStat= C_close_c ( CFile->Hdl);
     iStat= fclose( this->Hdl);
-    this->Hdl = 0;
+    this->Hdl = NULL;
     iRet = iStat;
   }
   else
@@ -377,6 +378,33 @@ int sstMisc01AscFilIntCls::Wr_StrDS1 ( int          iKey,
 
   // write row objekt to file, if iKey = 1, write also empty row
   iStat = this->wr_line ( iKey, &oFilRow);
+
+  // Fatal Errors goes to an assert
+  if (iRet < 0)
+  {
+    // Expression (iRet >= 0) has to be fullfilled
+    assert(0);
+  }
+
+  // Small Errors will given back
+  iRet = iStat;
+
+  return iRet;
+}
+//=============================================================================
+int sstMisc01AscFilIntCls::Wr_String ( int                iKey,
+                                       std::string  sStrDS)
+//.............................................................................
+{
+  sstMisc01AscRowIntCls oFilRow;
+  int iRet = 0;
+  int iStat = 0;
+//.............................................................................
+  if (iKey != 0) return -1;
+
+  iStat = oFilRow.Str1_toLine ( 0, &sStrDS);
+
+  iStat = this->wr_line( 0, &oFilRow);
 
   // Fatal Errors goes to an assert
   if (iRet < 0)

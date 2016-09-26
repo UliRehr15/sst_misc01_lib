@@ -88,7 +88,8 @@ int sstMisc01AscRowIntCls::LineAppendLong (int   iKey,
   // Int4 in einen String konvertieren und in Zeilenbereich kopieren
   iStat = oCsvStr.Csv_UInt4_2String(0,lValue,&oTmpStr);
 
-  sLineTmp.Line_toStr1(0,&oTmpStr);
+  // sLineTmp.Line_toStr1(0,&oTmpStr);
+  sLineTmp.Str1_toLine(0, &oTmpStr);
 
   // Append second row to object
   iStat = this->CatLine ( 0,  &sLineTmp);

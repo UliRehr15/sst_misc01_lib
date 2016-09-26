@@ -74,6 +74,9 @@ int Test_AscFile (int iKey) // v  -> For the moment 0
   iStat = oAscFil.wr_line(0,&oAscRow);
   assert (iStat >= 0);
 
+  iStat = oAscFil.Wr_String(0,"TestString");
+  assert (iStat >= 0);
+
   iStat = oAscFil.fcloseFil(0);
   assert (iStat >= 0);
 
@@ -83,6 +86,10 @@ int Test_AscFile (int iKey) // v  -> For the moment 0
   oStr.clear();
   iStat = oAscFil.Rd_StrDS1( 0, &oStr);
   assert(oStr == "Row1: Test");
+
+  oStr.clear();
+  iStat = oAscFil.Rd_StrDS1( 0, &oStr);
+  assert(oStr == "TestString");
 
   iStat = oAscFil.fcloseFil(0);
   assert (iStat >= 0);

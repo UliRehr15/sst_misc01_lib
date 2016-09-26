@@ -84,7 +84,7 @@ int sstMisc01AscFilCls::fopenRd ( int             iKey,
 }
 //==============================================================================
 int sstMisc01AscFilCls::fopenWr ( int         iKey,
-                            const char *FilNam)
+                                  const char *FilNam)
 //-----------------------------------------------------------------------------
 {
   return this->poAscFilInt->fopenWr ( iKey, FilNam);
@@ -94,6 +94,13 @@ int sstMisc01AscFilCls::fopenWr2 ( int  iKey)
 //-----------------------------------------------------------------------------
 {
   return this->poAscFilInt->fopenWr2( iKey);
+}
+//==============================================================================
+int sstMisc01AscFilCls::fopenAppend ( int               iKey,
+                                      const std::string oFilNam)
+//-----------------------------------------------------------------------------
+{
+  return this->poAscFilInt->fopenAppend( iKey, oFilNam);
 }
 //==============================================================================
 int sstMisc01AscFilCls::fsize_get ( int    iKey,
@@ -148,6 +155,13 @@ int sstMisc01AscFilCls::Wr_StrDS1 ( int           iKey,
 //-----------------------------------------------------------------------------
 {
   return this->poAscFilInt->Wr_StrDS1 ( iKey, StrDS);
+}
+//==============================================================================
+int sstMisc01AscFilCls::Wr_String ( int           iKey,
+                                    std::string  StrDS)
+//-----------------------------------------------------------------------------
+{
+  return this->poAscFilInt->Wr_String ( iKey, StrDS);
 }
 //==============================================================================
 int sstMisc01AscFilCls::line_back (int iKey)

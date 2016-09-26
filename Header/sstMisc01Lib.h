@@ -194,7 +194,7 @@ class sstMisc01AscFilCls
                    const char *FilNam);
      //==============================================================================
      /**
-     * @brief // Open Asc File for Writing <BR>
+     * @brief // Open Asc File for Writing with intern file name<BR>
      * iStat = oAscFil.fopenWr2 ( iKey);
      *
      * @param iKey   [in] For the moment 0
@@ -206,6 +206,22 @@ class sstMisc01AscFilCls
      */
      // ----------------------------------------------------------------------------
      int fopenWr2 ( int         iKey);
+     //==============================================================================
+     /**
+     * @brief // Open Asc File for appending data <BR>
+     * iStat = oAscFil.fopenAppend ( iKey, oFilNam);
+     *
+     * @param iKey   [in] For the moment 0
+     * @param oFilNam [in] Name of existing file
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int fopenAppend ( int               iKey,
+                       const std::string oFilNam);
      //==============================================================================
      /**
      * @brief // Get Size of file <BR>
@@ -336,6 +352,26 @@ class sstMisc01AscFilCls
      // ----------------------------------------------------------------------------
      int Wr_StrDS1 ( int           iKey,
                      std::string  *oString);
+     //==============================================================================
+     /**
+     * @brief // Write string object to file <BR>
+     * iStat = oAscFil.Wr_String ( iKey, oString);
+     *
+     * iKey = 0: Empty row will not be written. <BR>
+     * iKey = 1: Write empty row too. <BR>
+     *
+     * @param iKey    [in] 0 or 1
+     * @param oString [in] String object
+     *
+     * @return Errorstate
+     *
+     * @retval   =  0: OK
+     * @retval   = -1: Wrong Key
+     * @retval   <  0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int Wr_String ( int          iKey,
+                     std::string  oString);
      //==============================================================================
      /**
      * @brief // Step one line back <BR>
@@ -670,8 +706,8 @@ class sstMisc01PrtFilCls
 
      //=============================================================================
      /**
-     * @brief // Open Protocol <BR>
-     * iStat = oSstPrt.SST_PrtAuf ( iKey, *cFilNam);
+     * @brief // Open Protocol with filename<BR>
+     * iStat = oSstPrt.SST_PrtAuf ( iKey, cFilNam);
      *
      * Key = 0: Write only in file, Key = 1: Write to console too.
      *
