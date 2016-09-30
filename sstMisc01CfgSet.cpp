@@ -74,30 +74,34 @@ int sstMisc01CfgSetIntCls::FindSetSettings (int           iKey,
   return iRet;
 }
 //=============================================================================
+// Return Cfg Rowtype Error, Empty, Comment, Section or Setting
+// Section will be stored inside
+//=============================================================================
 int sstMisc01CfgSetIntCls::GetCfgIniRowType(int                    iKey,
                                    std::string           *sTmpFilRow,
-                                   sstCfgFilRowTyp_enum *eCfgSetTyp)
+                                   sstMisc01CfgFilRowTyp_enum *eCfgSetTyp)
+//-----------------------------------------------------------------------------
 {
   std::string           sTmpSection;
   sstStr01Cls oRowStr;
   int iRet  = 0;
   int iStat = 0;
-//-----------------------------------------------------------------------------
-  *eCfgSetTyp = eCfgRowSetError;
+  //-----------------------------------------------------------------------------
+  *eCfgSetTyp = esstMisc01CfgRowSetError;
 
   if ( iKey != 0) return -1;
 
   // iStat = Str1Cpy( 0, &this->sFilRow, sTmpFilRow->Txt);
   if (sTmpFilRow->length() <= 0)
   {
-    *eCfgSetTyp = eCfgRowSetEmpty;
+    *eCfgSetTyp = esstMisc01CfgRowSetEmpty;
     return 0;
   }
 
   // Find comment >;
   if (sTmpFilRow->at(0) == 59)  // 59 = ";"
   {
-    *eCfgSetTyp = eCfgRowSetComment;
+    *eCfgSetTyp = esstMisc01CfgRowSetComment;
     return 0;
   }
 
@@ -109,12 +113,12 @@ int sstMisc01CfgSetIntCls::GetCfgIniRowType(int                    iKey,
     oRowStr.GetNextBrakeInfo(0,sTmpFilRow,&sTmpSection);
     strncpy( this->cSection, sTmpSection.c_str(), dSST_CFG_SECTION_TXTLEN);
 
-    *eCfgSetTyp = eCfgRowSetSection;
+    *eCfgSetTyp = esstMisc01CfgRowSetSection;
     return 0;
   }
 
   // All other are Config Settings rows
-  *eCfgSetTyp = eCfgRowSetSetting;
+  *eCfgSetTyp = esstMisc01CfgRowSetSetting;
 
   // Fatal Errors goes to an assert
   if (iRet < 0)

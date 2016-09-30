@@ -384,16 +384,16 @@ class sstMisc01AscFilIntCls
      FILE *Hdl;            /**< Dateihandle         */
      long  Siz;            /**< Dateigröße Bytes    */
 };
-//==============================================================================
-enum _sstCfgFilRowTyp_enum
-{ eCfgRowSetEmpty,     /**< Empty Row         */
-  eCfgRowSetComment,   /**< Comment Row       */
-  eCfgRowSetSection,   /**< Section Row       */
-  eCfgRowSetSetting,   /**< Parameter Row     */
-  eCfgRowSetUnknown,   /**< Unknown Row       */
-  eCfgRowSetError,     /**< Error   Row       */
-     };
-typedef enum _sstCfgFilRowTyp_enum sstCfgFilRowTyp_enum;
+////==============================================================================
+//enum _sstCfgFilRowTyp_enum
+//{ eCfgRowSetEmpty,     /**< Empty Row         */
+//  eCfgRowSetComment,   /**< Comment Row       */
+//  eCfgRowSetSection,   /**< Section Row       */
+//  eCfgRowSetSetting,   /**< Parameter Row     */
+//  eCfgRowSetUnknown,   /**< Unknown Row       */
+//  eCfgRowSetError,     /**< Error   Row       */
+//     };
+//typedef enum _sstCfgFilRowTyp_enum sstCfgFilRowTyp_enum;
 
 #define dSST_CFG_SECTION_TXTLEN   10  /**< Fix Lenght of config section @ingroup sstMisc01IntLib */
 #define dSST_CFG_PARAMETER_TXTLEN   10  /**< Fix Lenght of config parameter @ingroup sstMisc01IntLib */
@@ -420,11 +420,15 @@ class sstMisc01CfgSetIntCls
      sstMisc01CfgSetIntCls();   // Constructor
 
      /**
-     * @brief Find row type from Config Ini Row
+     * @brief // Find row type of given Config Row
+     * iStat = oCfgSet.GetCfgIniRowTyp( iKey, &oCfgFilRow, &eCfgType);
      *
-     * @param iKey       [in]  For the moment 0
-     * @param sFilRow    [in]  set file row to class
-     * @param eCfgSetTyp [out] Setting Type of fil row
+     * Return Cfg Rowtype Error, Empty, Comment, Section or Setting
+     * Section will be stored inside
+     *
+     * @param iKey        [in]  For the moment 0
+     * @param sCfgFilRow  [in]  set file row
+     * @param eCfgSetTyp  [out] return Cfg row Type of fil row
      *
      * @return Errorstate
      *
@@ -432,7 +436,7 @@ class sstMisc01CfgSetIntCls
      * @retval   < 0: Unspecified Error
      */
      // ----------------------------------------------------------------------------
-    int GetCfgIniRowType(int iKey, std::string *sFilRow, sstCfgFilRowTyp_enum *eCfgSetTyp);
+    int GetCfgIniRowType(int iKey, std::string *sCfgFilRow, sstMisc01CfgFilRowTyp_enum *eCfgSetTyp);
      //==============================================================================
      /**
      * @brief Find settings values in ini file row and set into cfg object

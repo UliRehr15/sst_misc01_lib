@@ -176,6 +176,66 @@ Param3=333
 
   iStat = oAscFil.fcloseFil(0);
 
+  // Open existing config file and test contents
+  iStat = oAscFil.fopenRd(0,(char*)"CfgFileTest.cfg");
+  sstMisc01CfgSetCls oCfgSet;
+  sstMisc01CfgFilRowTyp_enum eCfgType;
+  std::string oResultStr1;
+  std::string oResultStr2;
+  std::string oErrStr;
+
+  iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
+  oCfgSet.GetCfgIniRowType(0,&oAscRow, &eCfgType);
+  assert (eCfgType == esstMisc01CfgRowSetEmpty);
+  assert (oAscRow.compare("") == 0);
+
+  iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
+  oCfgSet.GetCfgIniRowType(0,&oAscRow, &eCfgType);
+  assert (eCfgType == esstMisc01CfgRowSetSection);
+  assert (oAscRow.compare("[Basics]") == 0);
+  oResultStr1 = oCfgSet.GetSection();
+  assert (oResultStr1.compare("[Basics]") == 0);
+
+  iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
+  assert (oAscRow.compare("Param2=AAA") == 0);
+  oCfgSet.GetCfgIniRowType(0,&oAscRow, &eCfgType);
+  assert (eCfgType == esstMisc01CfgRowSetSetting);
+  // read parameter and value from cfg file row to cfgset object
+  if (eCfgType == esstMisc01CfgRowSetSetting)
+    iStat = oCfgSet.FindSetSettings(0,&oAscRow,&oErrStr);
+  oResultStr1 = oCfgSet.GetParameter();
+  oResultStr2 = oCfgSet.GetValue();
+  assert (oResultStr1.compare("Param2") == 0);
+  assert (oResultStr2.compare("AAA") == 0);
+
+  iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
+  oCfgSet.GetCfgIniRowType(0,&oAscRow, &eCfgType);
+  assert (eCfgType == esstMisc01CfgRowSetEmpty);
+  assert (oAscRow.compare("") == 0);
+
+  iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
+  oCfgSet.GetCfgIniRowType(0,&oAscRow, &eCfgType);
+  assert (eCfgType == esstMisc01CfgRowSetSection);
+  assert (oAscRow.compare("[Settings]") == 0);
+
+  iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
+  oCfgSet.GetCfgIniRowType(0,&oAscRow, &eCfgType);
+  assert (eCfgType == esstMisc01CfgRowSetSetting);
+  assert (oAscRow.compare("Param1=10.0") == 0);
+
+  iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
+  oCfgSet.GetCfgIniRowType(0,&oAscRow, &eCfgType);
+  assert (eCfgType == esstMisc01CfgRowSetSetting);
+  assert (oAscRow.compare("Param3=333") == 0);
+
+  iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
+  assert (iStat = -1);  // End of file
+
+  iStat = oAscFil.fcloseFil(0);
+
+
+
+
   return iStat;
 }
 //=============================================================================

@@ -214,6 +214,31 @@ sstMisc01CfgSetCls::~sstMisc01CfgSetCls()
 {
   delete (this->poInternObject);
 }
+//==============================================================================
+int sstMisc01CfgSetCls::GetCfgIniRowType(int iKey, std::string *sFilRow, sstMisc01CfgFilRowTyp_enum *eCfgSetTyp)
+{
+  return this->poInternObject->GetCfgIniRowType( iKey, sFilRow, eCfgSetTyp);
+}
+//=============================================================================
+char* sstMisc01CfgSetCls::GetSection()
+{
+  return this->poInternObject->GetSection();
+}
+//=============================================================================
+char* sstMisc01CfgSetCls::GetParameter()
+{
+  return this->poInternObject->GetParameter();
+}
+//=============================================================================
+char* sstMisc01CfgSetCls::GetValue()
+{
+  return this->poInternObject->GetValue();
+}
+//=============================================================================
+int sstMisc01CfgSetCls::FindSetSettings(int iKey, std::string *oFilRowStr, std::string *oErrStr )
+{
+  return this->poInternObject->FindSetSettings( iKey, oFilRowStr, oErrStr);
+}
 //=============================================================================
 sstMisc01PrtMsgCls::sstMisc01PrtMsgCls()
 {

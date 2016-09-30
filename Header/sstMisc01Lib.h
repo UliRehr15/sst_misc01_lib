@@ -411,6 +411,33 @@ class sstMisc01AscFilCls
 };
 //==============================================================================
 /**
+* @brief Definition Enum Config file row type
+*
+* For example: <BR>
+* Comment row:   ; xxx  <BR>
+* Section row:   [xxx]  <BR>
+* Parameter row: xx=yy  <BR>
+*
+* Changed: 10.05.16  Re.
+*
+* @ingroup sstMisc01Lib
+*
+* @author Re.
+*
+* @date 10.05.16
+*/
+// ----------------------------------------------------------------------------
+enum _sstMisc01CfgFilRowTyp_enum
+{ esstMisc01CfgRowSetEmpty,     /**< Empty Row         */
+  esstMisc01CfgRowSetComment,   /**< Comment Row       */
+  esstMisc01CfgRowSetSection,   /**< Section Row       */
+  esstMisc01CfgRowSetSetting,   /**< Parameter Row     */
+  esstMisc01CfgRowSetUnknown,   /**< Unknown Row       */
+  esstMisc01CfgRowSetError,     /**< Error   Row       */
+     };
+typedef enum _sstMisc01CfgFilRowTyp_enum sstMisc01CfgFilRowTyp_enum;
+//==============================================================================
+/**
 * @brief sst Lib Config Set Class
 *
 * More Comment
@@ -430,6 +457,26 @@ class sstMisc01CfgSetCls
   sstMisc01CfgSetCls();    // Constructor
   ~sstMisc01CfgSetCls();   // Destructor
 
+  //==============================================================================
+  /**
+  * @brief // Find row type of given Config Row <BR>
+  * iStat = oCfgSet.GetCfgIniRowTyp( iKey, &oCfgFilRow, &eCfgType);
+  *
+  * Return Cfg Rowtype Error, Empty, Comment, Section or Setting. <BR>
+  * Section will be stored inside. <BR>
+  *
+  * @param iKey        [in]  For the moment 0
+  * @param sCfgFilRow  [in]  set file row
+  * @param eCfgSetTyp  [out] return Cfg row Type of fil row
+  *
+  * @return Errorstate
+  *
+  * @retval   = 0: OK
+  * @retval   < 0: Unspecified Error
+  */
+  // ----------------------------------------------------------------------------
+
+  int GetCfgIniRowType(int iKey, std::string *sCfgFilRow, sstMisc01CfgFilRowTyp_enum *eCfgSetTyp);
      //==============================================================================
      /**
      * @brief Find settings values in ini file row and set into cfg object
