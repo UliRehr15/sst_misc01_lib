@@ -55,8 +55,11 @@ int main (int argc, char *argv [])
 int Test_AscFile (int iKey) // v  -> For the moment 0
 //-----------------------------------------------------------------------------
 {
-  sstMisc01AscRowCls oAscRow;
-  sstMisc01AscFilCls oAscFil;
+  sstMisc01AscRowCls oAscRow1;
+  sstMisc01AscFilCls oAscFil1;
+  sstMisc01AscFilCls oAscFil2;
+  std::string oFilNam1 = "Test.asc";
+  std::string oFilNam2 = "TestCompare.asc";
   std::string oStr;
 
   int iRet  = 0;
@@ -64,34 +67,48 @@ int Test_AscFile (int iKey) // v  -> For the moment 0
   //-----------------------------------------------------------------------------
   if ( iKey != 0) return -1;
 
-  iStat = oAscFil.fopenWr(0,(char*)"Test.asc");
+  iStat = oAscFil1.fopenWr(0,(char*) oFilNam1.c_str());
   assert (iStat >= 0);
 
   oStr = "Row1: Test";
-  iStat = oAscRow.Str1_toLine(0, &oStr);
+  iStat = oAscRow1.Str1_toLine(0, &oStr);
   assert (iStat >= 0);
 
-  iStat = oAscFil.wr_line(0,&oAscRow);
+  iStat = oAscFil1.wr_line(0,&oAscRow1);
   assert (iStat >= 0);
 
-  iStat = oAscFil.Wr_String(0,"TestString");
+  iStat = oAscFil1.Wr_String(0,"TestString");
   assert (iStat >= 0);
 
-  iStat = oAscFil.fcloseFil(0);
+  iStat = oAscFil1.fcloseFil(0);
   assert (iStat >= 0);
 
-  iStat = oAscFil.fopenRd(0, (char*)"Test.asc");
+  iStat = oAscFil2.fopenWr(0,(char*) oFilNam2.c_str());
+  assert (iStat >= 0);
+
+  iStat = oAscFil2.Wr_String(0,"Row1: Test");
+  assert (iStat >= 0);
+  iStat = oAscFil2.Wr_String(0,"TestString");
+  assert (iStat >= 0);
+
+  iStat = oAscFil2.fcloseFil(0);
+  assert (iStat >= 0);
+
+  unsigned long ulRowNo = 0;
+  iStat = sstMisc01FileCompare(0,oFilNam1,oFilNam2,&ulRowNo);
+
+  iStat = oAscFil1.fopenRd(0, (char*)"Test.asc");
   assert (iStat >= 0);
 
   oStr.clear();
-  iStat = oAscFil.Rd_StrDS1( 0, &oStr);
+  iStat = oAscFil1.Rd_StrDS1( 0, &oStr);
   assert(oStr == "Row1: Test");
 
   oStr.clear();
-  iStat = oAscFil.Rd_StrDS1( 0, &oStr);
+  iStat = oAscFil1.Rd_StrDS1( 0, &oStr);
   assert(oStr == "TestString");
 
-  iStat = oAscFil.fcloseFil(0);
+  iStat = oAscFil1.fcloseFil(0);
   assert (iStat >= 0);
 
   // Fatal Errors goes to an assert

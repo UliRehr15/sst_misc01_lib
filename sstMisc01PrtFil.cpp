@@ -161,7 +161,7 @@ int sstMisc01PrtFilIntCls::SST_PrtWrtZeil ( int               Key,
   iRet = 0;
 
   // strcpy( CLine.Txt, "Fehlerzeile: ");
-  oTmpStr = "Fehlerzeile: ";
+  oTmpStr = "Row ";
 
   // Int4 in einen String konvertieren und in Zeilenbereich kopieren
   iStat = oCsvStr.Csv_UInt4_2String( 0, ulZeil, &oTmpStr);

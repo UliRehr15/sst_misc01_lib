@@ -135,16 +135,19 @@ int sstMisc01CfgSetIntCls::GetCfgIniRowType(int                    iKey,
 //=============================================================================
 void sstMisc01CfgSetIntCls::SetSection(std::string oTmpSection)
 {
+  if (oTmpSection.length() >= dSST_CFG_SECTION_TXTLEN) assert (0);
   strncpy( this->cSection, oTmpSection.c_str(), dSST_CFG_SECTION_TXTLEN);
 }
 //=============================================================================
 void sstMisc01CfgSetIntCls::SetParameter(std::string oTmpParameter)
 {
+  if (oTmpParameter.length() >= dSST_CFG_PARAMETER_TXTLEN) assert (0);
   strncpy( this->cParameter, oTmpParameter.c_str(), dSST_CFG_PARAMETER_TXTLEN);
 }
 //=============================================================================
 void sstMisc01CfgSetIntCls::SetValue(std::string oTmpValue)
 {
+  if (oTmpValue.length() >= dSST_CFG_VALUE_TXTLEN) assert (0);
   strncpy( this->cValue, oTmpValue.c_str(), dSST_CFG_VALUE_TXTLEN);
 }
 //=============================================================================

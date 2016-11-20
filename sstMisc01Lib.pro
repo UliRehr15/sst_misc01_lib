@@ -10,9 +10,7 @@ CONFIG    += staticlib
 
 INCLUDEPATH += ./Header
 INCLUDEPATH += ../sst_str01_lib/Header
-# INCLUDEPATH += ../sst_rec04_lib/Header
 
-# SOURCES		+= str1_lib1.cpp
 HEADERS		+= ./Header/sstMisc01Lib.h
 HEADERS		+= sstMisc01LibInt.h
 
@@ -25,7 +23,6 @@ SOURCES		+= sstMisc01Lib.cpp \
     sstMisc01PrtFil.cpp \
     sstMisc01PrtMsg.cpp \
     sstMisc01FilNam.cpp
-
 
 OTHER_FILES += README.md
 

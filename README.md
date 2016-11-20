@@ -29,4 +29,7 @@ Versions <BR>
 20160905: Vers. 1.12: Extend return error in Class sstAscFile. <BR>
 20160926: Vers. 1.13: New functions OpenAppend,WriteString for sstAscFile.  <BR>
 20160930: Vers. 1.14: Some improvments for config set class.  <BR>
+20161120: Vers. 1.15: Small improvements for class AscFil. <BR>
+                      Small improvements for class CfgSet. <BR>
+                      New function CompareAscFiles. <BR>
 

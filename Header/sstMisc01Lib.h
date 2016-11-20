@@ -1149,7 +1149,40 @@ class sstMisc01FilNamCls
   private:  // Private functions
     sstMisc01FilNamIntCls *poInternObject;   /**< Pointer to intern object */
 };
-//-----------------------------------------------------------------------------
+//==============================================================================
+/**
+* @brief // Compare two Asc files <BR>
+* iStat = sstMisc01FileCompare( iKey, oFilNam1, oFilNam2, *ulRowNo);
+*
+* More Comment
+*
+* Changed: 09.07.15  Re.
+*
+* @ingroup sstMisc01Lib
+*
+* @param iKey     [in] For the moment 0
+* @param oFilNam1 [in] File Name 1
+* @param oFilNam2 [in] File Name 2 for comparing
+* @param ulRowNo  [out] Row number
+*
+* @return Errorstate
+*
+* @retval   =  0: Files are equal
+* @retval   = -1: Wrong Key
+* @retval   = -2: File 1 not found
+* @retval   = -3: File 2 not found
+* @retval   = -4: Row length not equal in RowNo
+* @retval   = -5: Row string not equal in RowNo
+* @retval   <  0: Unspecified Error
+*
+* @author Re.
+*
+* @date 09.07.15
+*/
+//------------------------------------------------------------------------------
+int sstMisc01FileCompare(int iKey, const std::string oFilNam1, const std::string oFilNam2,
+                         unsigned long *ulRowNo);
+//==============================================================================
 
 
 #endif

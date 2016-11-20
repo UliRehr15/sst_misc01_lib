@@ -137,7 +137,8 @@ class sstMisc01AscRowIntCls
 class sstMisc01AscFilIntCls
 {
   public:   // Öffentliche Funktionen
-     sstMisc01AscFilIntCls();  // Konstruktor
+  sstMisc01AscFilIntCls();  // Konstruktor
+  ~sstMisc01AscFilIntCls();  // Konstruktor
      //==============================================================================
      /**
      * @brief Open Asc File for only reading
@@ -368,7 +369,6 @@ class sstMisc01AscFilIntCls
      */
      // ----------------------------------------------------------------------------
      long GetFileSize();
-     // ----------------------------------------------------------------------------
      //==============================================================================
      /**
      * @brief GetFileName
@@ -377,27 +377,18 @@ class sstMisc01AscFilIntCls
      */
      // ----------------------------------------------------------------------------
      char* GetFileName();
-     // ----------------------------------------------------------------------------
+     //==============================================================================
 
   private:  // Private Funktionen
      char  Nam[MAX_PFAD];  /**< Dateiname mit Pfad  */
      FILE *Hdl;            /**< Dateihandle         */
      long  Siz;            /**< Dateigröße Bytes    */
 };
-////==============================================================================
-//enum _sstCfgFilRowTyp_enum
-//{ eCfgRowSetEmpty,     /**< Empty Row         */
-//  eCfgRowSetComment,   /**< Comment Row       */
-//  eCfgRowSetSection,   /**< Section Row       */
-//  eCfgRowSetSetting,   /**< Parameter Row     */
-//  eCfgRowSetUnknown,   /**< Unknown Row       */
-//  eCfgRowSetError,     /**< Error   Row       */
-//     };
-//typedef enum _sstCfgFilRowTyp_enum sstCfgFilRowTyp_enum;
+//==============================================================================
 
-#define dSST_CFG_SECTION_TXTLEN   10  /**< Fix Lenght of config section @ingroup sstMisc01IntLib */
-#define dSST_CFG_PARAMETER_TXTLEN   10  /**< Fix Lenght of config parameter @ingroup sstMisc01IntLib */
-#define dSST_CFG_VALUE_TXTLEN   10  /**< Fix Lenght of config value @ingroup sstMisc01IntLib */
+#define dSST_CFG_SECTION_TXTLEN   40  /**< Fix Lenght of config section @ingroup sstMisc01IntLib */
+#define dSST_CFG_PARAMETER_TXTLEN   40  /**< Fix Lenght of config parameter @ingroup sstMisc01IntLib */
+#define dSST_CFG_VALUE_TXTLEN   100  /**< Fix Lenght of config value @ingroup sstMisc01IntLib */
 
 //==============================================================================
 /**

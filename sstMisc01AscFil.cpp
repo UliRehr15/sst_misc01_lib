@@ -34,6 +34,18 @@ sstMisc01AscFilIntCls::sstMisc01AscFilIntCls()
   this->Siz = 0;                 // Dateigröße
 }
 //=============================================================================
+sstMisc01AscFilIntCls::~sstMisc01AscFilIntCls()
+//------------------------------------------------------------------------------
+{
+  strcpy( this->Nam,"\0");
+  this->Siz = 0;                 // Dateigröße
+  if (this->Hdl != NULL)
+  {
+    this->fcloseFil(0);
+    this->Hdl = NULL;
+  }
+}
+//=============================================================================
 int sstMisc01AscFilIntCls::fopenRd ( int             iKey,
                              const char     *FilNam)
 //------------------------------------------------------------------------------
@@ -156,7 +168,7 @@ int sstMisc01AscFilIntCls::fcloseFil ( int iKey)
 //.............................................................................
   if (iKey != 0) return -1;
 
-  if ( this->Hdl != 0)
+  if ( this->Hdl != NULL)
   {
     iStat = fclose( this->Hdl);
     this->Hdl = NULL;
@@ -164,8 +176,9 @@ int sstMisc01AscFilIntCls::fcloseFil ( int iKey)
   }
   else
   {
-    iRet = -1;
+    iRet = -2;
   }
+
   return iRet;
 }
 //=============================================================================
@@ -446,5 +459,59 @@ long sstMisc01AscFilIntCls::GetFileSize()
 char* sstMisc01AscFilIntCls::GetFileName()
 {
   return this->Nam;
+}
+//=============================================================================
+int sstMisc01FileCompare(int iKey, const std::string oFilNam1, const std::string oFilNam2,
+                         unsigned long *ulRowNo)
+{
+  if (iKey != 0) return -1;
+  sstMisc01AscFilCls oFil1;
+  sstMisc01AscFilCls oFil2;
+  int iStat = 0;
+  iStat = oFil1.fopenRd(0,(char*) oFilNam1.c_str());
+  if (iStat < 0)
+  {
+    return -2;
+  }
+  iStat = oFil2.fopenRd(0,(char*) oFilNam2.c_str());
+  if (iStat < 0)
+  {
+    oFil1.fcloseFil(0);
+    return -3;
+  }
+  std::string oStr1;
+  std::string oStr2;
+  int iStat1 = 0;
+  int iStat2 = 0;
+
+  *ulRowNo = 0;
+
+  iStat1 = oFil1.Rd_StrDS1(0,&oStr1);
+  iStat2 = oFil2.Rd_StrDS1(0,&oStr2);
+  while (iStat1 >= 0 && iStat2 >= 0)
+  {
+    *ulRowNo = *ulRowNo + 1;
+    std::size_t tSize = oStr1.compare(oStr2);
+    if (tSize != 0)
+    {
+      oFil1.fcloseFil(0);
+      oFil2.fcloseFil(0);
+      return -5;
+    }
+    iStat1 = oFil1.Rd_StrDS1(0,&oStr1);
+    iStat2 = oFil2.Rd_StrDS1(0,&oStr2);
+    if (iStat1 != iStat2)
+    {
+      *ulRowNo = *ulRowNo + 1;
+      oFil1.fcloseFil(0);
+      oFil2.fcloseFil(0);
+      return -4;
+    }
+  }
+  oFil1.fcloseFil(0);
+  oFil2.fcloseFil(0);
+
+  return 0;
+
 }
 //=============================================================================
