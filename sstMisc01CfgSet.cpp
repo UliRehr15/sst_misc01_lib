@@ -58,6 +58,15 @@ int sstMisc01CfgSetIntCls::FindSetSettings (int           iKey,
 
   *sErrTxt = oFrmtTyp.GetErrorString();
 
+  if (sTmpParameter.length() > dSST_CFG_PARAMETER_TXTLEN)
+  {
+    assert(0);
+  }
+  if (sTmpValue.length() > dSST_CFG_VALUE_TXTLEN)
+  {
+    assert(0);
+  }
+
   strncpy(this->cParameter,sTmpParameter.c_str(),dSST_CFG_PARAMETER_TXTLEN);
   strncpy(this->cValue,sTmpValue.c_str(),dSST_CFG_VALUE_TXTLEN);
 

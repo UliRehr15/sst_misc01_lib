@@ -32,4 +32,5 @@ Versions <BR>
 20161120: Vers. 1.15: Small improvements for class AscFil. <BR>
                       Small improvements for class CfgSet. <BR>
                       New function CompareAscFiles. <BR>
+20161126: Vers. 1.16: Small improvements for class CfgSet.     <BR>
 

@@ -386,9 +386,9 @@ class sstMisc01AscFilIntCls
 };
 //==============================================================================
 
-#define dSST_CFG_SECTION_TXTLEN   40  /**< Fix Lenght of config section @ingroup sstMisc01IntLib */
-#define dSST_CFG_PARAMETER_TXTLEN   40  /**< Fix Lenght of config parameter @ingroup sstMisc01IntLib */
-#define dSST_CFG_VALUE_TXTLEN   100  /**< Fix Lenght of config value @ingroup sstMisc01IntLib */
+#define dSST_CFG_SECTION_TXTLEN   20  /**< Fix Lenght of config section @ingroup sstMisc01IntLib */
+#define dSST_CFG_PARAMETER_TXTLEN   20  /**< Fix Lenght of config parameter @ingroup sstMisc01IntLib */
+#define dSST_CFG_VALUE_TXTLEN   200  /**< Fix Lenght of config value @ingroup sstMisc01IntLib */
 
 //==============================================================================
 /**
