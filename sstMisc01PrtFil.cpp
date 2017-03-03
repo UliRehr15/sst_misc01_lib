@@ -33,6 +33,13 @@ sstMisc01PrtFilIntCls::sstMisc01PrtFilIntCls()
 {
 }
 //=============================================================================
+sstMisc01PrtFilIntCls::~sstMisc01PrtFilIntCls()
+{
+  // if not already closed by function PrtZu, close class now
+  this->SST_PrtWrtChar ( 0, this->Fil.GetFileName(), (char*)"Protocolfile closed: ");
+  this->Fil.fcloseFil( 0);
+}
+//=============================================================================
 int sstMisc01PrtFilIntCls::SST_PrtAuf ( int          Key,
                                char        *FilNam)
 //.............................................................................

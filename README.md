@@ -33,4 +33,5 @@ Versions <BR>
                       Small improvements for class CfgSet. <BR>
                       New function CompareAscFiles. <BR>
 20161126: Vers. 1.16: Small improvements for class CfgSet.     <BR>
+20170303: Vers. 1.17: Small improvement in class PrtFilCls.     <BR>
 

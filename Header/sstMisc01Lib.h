@@ -1149,6 +1149,8 @@ class sstMisc01FilNamCls
   private:  // Private functions
     sstMisc01FilNamIntCls *poInternObject;   /**< Pointer to intern object */
 };
+//-----------------------------------------------------------------------------
+
 //==============================================================================
 /**
 * @brief // Compare two Asc files <BR>
