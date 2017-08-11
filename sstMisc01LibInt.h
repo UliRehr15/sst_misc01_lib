@@ -783,7 +783,7 @@ class sstMisc01PrtFilIntCls
 {
   public:   // Public functions
      sstMisc01PrtFilIntCls();  // Constructor
-     ~sstMisc01PrtFilIntCls();  // Destructor
+    //~sstTestBaseCls();  // Destructor
      //=============================================================================
      /**
      * @brief // Open Protocol <BR>

@@ -33,7 +33,7 @@
 
 // Defines ---------------------------------------------------------------------
 
-#define dCASC2_TEXTLEN    300  /**< Fix Lenght of Misc01 Asc file row    @ingroup sstMisc01Lib */
+#define dCASC2_TEXTLEN    1000  /**< Fix Lenght of Misc01 Asc file row    @ingroup sstMisc01Lib */
 #define MAX_PFAD          260  /**< Misc01 maximal path+filename length  @ingroup sstMisc01Lib */
 
 
@@ -1069,10 +1069,10 @@ class sstMisc01FilNamCls
      * @brief // remove given ending from filename <BR>
      * iStat = oSstFilNam.RemoveExtension(iKey, FilNamEnding, FilNamWith, FilNamWithout);
      *
-     * @param iKey            [in] For the moment 0
-     * @param oFilNamEnding   [in]
-     * @param oFilNamWith     [in]
-     * @param poFilNamWithout [out]
+     * @param iKey            [in]   For the moment 0
+     * @param oFilNamEnding   [in]   for exampel dxf without dot
+     * @param oFilNamWith     [in]   for exampel test.dxf
+     * @param poFilNamWithout [out]  file name for example -test-
      *
      * @return Errorstate
      *
@@ -1149,8 +1149,6 @@ class sstMisc01FilNamCls
   private:  // Private functions
     sstMisc01FilNamIntCls *poInternObject;   /**< Pointer to intern object */
 };
-//-----------------------------------------------------------------------------
-
 //==============================================================================
 /**
 * @brief // Compare two Asc files <BR>

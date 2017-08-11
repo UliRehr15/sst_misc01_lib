@@ -8,7 +8,7 @@ Structure of coding projects should be:
 .. [libs] <BR>
    [sst_str01_lib]<BR>
    [sst_misc01_lib]<BR>
-   [Doxygen_ouput]<BR>
+   [Doxygen_output]<BR>
 
 December 2015, Hanover, Germany, Uli Rehr
 
@@ -34,4 +34,5 @@ Versions <BR>
                       New function CompareAscFiles. <BR>
 20161126: Vers. 1.16: Small improvements for class CfgSet.     <BR>
 20170303: Vers. 1.17: Small improvement in class PrtFilCls.     <BR>
+20170811: Vers. 1.18: small improvments. <BR>
 

@@ -34,3 +34,6 @@ SOURCES		+= sstMisc01LibTest.cpp
 
 TARGET	  	= sstMisc01LibTest
 
+# copy to deployment directory
+# DESTDIR     = ../../../../local_deploy
+

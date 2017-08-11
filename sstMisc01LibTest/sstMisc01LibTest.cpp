@@ -292,6 +292,21 @@ int Test_FileNameCls (int iKey)
   if ( iKey != 0) return -1;
 
   {
+    sstMisc01FilNamCls oFilNamCnvt;
+
+    std::string cAppDefFilNam="NisApp.def";
+    std::string cCsvExpFilNam;
+    // strncpy(cCsvExpFilNam,cAppDefFilNam,20);
+    oFilNamCnvt.RemoveExtension( 0, ".def", cAppDefFilNam, &cCsvExpFilNam);
+    // cCsvExpFilNam = cAppDefFilNam;
+    // strncat(cCsvExpFilNam,(char*)"_TD",20);  // Type Define
+    cCsvExpFilNam = cCsvExpFilNam + "_TD";
+    // strncat(cCsvExpFilNam,(char*)".csv",20);
+    cCsvExpFilNam = cCsvExpFilNam + ".csv";
+
+  }
+
+  {
     std::string FilNamEnding="dxf";
     std::string FilNamWith="test.dXf";
     std::string FilNamWithout;
@@ -351,4 +366,5 @@ int Test_FileNameCls (int iKey)
 
   return iStat;
 }
+//=============================================================================
 

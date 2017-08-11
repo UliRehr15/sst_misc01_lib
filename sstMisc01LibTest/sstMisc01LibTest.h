@@ -24,7 +24,6 @@ int Test_LogSystem (int iKey);
 int Test_ConfigSystem (int iKey);
 int Test_ProgressBar (int iKey);
 int Test_FileNameCls (int iKey);
-int Test_VarDefTyp_Functions (int iKey);
 
 
 #endif
