@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMisc01AscFil.cpp    16.12.15  Re.    16.12.15  Re.
+// sstMisc01AscFil.cpp    16.05.18  Re.    16.12.15  Re.
 //
 
 #include <stdio.h>
@@ -464,7 +464,8 @@ char* sstMisc01AscFilIntCls::GetFileName()
 int sstMisc01FileCompare(int iKey, const std::string oFilNam1, const std::string oFilNam2,
                          unsigned long *ulRowNo)
 {
-  if (iKey != 0) return -1;
+  if (iKey < 0 || iKey > 1) return -1;
+
   sstMisc01AscFilCls oFil1;
   sstMisc01AscFilCls oFil2;
   int iStat = 0;
@@ -479,6 +480,14 @@ int sstMisc01FileCompare(int iKey, const std::string oFilNam1, const std::string
     oFil1.fcloseFil(0);
     return -3;
   }
+  long lFilSize1 = oFil1.GetFileSize();
+  long lFilSize2 = oFil2.GetFileSize();
+  if (lFilSize1 != lFilSize2 && iKey != 1)
+  {
+    *ulRowNo = 0;
+    return -6;
+  }
+
   std::string oStr1;
   std::string oStr2;
   int iStat1 = 0;

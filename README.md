@@ -35,4 +35,5 @@ Versions <BR>
 20161126: Vers. 1.16: Small improvements for class CfgSet.     <BR>
 20170303: Vers. 1.17: Small improvement in class PrtFilCls.     <BR>
 20170811: Vers. 1.18: small improvments. <BR>
+20180516: Vers. 1.19: Add compare file size in function sstMisc01FileCompare. <BR>
 

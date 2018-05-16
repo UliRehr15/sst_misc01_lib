@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMisc01Lib.h   16.12.15  Re.   16.12.15  Re.
+// sstMisc01Lib.h   16.05.18  Re.   16.12.15  Re.
 //
 // Datastructures and Prototypes for system "sstMisc01Lib"
 //
@@ -1154,13 +1154,13 @@ class sstMisc01FilNamCls
 * @brief // Compare two Asc files <BR>
 * iStat = sstMisc01FileCompare( iKey, oFilNam1, oFilNam2, *ulRowNo);
 *
-* More Comment
+* iKey = 1: Ignore Different files sizes and return first different row no. <BR>
 *
 * Changed: 09.07.15  Re.
 *
 * @ingroup sstMisc01Lib
 *
-* @param iKey     [in] For the moment 0
+* @param iKey     [in] 0 oder 1
 * @param oFilNam1 [in] File Name 1
 * @param oFilNam2 [in] File Name 2 for comparing
 * @param ulRowNo  [out] Row number
@@ -1173,6 +1173,7 @@ class sstMisc01FilNamCls
 * @retval   = -3: File 2 not found
 * @retval   = -4: Row length not equal in RowNo
 * @retval   = -5: Row string not equal in RowNo
+* @retval   = -6: File Size not equal
 * @retval   <  0: Unspecified Error
 *
 * @author Re.
