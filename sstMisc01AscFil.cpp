@@ -327,7 +327,7 @@ int sstMisc01AscFilIntCls::wr_line ( int           iKey,
 //.............................................................................
   if (iKey < 0 || iKey > 1) return -1;
 
-  if (this->Hdl <= NULL) return -2;
+  if (this->Hdl == NULL) return -2;
 
   if ( strlen( CLine->Txt) <= 0 && iKey != 1) return -3;
   iRet = 0;
@@ -345,7 +345,7 @@ int sstMisc01AscFilIntCls::wr_txt ( int    iKey,
 //.............................................................................
   if (iKey != 0) return -1;
 
-  if (this->Hdl <= NULL) return -2;
+  if (this->Hdl == NULL) return -2;
 
   if ( strlen( Txt) <= 0) return -3;
   iRet = 0;

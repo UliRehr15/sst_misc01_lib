@@ -1,7 +1,7 @@
 # sst_misc01_lib
 sst Miscellaneous Lib 
 
-This library should be build with QT 5 and qt creator 3.0.
+This Library is created with QtCreator 4.5.2 and gcc 7.3.0.
 
 Structure of coding projects should be:
 
@@ -36,4 +36,5 @@ Versions <BR>
 20170303: Vers. 1.17: Small improvement in class PrtFilCls.     <BR>
 20170811: Vers. 1.18: small improvments. <BR>
 20180516: Vers. 1.19: Add compare file size in function sstMisc01FileCompare. <BR>
+20180914: Vers. 1.20: Update to QtCreator 4.5.2 and gcc 7.3.0. <BR>
 
