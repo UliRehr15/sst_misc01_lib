@@ -14,6 +14,7 @@
 // sstMisc01FilNam.cpp    02.03.16  Re.    02.03.16  Re.
 //
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,41 +45,29 @@ int sstMisc01FilNamIntCls::RemoveExtension ( int          iKey,
 {
   std::string oTmpDatEnd;
   std::string oTmpDatNamMit;
-
-  int istat;
 //-----------------------------------------------------------------------------
   if (iKey != 0) return -1;
-  istat = 0;
-  DatNamOhn->clear();
 
   oTmpDatEnd    = DatEnd;
   oTmpDatNamMit = DatNamMit;
+  std::size_t oDatEndLen = oTmpDatEnd.length();
+  std::size_t oDatNamMitLen = oTmpDatNamMit.length();
+  if (oDatEndLen >= oDatNamMitLen) return -2;
 
-
-
-
-// std::string str = "Hello World";
+  // transform both strings to upper
   std::transform(oTmpDatEnd.begin(), oTmpDatEnd.end(),oTmpDatEnd.begin(), ::toupper);
   std::transform(oTmpDatNamMit.begin(), oTmpDatNamMit.end(),oTmpDatNamMit.begin(), ::toupper);
 
-
-  // TZ = NULL;
-
-  // gewählten Dateinamen auf den Stamm kürzen
-  // TLen = DatEnd->length();            // Länge der Datei-Endung berechnen
-  // TZ   = strstr (DatNamMit, DatEnd);  // Anfang der Datei-Endung finden
-  // unsigned int uiPos =  DatNamMit->find(*DatEnd);
   unsigned int uiPos =  oTmpDatNamMit.find(oTmpDatEnd);
-  if (uiPos > 0)
+  if (uiPos == (oDatNamMitLen - oDatEndLen))
   {
-    // memset(TZ,'\0',TLen);  // String -DatNamMit- nullen ab gefundener Adresse
-    *DatNamOhn = DatNamMit.substr(0,uiPos-1);
+    // end string is at end of datnamstring
+    DatNamOhn->clear();
+    *DatNamOhn = DatNamMit.substr(0,uiPos);
   }
+  else return -3;
 
-  // und in Ergebnis kopieren
-  // strcpy(DatNamOhn, DatNamMit);
-
-  return istat;
+  return 0;
 }
 //=============================================================================
 int sstMisc01FilNamIntCls::GetPntPos ( int           Key,
@@ -96,8 +85,8 @@ int sstMisc01FilNamIntCls::GetPntPos ( int           Key,
   // iStat = 0;
   *PktPos = 0;
 
-  // Länge des Dateinamen feststellen
-  // Dateiname darf nicht länger 8+4 sein
+  // LÃ¤nge des Dateinamen feststellen
+  // Dateiname darf nicht lÃ¤nger 8+4 sein
   // NamLen = strlen ( DatNam);
   NamLen = DatNam->length();
   if ( NamLen > MAX_PFAD-2 || NamLen <= 0)
@@ -123,7 +112,7 @@ int sstMisc01FilNamIntCls::GetPntPos ( int           Key,
   {
     // Zeichen Punkt gefunden
     iRet = 1;
-    // Der Stamm von DOS-Dateinamen darf nicht länger 8 Zeichen sein
+    // Der Stamm von DOS-Dateinamen darf nicht lÃ¤nger 8 Zeichen sein
     if ( *PktPos >= NamLen || *PktPos < 1)
     {
       *PktPos = 0;
@@ -193,7 +182,7 @@ int sstMisc01FilNamIntCls::ReplaceExtension ( int          iKey,
   }
   else if (iStat == 0)
   {
-    //  Endung anhängen
+    //  Endung anhÃ¤ngen
     // strcat ( FilNamReplaceExtension, FilNamSplitExtension);
     *FilNamReplaceExtension = *FilNamReplaceExtension + *FilNamSplitExtension;
   }
@@ -244,3 +233,4 @@ int sstMisc01FilNamIntCls::SplitExtension (int          iKey,
   return iRet;
 }
 //=============================================================================
+

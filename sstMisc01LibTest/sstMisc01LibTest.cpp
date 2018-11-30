@@ -294,16 +294,21 @@ int Test_FileNameCls (int iKey)
   {
     sstMisc01FilNamCls oFilNamCnvt;
 
-    std::string cAppDefFilNam="NisApp.def";
+    std::string cAppDefFilNam="NisApp.deff";
     std::string cCsvExpFilNam;
-    // strncpy(cCsvExpFilNam,cAppDefFilNam,20);
-    oFilNamCnvt.RemoveExtension( 0, ".def", cAppDefFilNam, &cCsvExpFilNam);
-    // cCsvExpFilNam = cAppDefFilNam;
-    // strncat(cCsvExpFilNam,(char*)"_TD",20);  // Type Define
-    cCsvExpFilNam = cCsvExpFilNam + "_TD";
-    // strncat(cCsvExpFilNam,(char*)".csv",20);
-    cCsvExpFilNam = cCsvExpFilNam + ".csv";
 
+    iStat = oFilNamCnvt.RemoveExtension( 0, ".deff", cAppDefFilNam, &cCsvExpFilNam);
+    assert(iStat == 0);
+
+    cCsvExpFilNam = cCsvExpFilNam + "_TD";
+    assert(cCsvExpFilNam == "NisApp_TD");
+
+    cCsvExpFilNam = cCsvExpFilNam + ".csv";
+    assert(cCsvExpFilNam == "NisApp_TD.csv");
+
+    cCsvExpFilNam.clear();
+    iStat = oFilNamCnvt.RemoveExtension( 0, ".def", cAppDefFilNam, &cCsvExpFilNam);
+    assert(iStat == -3);  // string not found at end of filnam
   }
 
   {
@@ -313,7 +318,7 @@ int Test_FileNameCls (int iKey)
     // remove given ending from filename
     iStat = oSstFilNam.RemoveExtension( 0, FilNamEnding, FilNamWith, &FilNamWithout);
     assert (iStat >= 0);
-    assert (FilNamWithout.compare("test") == 0);
+    assert (FilNamWithout.compare("test.") == 0);
   }
 
   {

@@ -1046,11 +1046,11 @@ class sstMisc01ConPrgBarCls
 };
 //==============================================================================
 /**
-* @brief sst File Name Class
+* @brief File Name Manager Class
 *
 * Should work also with lower/upper case file extension
 *
-* Changed: 01.03.16  Re.
+* Changed: 30.11.18  Re.
 *
 * @ingroup sstMisc01Lib
 *
@@ -1066,18 +1066,21 @@ class sstMisc01FilNamCls
     ~sstMisc01FilNamCls();  // Destructor
      //==============================================================================
      /**
-     * @brief // remove given ending from filename <BR>
+     * @brief // remove given extension from filename <BR>
      * iStat = oSstFilNam.RemoveExtension(iKey, FilNamEnding, FilNamWith, FilNamWithout);
      *
      * @param iKey            [in]   For the moment 0
-     * @param oFilNamEnding   [in]   for exampel dxf without dot
+     * @param oFilNamEnding   [in]   for exampel dxf with/without dot
      * @param oFilNamWith     [in]   for exampel test.dxf
      * @param poFilNamWithout [out]  file name for example -test-
      *
      * @return Errorstate
      *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
+     * @retval   =  0: OK
+     * @retval   = -1: Wrong Key
+     * @retval   = -2: Extension string too long
+     * @retval   = -3: Extension string not at end of file name string
+     * @retval   <  0: Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int RemoveExtension ( int   iKey,
@@ -1086,14 +1089,14 @@ class sstMisc01FilNamCls
                            std::string *poFilNamWithout);
      //==============================================================================
      /**
-     * @brief // Find point char position in filename (1-n) <BR>
+     * @brief // Find point char position in filename (1 to n) <BR>
      * iStat = oSstFilNam.GetPntPos ( iKey, &oFilNam, &uiPntPos);
      *
      * Search from file end <BR>
      *
      * @param iKey     [in] For the moment 0
      * @param oFilNam  [in]  Filename
-     * @param uiPntPos [out] Point Position in String (1-n)
+     * @param uiPntPos [out] Point Position in String (1 to n)
      *
      * @return Errorstate
      *

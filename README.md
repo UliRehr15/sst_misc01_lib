@@ -37,4 +37,5 @@ Versions <BR>
 20170811: Vers. 1.18: small improvments. <BR>
 20180516: Vers. 1.19: Add compare file size in function sstMisc01FileCompare. <BR>
 20180914: Vers. 1.20: Update to QtCreator 4.5.2 and gcc 7.3.0. <BR>
+20181130: Vers. 1.21: Small corrections in FileNameManagerClass RemoveExtention.  <BR>
 
