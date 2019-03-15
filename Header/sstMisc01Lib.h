@@ -1154,7 +1154,7 @@ class sstMisc01FilNamCls
 };
 //==============================================================================
 /**
-* @brief // Compare two Asc files <BR>
+* @brief // Compare two Asc files and return first diffent file row <BR>
 * iStat = sstMisc01FileCompare( iKey, oFilNam1, oFilNam2, *ulRowNo);
 *
 * iKey = 1: Ignore Different files sizes and return first different row no. <BR>

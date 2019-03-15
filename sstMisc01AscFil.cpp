@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMisc01AscFil.cpp    16.05.18  Re.    16.12.15  Re.
+// sstMisc01AscFil.cpp    12.03.19  Re.    16.12.15  Re.
 //
 
 #include <stdio.h>
@@ -517,6 +517,9 @@ int sstMisc01FileCompare(int iKey, const std::string oFilNam1, const std::string
       return -4;
     }
   }
+
+  *ulRowNo = 0;  // no different row found
+
   oFil1.fcloseFil(0);
   oFil2.fcloseFil(0);
 

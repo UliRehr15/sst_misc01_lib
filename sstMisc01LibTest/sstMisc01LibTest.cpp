@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMisc01LibTest.cpp    15.02.16  Re.    16.12.15  Re.
+// sstMisc01LibTest.cpp    12.03.19  Re.    16.12.15  Re.
 //
 
 #include <stdio.h>
@@ -33,6 +33,10 @@ int main (int argc, char *argv [])
   int iStat = 0;
 
   printf("Test Misc01Lib Start. \n");
+
+  // Test Frame for File Diff functions <BR>
+  iStat = Test_FileDiff ( 0);
+  assert (iStat >= 0);
 
   iStat = Test_FileNameCls ( 0);
   assert (iStat >= 0);
@@ -265,6 +269,8 @@ int Test_ProgressBar (int iKey) // v  -> For the moment 0
   //-----------------------------------------------------------------------------
   if ( iKey != 0) return -1;
 
+  printf("Test ProgressBar Functions Start. \n");
+
   // open progress bar on console with 10 calls per point
   iStat = oPrgBar.Open ( 0, (char*) "Reading Start", 10);
   assert(iStat == 0);
@@ -278,6 +284,8 @@ int Test_ProgressBar (int iKey) // v  -> For the moment 0
   // close progress bar on console
   iStat = oPrgBar.Close ( 0, (char*) "Reading Stop");
   assert(iStat == 0);
+
+  printf("Test ProgressBar Functions Finish OK. \n");
 
   return iStat;
 }
@@ -372,4 +380,66 @@ int Test_FileNameCls (int iKey)
   return iStat;
 }
 //=============================================================================
+int Test_FileDiff (int iKey)
+//-----------------------------------------------------------------------------
+{
 
+  sstMisc01AscRowCls oAscRow1;
+  sstMisc01AscFilCls oAscFil1;
+  sstMisc01AscFilCls oAscFil2;
+  std::string oFilNam1 = "Test.asc";
+  std::string oFilNam2 = "TestCompare.asc";
+  std::string oStr;
+
+  // int iRet  = 0;
+  int iStat = 0;
+  //-----------------------------------------------------------------------------
+  if ( iKey != 0) return -1;
+
+  printf("Test File Diff Functions Start. \n");
+
+  //-----------------------------------------------------------------------------
+
+  iStat = oAscFil1.fopenWr(0,(char*) oFilNam1.c_str());
+  iStat = oAscFil2.fopenWr(0,(char*) oFilNam2.c_str());
+
+  iStat = oAscFil1.Wr_String(0,"Row1: Test");
+  iStat = oAscFil1.Wr_String(0,"TestString");
+
+  iStat = oAscFil2.Wr_String(0,"Row1: Test");
+  iStat = oAscFil2.Wr_String(0,"TestString");
+
+  iStat = oAscFil1.fcloseFil(0);
+  iStat = oAscFil2.fcloseFil(0);
+
+  unsigned long ulRowNo = 0;
+  iStat = sstMisc01FileCompare(0,oFilNam1,oFilNam2,&ulRowNo);
+  assert (iStat == 0);
+  assert(ulRowNo == 0);  // Files are equal
+
+  //-----------------------------------------------------------------------------
+
+  iStat = oAscFil1.fopenWr(0,(char*) oFilNam1.c_str());
+  iStat = oAscFil2.fopenWr(0,(char*) oFilNam2.c_str());
+
+  iStat = oAscFil1.Wr_String(0,"Row1: Test");
+  iStat = oAscFil1.Wr_String(0,"TestString");
+
+  iStat = oAscFil2.Wr_String(0,"Row1: Test");
+  iStat = oAscFil2.Wr_String(0,"Testttring");  // different second row!
+
+  iStat = oAscFil1.fcloseFil(0);
+  iStat = oAscFil2.fcloseFil(0);
+
+  ulRowNo = 0;
+  iStat = sstMisc01FileCompare(0,oFilNam1,oFilNam2,&ulRowNo);
+  assert (iStat == -5);   // Files are not equal
+  assert (ulRowNo == 2);  // Second Row is first different
+
+  //-----------------------------------------------------------------------------
+
+  printf("Test File Diff Functions Finish OK. \n");
+
+  return 0;
+}
+//=============================================================================
