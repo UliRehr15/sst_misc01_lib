@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMisc01FilNam.cpp    02.03.16  Re.    02.03.16  Re.
+// sstMisc01FilNam.cpp    22.04.19  Re.    02.03.16  Re.
 //
 
 
@@ -58,7 +58,8 @@ int sstMisc01FilNamIntCls::RemoveExtension ( int          iKey,
   std::transform(oTmpDatEnd.begin(), oTmpDatEnd.end(),oTmpDatEnd.begin(), ::toupper);
   std::transform(oTmpDatNamMit.begin(), oTmpDatNamMit.end(),oTmpDatNamMit.begin(), ::toupper);
 
-  unsigned int uiPos =  oTmpDatNamMit.find(oTmpDatEnd);
+  // Find Substring from end of String
+  unsigned int uiPos =  oTmpDatNamMit.rfind(oTmpDatEnd);
   if (uiPos == (oDatNamMitLen - oDatEndLen))
   {
     // end string is at end of datnamstring

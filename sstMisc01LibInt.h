@@ -1032,14 +1032,17 @@ class sstMisc01FilNamIntCls
      * iStat = oSstFilNamInt.RemoveExtension(iKey, FilNamEnding, FilNamWith, &FilNamWithout);
      *
      * @param iKey           [in] For the moment 0
-     * @param oFilNamEnding  [in]
-     * @param oFilNamWith    [in]
-     * @param oFilNamWithout [out]
+     * @param oFilNamEnding  [in] File Extension like ".dxf"
+     * @param oFilNamWith    [in] Filename with extension
+     * @param oFilNamWithout [out] Filename without extension
      *
      * @return Errorstate
      *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
+     * @retval   =  0: OK
+     * @retval   <  0: Unspecified Error
+     * @retval   = -1: Wrong Key
+     * @retval   = -2: Given extension empty
+     * @retval   = -3: extension not found in filename
      */
      // ----------------------------------------------------------------------------
      int RemoveExtension ( int          iKey,

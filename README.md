@@ -39,4 +39,5 @@ Versions <BR>
 20180914: Vers. 1.20: Update to QtCreator 4.5.2 and gcc 7.3.0. <BR>
 20181130: Vers. 1.21: Small corrections in FileNameManagerClass RemoveExtention.  <BR>
 20190315: Vers. 1.22: Small Corrections in CompareAscFiles. <BR>
+20190422: Vers. 1.23: Small Corrections in handling file extensions. <BR>
 

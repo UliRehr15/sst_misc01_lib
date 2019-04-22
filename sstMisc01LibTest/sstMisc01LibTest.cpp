@@ -25,14 +25,19 @@
 
 #include "sstMisc01LibTest.h"
 
-
 //=============================================================================
-int main (int argc, char *argv [])
+// int main (int argc, char *argv [])
+int main ()
 //=============================================================================
 {
   int iStat = 0;
 
-  printf("Test Misc01Lib Start. \n");
+  printf("Test sstMisc01Lib Start. \n");
+
+  std::string oFileNameStr = "tttdxfdsss.dxf";
+  std::string oFileExtensionStr = "dxf";
+
+  std::size_t found = oFileNameStr.rfind(oFileExtensionStr);
 
   // Test Frame for File Diff functions <BR>
   iStat = Test_FileDiff ( 0);
@@ -53,7 +58,7 @@ int main (int argc, char *argv [])
   iStat = Test_ProgressBar ( 0);
   assert (iStat >= 0);
 
-  printf("Test Misc01Lib Success. \n");
+  printf("Test sstMisc01Lib Success. \n");
 }
 //=============================================================================
 int Test_AscFile (int iKey) // v  -> For the moment 0
@@ -302,17 +307,17 @@ int Test_FileNameCls (int iKey)
   {
     sstMisc01FilNamCls oFilNamCnvt;
 
-    std::string cAppDefFilNam="NisApp.deff";
+    std::string cAppDefFilNam="NisdeffApp.deff";
     std::string cCsvExpFilNam;
 
     iStat = oFilNamCnvt.RemoveExtension( 0, ".deff", cAppDefFilNam, &cCsvExpFilNam);
     assert(iStat == 0);
 
     cCsvExpFilNam = cCsvExpFilNam + "_TD";
-    assert(cCsvExpFilNam == "NisApp_TD");
+    assert(cCsvExpFilNam == "NisdeffApp_TD");
 
     cCsvExpFilNam = cCsvExpFilNam + ".csv";
-    assert(cCsvExpFilNam == "NisApp_TD.csv");
+    assert(cCsvExpFilNam == "NisdeffApp_TD.csv");
 
     cCsvExpFilNam.clear();
     iStat = oFilNamCnvt.RemoveExtension( 0, ".def", cAppDefFilNam, &cCsvExpFilNam);
@@ -321,12 +326,12 @@ int Test_FileNameCls (int iKey)
 
   {
     std::string FilNamEnding="dxf";
-    std::string FilNamWith="test.dXf";
+    std::string FilNamWith="testdxf.dXf";
     std::string FilNamWithout;
     // remove given ending from filename
     iStat = oSstFilNam.RemoveExtension( 0, FilNamEnding, FilNamWith, &FilNamWithout);
     assert (iStat >= 0);
-    assert (FilNamWithout.compare("test.") == 0);
+    assert (FilNamWithout.compare("testdxf.") == 0);
   }
 
   {
