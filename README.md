@@ -40,4 +40,5 @@ Versions <BR>
 20181130: Vers. 1.21: Small corrections in FileNameManagerClass RemoveExtention.  <BR>
 20190315: Vers. 1.22: Small Corrections in CompareAscFiles. <BR>
 20190422: Vers. 1.23: Small Corrections in handling file extensions. <BR>
+20200516: Vers. 1.24: Fix problem in protocol class. New class DateTime. <BR>
 

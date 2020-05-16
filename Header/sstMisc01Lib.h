@@ -47,6 +47,7 @@ class sstMisc01CfgFilIntCls;
 class sstMisc01PrtMsgIntCls;
 class sstMisc01PrtFilIntCls;
 class sstMisc01FilNamIntCls;
+class sstMisc01DateTimeIntCls;
 
 //==============================================================================
 /**
@@ -777,7 +778,7 @@ class sstMisc01PrtFilCls
                       char    *cFilNam);
      //=============================================================================
      /**
-     * @brief Write in Message in Protocolfile// Shortstory <BR>
+     * @brief // Write Message to Console / Protocolfile <BR>
      * iStat = oSstPrt.SST_PrtWrt ( iKey, *cMld);
      *
      * More Comment
@@ -801,13 +802,13 @@ class sstMisc01PrtFilCls
                       char         *cMld);
      //=============================================================================
      /**
-     * @brief // Write a Messageobject in Protocolfile <BR>
+     * @brief // Write a Messageobject to Console / Protocolfile <BR>
      * iStat = oPtr.SST_PrtWrtMld ( iKey, *oMld);
      *
      * Changed: 11.02.10  Re.
      *
-     * @param iKey: [in]      For the moment 0
-     * @param oMld: [in]      Message-Object
+     * @param iKey: [in]  For the moment 0
+     * @param oMld: [in]  Message-Object
      *
      * @return Errorstate
      *
@@ -823,7 +824,7 @@ class sstMisc01PrtFilCls
                          sstMisc01PrtMsgCls *oMld);
      //=============================================================================
      /**
-     * @brief // Write Message in Protocolfile with Row-Information <BR>
+     * @brief // Write Message to Console / Protocolfile with Row-Information <BR>
      * iStat = oSstPrt.SST_PrtWrtZeil ( iKey, lZeil, *cMld);
      *
      * Two Row-Information: First Row-Number, Second Text-Information
@@ -849,7 +850,7 @@ class sstMisc01PrtFilCls
                           char           *cMld);
      //=============================================================================
      /**
-     * @brief // Write Message to Protocolfile with Double-Value <BR>
+     * @brief // Write Message to Console / Protocolfile with Double-Value <BR>
      * iStat = oSstPrt.SST_PrtWrtDbl ( iKey, dDblVal, *cMld);
      *
      * Key=1: Write to Console
@@ -873,7 +874,7 @@ class sstMisc01PrtFilCls
                          char         *cMld);
      //=============================================================================
      /**
-     * @brief // Write Message to Protocolfile with Integer-Value <BR>
+     * @brief // Write Message to Console / Protocolfile with Unsigned long Int-Value <BR>
      * iStat = oSstPrt.SST_PrtWrtInt4 ( iKey, lVal, *cMld);
      *
      * Key=1: Write to Console
@@ -899,7 +900,7 @@ class sstMisc01PrtFilCls
                           char         *cMld);
      //=============================================================================
      /**
-     * @brief // Write Message to Protocolfile with char-Value <BR>
+     * @brief // Write Message to Console / Protocolfile with char-Value <BR>
      * iStat = oSstPrt.SST_PrtWrtChar ( iKey, *cVal, *cMld);
      *
      * Key = 1: Write to Console too
@@ -1150,8 +1151,52 @@ class sstMisc01FilNamCls
                          std::string *oFilNam);
 // ----------------------------------------------------------------------------
   private:  // Private functions
-    sstMisc01FilNamIntCls *poInternObject;   /**< Pointer to intern object */
+     sstMisc01FilNamIntCls *poInternObject;   /**< Pointer to intern object */
 };
+
+//==============================================================================
+/**
+* @brief Date and Time Handler Class
+*
+* General Date / Time Handler
+*
+* Changed: 16.05.20  Re.
+*
+* @ingroup sstMisc01Lib
+*
+* @author Re.
+*
+* @date 15.05.20
+*/
+// ----------------------------------------------------------------------------
+class sstMisc01DateTimeCls
+{
+  public:   // Public functions
+     sstMisc01DateTimeCls();   // Constructor
+     ~sstMisc01DateTimeCls();   // Destructor
+     //==============================================================================
+     /**
+     * @brief // Return actual Data as string <BR>
+     * oDateStr = oDateTimeHdl.getActualDate ();
+     *
+     * @return Date String
+     */
+     // ----------------------------------------------------------------------------
+         std::string getActualDate();
+         //==============================================================================
+         /**
+         * @brief // Return actual Time as string <BR>
+         * oDateStr = oDateTimeHdl.getActualTime ();
+         *
+         * @return Time String
+         */
+         // ----------------------------------------------------------------------------
+         std::string getActualTime();
+       private:  // Private functions
+         sstMisc01DateTimeIntCls *poInternObject;   /**< Pointer to intern object */
+     };
+//-----------------------------------------------------------------------------
+
 //==============================================================================
 /**
 * @brief // Compare two Asc files and return first diffent file row <BR>

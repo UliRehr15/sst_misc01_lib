@@ -15,7 +15,7 @@ CXX           = clang++
 DEFINES       = -DQT_QML_DEBUG
 CFLAGS        = -pipe -g -fPIC -Wall -W $(DEFINES)
 CXXFLAGS      = -pipe -g -fPIC -Wall -W $(DEFINES)
-INCPATH       = -I. -IHeader -I../sst_str01_lib/Header -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang
+INCPATH       = -I. -IHeader -I../sst_str01_lib/Header -I../sstMath01Lib/Header -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -55,7 +55,8 @@ SOURCES       = sstMisc01Lib.cpp \
 		sstMisc01PrgBar.cpp \
 		sstMisc01PrtFil.cpp \
 		sstMisc01PrtMsg.cpp \
-		sstMisc01FilNam.cpp 
+		sstMisc01FilNam.cpp \
+		sstMisc01DateTime.cpp 
 OBJECTS       = sstMisc01Lib.o \
 		sstMisc01AscFil.o \
 		sstMisc01AscRow.o \
@@ -64,7 +65,8 @@ OBJECTS       = sstMisc01Lib.o \
 		sstMisc01PrgBar.o \
 		sstMisc01PrtFil.o \
 		sstMisc01PrtMsg.o \
-		sstMisc01FilNam.o
+		sstMisc01FilNam.o \
+		sstMisc01DateTime.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -141,7 +143,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		sstMisc01PrgBar.cpp \
 		sstMisc01PrtFil.cpp \
 		sstMisc01PrtMsg.cpp \
-		sstMisc01FilNam.cpp
+		sstMisc01FilNam.cpp \
+		sstMisc01DateTime.cpp
 QMAKE_TARGET  = sst_misc01_lib_d
 DESTDIR       = ../libs/
 TARGET        = libsst_misc01_lib_d.a
@@ -379,6 +382,12 @@ sstMisc01PrtMsg.o: sstMisc01PrtMsg.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
 sstMisc01FilNam.o: sstMisc01FilNam.cpp Header/sstMisc01Lib.h \
 		sstMisc01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01FilNam.o sstMisc01FilNam.cpp
+
+sstMisc01DateTime.o: sstMisc01DateTime.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
+		../sstMath01Lib/Header/sstMath01Lib.h \
+		Header/sstMisc01Lib.h \
+		sstMisc01LibInt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMisc01DateTime.o sstMisc01DateTime.cpp
 
 ####### Install
 

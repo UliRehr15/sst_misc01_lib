@@ -34,6 +34,10 @@ int main ()
 
   printf("Test sstMisc01Lib Start. \n");
 
+  sstMisc01DateTimeCls oDateTimeHdl;
+  std::string oDateStr = oDateTimeHdl.getActualDate();
+  std::string oTimeStr = oDateTimeHdl.getActualTime();
+
   std::string oFileNameStr = "tttdxfdsss.dxf";
   std::string oFileExtensionStr = "dxf";
 
@@ -138,10 +142,32 @@ int Test_LogSystem (int iKey) // v  -> For the moment 0
   if ( iKey != 0) return -1;
 
   sstMisc01PrtFilCls oSstPrt;
+  sstMisc01PrtMsgCls oMsg;
 
   // Open Protocol
   iStat = oSstPrt.SST_PrtAuf ( 0, (char*) "TestPrt");
   assert(iStat == 0);
+
+  // Write Message to Console / Protocolfile
+  iStat = oSstPrt.SST_PrtWrt( 1, (char*)"Test");
+
+  // Write Message to Console / Protocolfile with char-Value
+  iStat = oSstPrt.SST_PrtWrtChar( 1, (char*)"Infotext", (char*)"Message: ");
+
+  // Write Message to Console
+  iStat = oSstPrt.SST_PrtWrtConsole( 1, (char*)"Consoletext");
+
+  // Write Message to Console / Protocolfile with Double-Value
+  iStat = oSstPrt.SST_PrtWrtDbl( 1, 22.22, (char*)"DoubleValue: ");
+
+  // Write Message to Console / Protocolfile with Unsigned long Int-Value
+  iStat = oSstPrt.SST_PrtWrtInt4( 1, 555555, (char*)"UnsignedLongIntValue: ");
+
+  // Write a Messageobject to Console / Protocolfile
+  iStat = oSstPrt.SST_PrtWrtMld( 1, &oMsg);
+
+  // Write Message to Console / Protocolfile with Row-Information
+  iStat = oSstPrt.SST_PrtWrtZeil( 1, 987654, (char*)"Row Number: ");
 
   // Close Protocol
   iStat = oSstPrt.SST_PrtZu ( 0);

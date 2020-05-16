@@ -363,7 +363,6 @@ int sstMisc01FilNamCls::ReplaceExtension ( int          iKey,
                                     std::string *oFilNamNew)
 {
   return this->poInternObject->ReplaceExtension(iKey,oFilNamOld,oFilNamEnd,oFilNamNew);
-
 }
 //==============================================================================
 int sstMisc01FilNamCls::SplitExtension (int           iKey,
@@ -375,5 +374,29 @@ int sstMisc01FilNamCls::SplitExtension (int           iKey,
   return this->poInternObject->SplitExtension(iKey,oFilNamEnd,oFilEnd,oFilNam);
 
 }
-//==============================================================================
+//=============================================================================
+sstMisc01DateTimeCls::sstMisc01DateTimeCls ()
+//-----------------------------------------------------------------------------
+{
+  poInternObject = new(sstMisc01DateTimeIntCls);
+}
+//=============================================================================
+sstMisc01DateTimeCls::~sstMisc01DateTimeCls ()
+//-----------------------------------------------------------------------------
+{
+  delete poInternObject;
+}
+//=============================================================================
+std::string sstMisc01DateTimeCls::getActualDate ()
+//-----------------------------------------------------------------------------
+{
+  return this->poInternObject->getActualDate();
+}
+//=============================================================================
+std::string sstMisc01DateTimeCls::getActualTime ()
+//-----------------------------------------------------------------------------
+{
+  return this->poInternObject->getActualTime();
+}
+//=============================================================================
 

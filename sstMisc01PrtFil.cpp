@@ -251,7 +251,7 @@ int sstMisc01PrtFilIntCls::SST_PrtWrtDbl ( int           Key,
 
   strcpy(cLineOut.Txt, Mld);  // Meldung in Ausgabezeile schreiben
 
-  strcat(cLineOut.Txt, cLineDbl.Txt);  // Long Int anhängen
+  strcat(cLineOut.Txt, oTmpStr.c_str());  // append double value
 
   // Eine Zeile in Ascii-Datei schreiben
   iStat = this->Fil.wr_line( 0, &cLineOut);

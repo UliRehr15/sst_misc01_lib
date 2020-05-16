@@ -1111,6 +1111,46 @@ class sstMisc01FilNamIntCls
 private:  // Private functions
 // int Dum;        /**< Dummy */
 };
+//==============================================================================
+/**
+* @brief Definition Class sstMisc01DateTimeIntCls
+*
+* General Date / Time Handler
+*
+* Changed: 15.05.20  Re.
+*
+* @ingroup sstMisc01Lib
+*
+* @author Re.
+*
+* @date 15.05.20
+*/
+// ----------------------------------------------------------------------------
+class sstMisc01DateTimeIntCls
+{
+  public:   // Public functions
+     sstMisc01DateTimeIntCls();   // Constructor
+    // ~X();   // Destructor
+     //==============================================================================
+     /**
+     * @brief // Return actual Data as string <BR>
+     * oDateStr = oDateTimeHdl.getActualDate ();
+     *
+     * @return Date String
+     */
+     // ----------------------------------------------------------------------------
+         std::string getActualDate();
+         //==============================================================================
+         /**
+         * @brief // Return actual Time as string <BR>
+         * oDateStr = oDateTimeHdl.getActualTime ();
+         *
+         * @return Time String
+         */
+         // ----------------------------------------------------------------------------
+         std::string getActualTime();
+       private:  // Private functions
+     };
 //-----------------------------------------------------------------------------
 
 #endif
