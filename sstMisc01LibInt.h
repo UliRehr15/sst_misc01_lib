@@ -19,6 +19,11 @@
 #ifndef   _SST_MISC01_LIB_INT_HEADER
 #define   _SST_MISC01_LIB_INT_HEADER
 
+#include <string>
+#include <list>
+
+#include <sstMisc01Lib.h>
+
 /**
  * @defgroup sstMisc01IntLib sstMisc01IntLib: cpp sst miscellanious intern library (Version 1)
  *
@@ -148,11 +153,11 @@ class sstMisc01AscFilIntCls
      *
      * @return Errorstate
      *
-     * @retval   =  0: OK
-     * @retval   = -1: Wrong Key
-     * @retval   = -2: File name error
-     * @retval   = -3: File not found
-     * @retval   <  0: Unspecified Error
+     * @retval   =0:  OK
+     * @retval   =-1: Wrong Key
+     * @retval   =-2: File name error
+     * @retval   =-3: File not found
+     * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int fopenRd ( int             iKey,
@@ -251,10 +256,10 @@ class sstMisc01AscFilIntCls
      *
      * @return Errorstate
      *
-     * @retval   =  0: OK
-     * @retval   = -1: Wrong Key
-     * @retval   = -4: File not open
-     * @retval   <  0: Unspecified Error
+     * @retval   =0:  OK
+     * @retval   =-1: Wrong Key
+     * @retval   =-4: File not open
+     * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int rd_line ( int             iKey,
@@ -321,9 +326,9 @@ class sstMisc01AscFilIntCls
      *
      * @return Errorstate
      *
-     * @retval   =  0: OK
-     * @retval   = -1: Wrong Key
-     * @retval   <  0: Unspecified Error
+     * @retval   =0:  OK
+     * @retval   =-1: Wrong Key
+     * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int Wr_StrDS1 ( int          iKey,
@@ -341,9 +346,9 @@ class sstMisc01AscFilIntCls
      *
      * @return Errorstate
      *
-     * @retval   =  0: OK
-     * @retval   = -1: Wrong Key
-     * @retval   <  0: Unspecified Error
+     * @retval   =0:  OK
+     * @retval   =-1: Wrong Key
+     * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int Wr_String ( int          iKey,
@@ -592,8 +597,8 @@ private:  // Private functions
 *
 * @return Errorstate
 *
-* @retval   = 0: False
-* @retval   = 1: True
+* @retval   =0: False
+* @retval   =1: True
 *
 * @author Re.
 *
@@ -1038,11 +1043,11 @@ class sstMisc01FilNamIntCls
      *
      * @return Errorstate
      *
-     * @retval   =  0: OK
-     * @retval   <  0: Unspecified Error
-     * @retval   = -1: Wrong Key
-     * @retval   = -2: Given extension empty
-     * @retval   = -3: extension not found in filename
+     * @retval   =0:  OK
+     * @retval   <0:  Unspecified Error
+     * @retval   =-1: Wrong Key
+     * @retval   =-2: Given extension empty
+     * @retval   =-3: extension not found in filename
      */
      // ----------------------------------------------------------------------------
      int RemoveExtension ( int          iKey,

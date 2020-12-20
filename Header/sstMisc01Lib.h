@@ -19,6 +19,8 @@
 #ifndef   _SST_MISC01_LIB_HEADER
 #define   _SST_MISC01_LIB_HEADER
 
+#include <string>
+
 /**
  * @defgroup sstMisc01Lib sstMisc01Lib: cpp sst miscellanious library (Version 1)
  *
@@ -277,10 +279,10 @@ class sstMisc01AscFilCls
      *
      * @return Errorstate
      *
-     * @retval   =  0: OK
-     * @retval   = -1: Wrong Key
-     * @retval   = -4: File not open
-     * @retval   <  0: Unspecified Error
+     * @retval   =0:  OK
+     * @retval   =-1: Wrong Key
+     * @retval   =-4: File not open
+     * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int rd_line ( int             iKey,
@@ -346,9 +348,9 @@ class sstMisc01AscFilCls
      *
      * @return Errorstate
      *
-     * @retval   =  0: OK
-     * @retval   = -1: Wrong Key
-     * @retval   <  0: Unspecified Error
+     * @retval   =0:  OK
+     * @retval   =-1: Wrong Key
+     * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int Wr_StrDS1 ( int           iKey,
@@ -366,9 +368,9 @@ class sstMisc01AscFilCls
      *
      * @return Errorstate
      *
-     * @retval   =  0: OK
-     * @retval   = -1: Wrong Key
-     * @retval   <  0: Unspecified Error
+     * @retval   =0:  OK
+     * @retval   =-1: Wrong Key
+     * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int Wr_String ( int          iKey,
@@ -1077,11 +1079,11 @@ class sstMisc01FilNamCls
      *
      * @return Errorstate
      *
-     * @retval   =  0: OK
-     * @retval   = -1: Wrong Key
-     * @retval   = -2: Extension string too long
-     * @retval   = -3: Extension string not at end of file name string
-     * @retval   <  0: Unspecified Error
+     * @retval   =0:  OK
+     * @retval   =-1: Wrong Key
+     * @retval   =-2: Extension string too long
+     * @retval   =-3: Extension string not at end of file name string
+     * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int RemoveExtension ( int   iKey,
@@ -1101,9 +1103,9 @@ class sstMisc01FilNamCls
      *
      * @return Errorstate
      *
-     * @retval   = 1: Yes, point char found
-     * @retval   = 0: Nothing found
-     * @retval   < 0: Unspecified Error
+     * @retval   =1: Yes, point char found
+     * @retval   =0: Nothing found
+     * @retval   <0: Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int GetPntPos ( int   iKey,
@@ -1215,14 +1217,14 @@ class sstMisc01DateTimeCls
 *
 * @return Errorstate
 *
-* @retval   =  0: Files are equal
-* @retval   = -1: Wrong Key
-* @retval   = -2: File 1 not found
-* @retval   = -3: File 2 not found
-* @retval   = -4: Row length not equal in RowNo
-* @retval   = -5: Row string not equal in RowNo
-* @retval   = -6: File Size not equal
-* @retval   <  0: Unspecified Error
+* @retval   =0:  Files are equal
+* @retval   =-1: Wrong Key
+* @retval   =-2: File 1 not found
+* @retval   =-3: File 2 not found
+* @retval   =-4: Row length not equal in RowNo
+* @retval   =-5: Row string not equal in RowNo
+* @retval   =-6: File Size not equal
+* @retval   <0:  Unspecified Error
 *
 * @author Re.
 *

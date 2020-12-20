@@ -42,6 +42,7 @@ int main ()
   std::string oFileExtensionStr = "dxf";
 
   std::size_t found = oFileNameStr.rfind(oFileExtensionStr);
+  assert(found > 0);
 
   // Test Frame for File Diff functions <BR>
   iStat = Test_FileDiff ( 0);
