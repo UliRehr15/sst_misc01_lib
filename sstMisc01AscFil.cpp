@@ -32,6 +32,7 @@ sstMisc01AscFilIntCls::sstMisc01AscFilIntCls()
   strcpy( this->Nam,"\0");
   this->Hdl = NULL;
   this->Siz = 0;                 // Dateigröße
+  this->iLastChar = 0;
 }
 //=============================================================================
 sstMisc01AscFilIntCls::~sstMisc01AscFilIntCls()
@@ -71,6 +72,7 @@ int sstMisc01AscFilIntCls::fopenRd ( int             iKey,
     fseek ( this->Hdl, 0, SEEK_END);
     this->Siz = ftell( this->Hdl);
     fseek ( this->Hdl, 0, SEEK_SET);
+    this->iLastChar = 0;
     iStat = 0;
   }
   return iStat;
@@ -211,9 +213,10 @@ int sstMisc01AscFilIntCls::fdeleteFil ( int iKey)
 int sstMisc01AscFilIntCls::rd_line ( int                     iKey,
                                      sstMisc01AscRowIntCls  *CLine)
 {
-  int ichar;
+  int ichar = 0;
 
-  int ii;
+  // int ii = 0;
+  int jj=1;
 
   int iStat;
 //.............................................................................
@@ -222,11 +225,19 @@ int sstMisc01AscFilIntCls::rd_line ( int                     iKey,
   iStat = 0;
   ichar = 0;
 
+  if (this->iLastChar != 0 && this->iLastChar != 13&& this->iLastChar != 10)
+  {
+    CLine->Txt[0] = (char)this->iLastChar;  // Buchstaben eintragen
+    CLine->Len = 1;
+    jj++;
+  }
+  // this->iLastChar = 0;
   // Struktur Text-Zeile initialisieren
   // iStat = casc_LineIni_c ( 0, CLine);
 
-  for (ii=1; ii<=dCASC2_TEXTLEN; ii++)
+  for (int ii=jj; ii<=dCASC2_TEXTLEN; ii++)
   {
+    if (ii > 1 ) this->iLastChar = ichar;
     ichar = 0;
     iStat = fread ( &ichar, 1, 1, this->Hdl);
 
@@ -247,59 +258,205 @@ int sstMisc01AscFilIntCls::rd_line ( int                     iKey,
       }
       else
       {
-        return ii-1;
+        if (this->iLastChar == 10) return ii-2;
+        else return ii-1;
       }
     }
 
     // Test auf Zeilenende
 
-    // if(ichar == 10 && iKey >= 2)  // 10 -> LF    (UNIX-Variante)
-    if(ichar == 10)  // 10 -> LF    (UNIX-Variante)
+    switch (ichar)
     {
-      // Zeilen-Ende erreicht
-      CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
-      CLine->Len = ii-1;       // Zeilenlänge merken
+      case 10:
+      {  // LF
+        switch (this->iLastChar)
+        {
+          case 10:
+          {  // LF LF
 
-      return ii-1;
-    }
+            // Zeilen-Ende erreicht
+            CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+            CLine->Len = ii-1;       // Zeilenlänge merken
+            this->iLastChar = ichar;
+            return ii-1;
 
-    if(ichar == 13)  // 13 -> CR/LF (DOS-Variante)
-    {
+            break;
+          }  // end case 10 LF LF
+          case 13:
+          {  // CR LF
 
-      // LF lesen
-      ichar = 0;
-      iStat = fread ( &ichar, 1, 1, this->Hdl);
-      if (ichar == 10)
+            // Zeilen-Ende erreicht
+            CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+            CLine->Len = ii-1;       // Zeilenlänge merken
+            this->iLastChar = ichar;
+            return ii-1;
+
+            break;
+          }  // end case CR LF
+          default:
+          {
+            break;
+          }  // end default
+        }  // end switch ilastchar
+        // break;
+            // switch ilastchar
+        break;
+      }      // case 10
+      case 13:
+      {  // CR
+        switch (this->iLastChar)
+        {
+          case 10:
+          {  // LF CR
+
+            // Zeilen-Ende erreicht
+//            CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+//            CLine->Len = ii-1;       // Zeilenlänge merken
+//            this->iLastChar = ichar;
+//            return ii-1;
+
+            break;
+          }
+          case 13:
+          {  // CR CR
+            // Zeilen-Ende erreicht
+            CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+            CLine->Len = ii-1;       // Zeilenlänge merken
+            this->iLastChar = ichar;
+            return ii-1;
+
+            break;
+          }
+          default:
+          {
+            // do nothing
+            break;
+          }
+          // break;
+        }      // switch ilastchar
+        break;
+      }  // case 13
+
+      default:
       {
-        // Zeilen-Ende erreicht
-        CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
-        CLine->Len = ii-1;       // Zeilenlänge merken
-        return ii-1;
 
-      }
-      ii++;
-
-    }
-
-    // Hier Test auf nichtdruckbare Zeichen
-    // isprint testet nur ASCII (0-127), d.h. keine Umlaute!
-    // if ( ! isprint(ichar) && !Str_IsSonderzeichen(0,ichar))
-    if ( ichar < 32 || ichar > 255 )
-    {
-      if (ichar == 9 || ichar == 10)
+      switch (this->iLastChar)
       {
-        // Tabulator und LF (UNIX) übernehmen
+        case 10:
+        {  // LF CR
+
+          // Zeilen-Ende erreicht
+            CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+            CLine->Len = ii-1;       // Zeilenlänge merken
+            this->iLastChar = ichar;
+            return ii-1;
+
+          break;
+        }
+        case 13:
+        {  // CR CR
+          // Zeilen-Ende erreicht
+          CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+          CLine->Len = ii-1;       // Zeilenlänge merken
+          this->iLastChar = ichar;
+          return ii-1;
+
+          break;
+        }
+        default:
+        {
+          // do nothing
+          break;
+        }
+        // break;
+      }      // switch ilastchar
+
+      // Hier Test auf nichtdruckbare Zeichen
+      // isprint testet nur ASCII (0-127), d.h. keine Umlaute!
+      // if ( ! isprint(ichar) && !Str_IsSonderzeichen(0,ichar))
+      if ( ichar < 32 || ichar > 255 )
+      {
+        if (ichar == 9 || ichar == 10|| ichar == 13)
+        {
+          // Tabulator und LF (UNIX) übernehmen
+        }
+        else
+        {
+          if(iKey == 2)
+          {
+            CLine->Txt[ii-1] = '?'; // Replace not printable char with questionmark
+          }
+          else
+          {
+            // Abbruch bei nicht druckbaren Zeichen
+            CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+            CLine->Len = ii-1;       // Zeilenlänge merken
+            return -2;
+          }
+        }
       }
       else
       {
-        // Abbruch bei nicht druckbaren Zeichen
-        CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
-        CLine->Len = ii-1;       // Zeilenlänge merken
-        return -2;
+        CLine->Txt[ii-1] = (char)ichar;  // Buchstaben eintragen
       }
-    }
 
-    CLine->Txt[ii-1] = (char)ichar;  // Buchstaben eintragen
+        break;
+      }
+    }  // switch ichar
+
+//    // if(ichar == 10 && iKey >= 2)  // 10 -> LF    (UNIX-Variante)
+//    if(ichar == 10)  // 10 -> LF    (UNIX-Variante)
+//    {
+//      // Zeilen-Ende erreicht
+//      CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+//      CLine->Len = ii-1;       // Zeilenlänge merken
+
+//      return ii-1;
+//    }
+
+//    if(ichar == 13)  // 13 -> CR/LF (DOS-Variante)
+//    {
+
+//      // LF read
+//      ichar = 0;
+//      iStat = fread ( &ichar, 1, 1, this->Hdl);
+//      if (ichar == 10)
+//      {
+//        // CR/LF found
+//        CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+//        CLine->Len = ii-1;       // Zeilenlänge merken
+//        return ii-1;
+//      }
+//      else
+//      {
+//        // only CR found
+//        CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+//        CLine->Len = ii-1;       // Zeilenlänge merken
+//        this->iLastChar = ichar;
+//        return ii-1;
+//        //     ii++;
+//      }
+//    }
+
+//    // Hier Test auf nichtdruckbare Zeichen
+//    // isprint testet nur ASCII (0-127), d.h. keine Umlaute!
+//    // if ( ! isprint(ichar) && !Str_IsSonderzeichen(0,ichar))
+//    if ( ichar < 32 || ichar > 255 )
+//    {
+//      if (ichar == 9 || ichar == 10|| ichar == 13)
+//      {
+//        // Tabulator und LF (UNIX) übernehmen
+//      }
+//      else
+//      {
+//        // Abbruch bei nicht druckbaren Zeichen
+//        CLine->Txt[ii-1] = '\0'; // Zeile ordnungsgemäß abschließen
+//        CLine->Len = ii-1;       // Zeilenlänge merken
+//        return -2;
+//      }
+//    }
+
+//    CLine->Txt[ii-1] = (char)ichar;  // Buchstaben eintragen
   }
 
   // Kein reguläres Ende gefunden
@@ -316,7 +473,8 @@ int sstMisc01AscFilIntCls::rd_line ( int                     iKey,
   } while ( ichar != 10 && ichar != 13 && ichar != EOF && iStat == 1);
 
   if ( iKey == 1 || iKey == 3) return -3;
-  else return ii-2;
+  // else return ii-2;
+  else return dCASC2_TEXTLEN-2;
 }
 //=============================================================================
 int sstMisc01AscFilIntCls::wr_line ( int           iKey,

@@ -388,6 +388,8 @@ class sstMisc01AscFilIntCls
      char  Nam[MAX_PFAD];  /**< Dateiname mit Pfad  */
      FILE *Hdl;            /**< Dateihandle         */
      long  Siz;            /**< Dateigröße Bytes    */
+     int iLastChar;        /**< Last Char readed    */
+     // bool bLastCharRead;   /**< Last Char filled    */
 };
 //==============================================================================
 

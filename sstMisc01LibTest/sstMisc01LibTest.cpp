@@ -125,6 +125,47 @@ int Test_AscFile (int iKey) // v  -> For the moment 0
   iStat = oAscFil1.fcloseFil(0);
   assert (iStat >= 0);
 
+//=============================================================================
+  // Test with not printable chars
+
+  iStat = oAscFil1.fopenWr(0,(char*) oFilNam1.c_str());
+  assert (iStat >= 0);
+
+  char cTest[20];
+
+  memset(cTest,0,20);
+  strncpy(cTest,"abcdefhi",19);
+  cTest[4] = 3;  // set not printable char
+  oStr = cTest;
+
+  iStat = oAscFil1.Wr_String( 0, oStr);  // write string with not printable char in file
+  assert (iStat >= 0);
+
+  iStat = oAscFil1.fcloseFil(0);
+  assert (iStat >= 0);
+
+  iStat = oAscFil1.fopenRd(0, (char*)"Test.asc");
+  assert (iStat >= 0);
+
+  oStr.clear();
+  iStat = oAscFil1.Rd_StrDS1( 0, &oStr);
+  assert(iStat == -2);  // not printable char found
+
+  iStat = oAscFil1.fcloseFil(0);
+  assert (iStat >= 0);
+
+  iStat = oAscFil1.fopenRd(0, (char*)"Test.asc");
+  assert (iStat >= 0);
+
+  oStr.clear();
+  iStat = oAscFil1.Rd_StrDS1( 2, &oStr);
+  assert(oStr.length() == 8);
+  assert(iStat == 8);  // non printable char is replaced with question mark
+
+  iStat = oAscFil1.fcloseFil(0);
+  assert (iStat >= 0);
+
+
   // Fatal Errors goes to an assert
 
   assert(iRet >= 0);
@@ -225,7 +266,7 @@ Param3=333
   iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
   assert (oAscRow.compare("Param3=333") == 0);
   iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
-  assert (iStat = -1);  // End of file
+  assert (iStat == -1);  // End of file Error
 
   iStat = oAscFil.fcloseFil(0);
 
@@ -282,7 +323,7 @@ Param3=333
   assert (oAscRow.compare("Param3=333") == 0);
 
   iStat = oAscFil.Rd_StrDS1( 2, &oAscRow);
-  assert (iStat = -1);  // End of file
+  assert (iStat == -1);  // End of file Error
 
   iStat = oAscFil.fcloseFil(0);
 

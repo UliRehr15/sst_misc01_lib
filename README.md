@@ -42,4 +42,5 @@ Versions <BR>
 20190422: Vers. 1.23: Small Corrections in handling file extensions. <BR>
 20200516: Vers. 1.24: Fix problem in protocol class. New class DateTime. <BR>
 20201220: Vers. 1.25: Fixed some warnings with Doxygen. <BR>
+20210611: Vers. 1.26: Better behavior while reading of non-printable-chars. <BR>
 

@@ -274,8 +274,12 @@ class sstMisc01AscFilCls
      * @brief // Read Row from file <BR>
      * iStat = oAscFil.rd_line ( iKey, CLine);
      *
-     * @param iKey  [in]  For the moment 0
-     * @param CLine [out] File Row
+     * iKey=1: Bit 1: No read error, when get max. string length  <BR>
+     * iKey=2: Bit 2: Replace non-printable-char with question mark <BR>
+     * iKey=3: Bit 1 + 2 <BR>
+     *
+     * @param iKey  [in]  0,1,2,3 <BR>
+     * @param CLine [out] return sst File Row object <BR>
      *
      * @return Errorstate
      *
@@ -285,7 +289,7 @@ class sstMisc01AscFilCls
      * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
-     int rd_line ( int             iKey,
+     int rd_line ( int                  iKey,
                    sstMisc01AscRowCls  *CLine);
      //==============================================================================
      /**
@@ -324,13 +328,21 @@ class sstMisc01AscFilCls
      * @brief // Read string object from file <BR>
      * iStat = oAscFil.Rd_StrDS1 ( iKey, &oString);
      *
-     * @param iKey    [in]  For the moment 0
-     * @param oString [out] Str1 structure
+     * iKey=1: Bit 1: No read error, when get max. string length <BR>
+     * iKey=2: Bit 2: Replace non-printable-char with question mark <BR>
+     * iKey=3: Bit 1 + 2 <BR>
      *
-     * @return Errorstate
+     * @param iKey    [in]  0,1,2,3 <BR>
+     * @param oString [out] return standard string <BR>
      *
-     * @retval   = 0: OK
-     * @retval   < 0: Unspecified Error
+     * @return String length or error state
+     *
+     * @retval   >=0: Return chars read
+     * @retval   =-1: Wrong Key
+     * @retval   =-2: Non printable char found
+     * @retval   =-3: ?
+     * @retval   =-4: File not found
+     * @retval   <0:  Unspecified Error
      */
      // ----------------------------------------------------------------------------
      int Rd_StrDS1 ( int           iKey,
